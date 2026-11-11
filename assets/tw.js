@@ -185,3 +185,62 @@ document.querySelectorAll('[data-folio]').forEach(function(root){
  win.addEventListener('resize',onScroll,{passive:true});
  update();
 })();
+
+/* Luminous layer: hero window field, headline rise, spotlight, step signal. No dependencies. */
+(function(){'use strict';
+var d=document,W=window,root=d.documentElement,RM=W.matchMedia&&W.matchMedia('(prefers-reduced-motion: reduce)').matches;
+root.classList.add('lum');
+var hero=d.querySelector('.editorial-hero');
+/* 1. Headline: split words into masked lines */
+if(hero&&!RM){
+ var h1=hero.querySelector('h1'),n=0;
+ if(h1&&!h1.dataset.lum){h1.dataset.lum='1';h1.setAttribute('aria-label',h1.innerHTML.replace(/<br\s*\/?>/gi,' ').replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim());
+  (function walk(el){Array.from(el.childNodes).forEach(function(node){
+   if(node.nodeType===3){var parts=node.textContent.split(/(\s+)/),frag=d.createDocumentFragment();
+    parts.forEach(function(p){if(!p)return;if(/^\s+$/.test(p)){frag.appendChild(d.createTextNode(p));return;}
+     var w=d.createElement('span');w.className='lw';var i=d.createElement('i');i.textContent=p;i.style.setProperty('--d',(0.18+n*0.11).toFixed(2)+'s');n++;w.appendChild(i);frag.appendChild(w);});
+    node.parentNode.replaceChild(frag,node);}
+   else if(node.nodeType===1&&node.tagName!=='BR')walk(node);});})(h1);
+  
+ }
+}
+/* 2. Hero window field: lit windows; one completes (flashes electric) and fades */
+if(hero){
+ var cv=d.createElement('canvas');cv.className='lum-field';cv.setAttribute('aria-hidden','true');hero.insertBefore(cv,hero.firstChild.nextSibling);
+ var cx=cv.getContext('2d'),dpr=Math.min(1.5,W.devicePixelRatio||1),cells=[],cw=0,ch=0,mx=-999,my=-999,vis=true,raf=0,last=0;
+ function build(){var r=hero.getBoundingClientRect();cw=r.width;ch=r.height;cv.width=cw*dpr;cv.height=ch*dpr;cx.setTransform(dpr,0,0,dpr,0,0);cells=[];
+  var gx=cw<700?22:30,gy=cw<700?26:34,x0=cw<700?cw*.1:cw*.42;
+  for(var y=ch*(cw<700?.08:.3);y<ch-gy*2;y+=gy)for(var x=x0;x<cw-gx;x+=gx){var edge=(x-x0)/(cw-x0);if(Math.random()<.55+edge*.25)cells.push({x:x,y:y,w:gx*.42,h:gy*.5,b:Math.random()*.10,t:0,ph:Math.random()*6.28});}}
+ function draw(ts){raf=0;if(!vis)return;var dt=Math.min(64,ts-(last||ts));last=ts;cx.clearRect(0,0,cw,ch);
+  if(!RM&&Math.random()<dt/260){var c=cells[(Math.random()*cells.length)|0];if(c&&c.t<=0)c.t=1;}
+  for(var i=0;i<cells.length;i++){var c=cells[i],dx=c.x-mx,dy=c.y-my,near=Math.max(0,1-Math.sqrt(dx*dx+dy*dy)/220);
+   var a=c.b+(RM?0:Math.sin(ts/1800+c.ph)*.025)+near*.35;
+   if(c.t>0){var k=c.t;cx.fillStyle='rgba(61,155,255,'+(k*.9).toFixed(3)+')';cx.shadowColor='rgba(61,155,255,.9)';cx.shadowBlur=18*k;cx.fillRect(c.x,c.y,c.w,c.h);cx.shadowBlur=0;c.t-=dt/1400;if(c.t<=0){c.b=0;}continue;}
+   if(a>.012){cx.fillStyle='rgba(214,226,240,'+a.toFixed(3)+')';cx.fillRect(c.x,c.y,c.w,c.h);}
+   if(c.b<.10&&Math.random()<.0004)c.b=Math.random()*.10;}
+  if(!RM)raf=W.requestAnimationFrame(draw);}
+ function kick(){if(!raf&&vis)raf=W.requestAnimationFrame(draw);}
+ build();kick();
+ W.addEventListener('resize',function(){build();kick();},{passive:true});
+ if('IntersectionObserver' in W)new IntersectionObserver(function(e){vis=e[0].isIntersecting;kick();}).observe(hero);
+ d.addEventListener('visibilitychange',function(){vis=!d.hidden;kick();});
+ hero.addEventListener('pointermove',function(e){var r=hero.getBoundingClientRect();mx=e.clientX-r.left;my=e.clientY-r.top;hero.style.setProperty('--mx',mx+'px');hero.style.setProperty('--my',my+'px');if(RM)kick();},{passive:true});
+ hero.addEventListener('pointerleave',function(){mx=my=-999;});
+ var foot=hero.querySelector('.editorial-hero-foot>span');if(foot)foot.classList.add('lum-live');
+}
+/* 3. Spotlight on dark sections (fine pointers only) */
+if(W.matchMedia&&W.matchMedia('(pointer:fine)').matches){
+ d.querySelectorAll('.statement,.operating-logic,.editorial-cases,.close').forEach(function(s){s.classList.add('lum-spot');
+  s.addEventListener('pointermove',function(e){var r=s.getBoundingClientRect();s.style.setProperty('--sx',(e.clientX-r.left)+'px');s.style.setProperty('--sy',(e.clientY-r.top)+'px');s.style.setProperty('--so','1');},{passive:true});
+  s.addEventListener('pointerleave',function(){s.style.setProperty('--so','0');});});
+}
+/* 4. Steps light up when they enter view */
+var steps=d.querySelector('.operating-steps');
+if(steps){if('IntersectionObserver' in W&&!RM){var io=new IntersectionObserver(function(e){if(e[0].isIntersecting){steps.classList.add('is-lit');io.disconnect();}},{threshold:.25});io.observe(steps);}else steps.classList.add('is-lit');}
+/* 5. Vanish band: strike-through draws as the word passes centre */
+var band=d.querySelector('.lum-vanish');
+if(band&&!RM){var strikes=band.querySelectorAll('s'),bv=false;
+ if('IntersectionObserver' in W)new IntersectionObserver(function(e){bv=e[0].isIntersecting;if(bv)tick();}).observe(band);
+ function tick(){if(!bv)return;var mid=W.innerWidth*.5;for(var i=0;i<strikes.length;i++){var r=strikes[i].getBoundingClientRect(),c=r.left+r.width/2,k=Math.min(1,Math.max(0,(mid+W.innerWidth*.15-c)/(W.innerWidth*.3)));strikes[i].style.setProperty('--k',k.toFixed(3));}W.requestAnimationFrame(tick);}
+}
+})();
