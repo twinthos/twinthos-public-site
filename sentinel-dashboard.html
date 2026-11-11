@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Twinthos Sentinel Dashboard</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#06060A; color:#F0F0F5; font-family:system-ui,sans-serif; padding:40px; }
+  h1 { font-size:32px; margin-bottom:8px; }
+  .subtitle { color:#8A8A95; font-size:14px; margin-bottom:32px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px; margin-bottom:32px; }
+  .card { background:#0A0A10; border:1px solid #18181F; border-radius:12px; padding:20px; }
+  .card-num { font-size:36px; font-weight:700; color:#4F8CFF; }
+  .card-label { font-size:11px; color:#5A5A65; text-transform:uppercase; letter-spacing:0.1em; margin-top:4px; }
+  .section { margin-top:32px; }
+  .section h2 { font-size:18px; margin-bottom:12px; color:#4F8CFF; }
+  .list { list-style:none; }
+  .list li { padding:8px 0; border-bottom:1px solid #12121A; font-size:13px; color:#8A8A95; }
+  .list li:last-child { border-bottom:none; }
+  .status { display:inline-block; padding:4px 10px; border-radius:4px; font-size:11px; font-weight:600; }
+  .status.ok { background:rgba(52,211,153,0.12); color:#34D399; }
+  .status.warn { background:rgba(251,191,36,0.12); color:#FBBF24; }
+  .footer { margin-top:40px; color:#5A5A65; font-size:11px; }
+</style>
+</head>
+<body>
+  <h1>Twinthos Sentinel</h1>
+  <p class="subtitle">Continuous Threat Intelligence Dashboard — Last updated: 2026-11-11 04:10 UTC</p>
+
+  <div class="grid">
+    <div class="card">
+      <div class="card-num">160</div>
+      <div class="card-label">CVEs Tracked</div>
+    </div>
+    <div class="card">
+      <div class="card-num">0</div>
+      <div class="card-label">KEV Alerts Sent</div>
+    </div>
+    <div class="card">
+      <div class="card-num">4</div>
+      <div class="card-label">News Alerts Sent</div>
+    </div>
+    <div class="card">
+      <div class="card-num">0</div>
+      <div class="card-label">Min Severity</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Configuration</h2>
+    <div class="card">
+      <ul class="list">
+        <li>Telegram: <span class="status ok">Enabled</span></li>
+        <li>News Scanner: <span class="status ok">Enabled</span></li>
+        <li>Auto-Remediate: <span class="status ok">Enabled</span></li>
+        <li>Suppliers: openai, anthropic, langchain, mcp, requests, flask</li>
+        <li>Alert Min Severity: 0</li>
+        <li>Scan Interval: 60 min</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Recent State</h2>
+    <div class="card">
+      <ul class="list">
+        <li>Last CVE Scan: 2026-11-11T04:04:32.117838+00:00</li>
+        <li>Last News Scan: Never</li>
+        <li>Recent CVEs: RUSTSEC-2026-0457, RUSTSEC-2026-0461, RUSTSEC-2026-0462, SZB-c4c564b6da, SZB-ea98c8be72</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>News Sources</h2>
+    <div class="card">
+      <ul class="list">
+        <li>https://blog.talosintelligence.com/rss/</li><li>https://krebsonsecurity.com/feed/</li><li>https://nodejs.org/en/feed/vulnerability.xml</li><li>https://www.securityweek.com/feed/</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer">
+    Twinthos Sentinel v1.4.1 — Continuous Threat Intelligence
+  </div>
+</body>
+</html>
