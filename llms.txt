@@ -14,7 +14,7 @@ Public service pages below are authoritative. This text file is optional machine
 - Does not guarantee revenue, error-free autonomy, unrestricted access or human-level judgement.
 
 - AI security engagements assess tool access, instruction boundaries, failure handling and evidence; scope and price are agreed separately.
-- Sentinel is open-source research, not a certification or an independently audited security product.
+- Sentinel is Twinthos's own AI-security research project. Source and tests are shown on request. It is not a certification or an independently audited security product.
 
 ## Prices and scope (consult service pages for current terms)
 - Operations Audit: £999 one-off. A written process assessment and plan; it does not include production deployment. https://twinthos.com/operations-audit/
@@ -52,4 +52,4 @@ Twinthos Notes provides plain-English research, comparisons and buyer checklists
 - Preliminary research on enterprise AI ROI does not establish that 95% of all AI projects fail.
 - Some chat assistants already have memory and tools; the distinction is the managed, accountable business process.
 
-Updated: 2026-11-08.
+Updated: 2026-11-11.
