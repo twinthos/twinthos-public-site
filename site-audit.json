@@ -1,0 +1,157 @@
+{
+ "root": "/root/twinthos_live",
+ "pages": 33,
+ "counts": {
+  "P1": 7,
+  "P2": 14
+ },
+ "findings": [
+  {
+   "severity": "P1",
+   "page": "audit/index.html",
+   "check": "viewport",
+   "evidence": "missing",
+   "fix": "add viewport meta"
+  },
+  {
+   "severity": "P1",
+   "page": "contact/index.html",
+   "check": "viewport",
+   "evidence": "missing",
+   "fix": "add viewport meta"
+  },
+  {
+   "severity": "P1",
+   "page": "demo/index.html",
+   "check": "viewport",
+   "evidence": "missing",
+   "fix": "add viewport meta"
+  },
+  {
+   "severity": "P1",
+   "page": "demos/index.html",
+   "check": "viewport",
+   "evidence": "missing",
+   "fix": "add viewport meta"
+  },
+  {
+   "severity": "P1",
+   "page": "questions/index.html",
+   "check": "viewport",
+   "evidence": "missing",
+   "fix": "add viewport meta"
+  },
+  {
+   "severity": "P1",
+   "page": "services/index.html",
+   "check": "viewport",
+   "evidence": "missing",
+   "fix": "add viewport meta"
+  },
+  {
+   "severity": "P1",
+   "page": "thankyou/index.html",
+   "check": "viewport",
+   "evidence": "missing",
+   "fix": "add viewport meta"
+  },
+  {
+   "severity": "P2",
+   "page": "how-it-works/index.html",
+   "check": "description length",
+   "evidence": "166 chars",
+   "fix": "aim 120-155"
+  },
+  {
+   "severity": "P2",
+   "page": "notes/atm-and-bank-tellers/index.html",
+   "check": "description length",
+   "evidence": "86 chars",
+   "fix": "aim 120-155"
+  },
+  {
+   "severity": "P2",
+   "page": "notes/cost-of-an-ai-employee/index.html",
+   "check": "description length",
+   "evidence": "52 chars",
+   "fix": "aim 120-155"
+  },
+  {
+   "severity": "P2",
+   "page": "notes/digital-employee-cost/index.html",
+   "check": "description length",
+   "evidence": "64 chars",
+   "fix": "aim 120-155"
+  },
+  {
+   "severity": "P2",
+   "page": "notes/index.html",
+   "check": "description length",
+   "evidence": "83 chars",
+   "fix": "aim 120-155"
+  },
+  {
+   "severity": "P2",
+   "page": "notes/intro-to-ai/index.html",
+   "check": "description length",
+   "evidence": "66 chars",
+   "fix": "aim 120-155"
+  },
+  {
+   "severity": "P2",
+   "page": "notes/questions-to-ask-managed-ai-agent/index.html",
+   "check": "description length",
+   "evidence": "77 chars",
+   "fix": "aim 120-155"
+  },
+  {
+   "severity": "P2",
+   "page": "notes/small-businesses-already-hired-ai/index.html",
+   "check": "description length",
+   "evidence": "95 chars",
+   "fix": "aim 120-155"
+  },
+  {
+   "severity": "P2",
+   "page": "notes/super-intelligence-si/index.html",
+   "check": "description length",
+   "evidence": "84 chars",
+   "fix": "aim 120-155"
+  },
+  {
+   "severity": "P2",
+   "page": "notes/the-2-dollar-ai-that-answers-the-phone/index.html",
+   "check": "description length",
+   "evidence": "70 chars",
+   "fix": "aim 120-155"
+  },
+  {
+   "severity": "P2",
+   "page": "notes/what-an-ai-agent-actually-does/index.html",
+   "check": "description length",
+   "evidence": "98 chars",
+   "fix": "aim 120-155"
+  },
+  {
+   "severity": "P2",
+   "page": "privacy/index.html",
+   "check": "description length",
+   "evidence": "88 chars",
+   "fix": "aim 120-155"
+  },
+  {
+   "severity": "P2",
+   "page": "terms/index.html",
+   "check": "description length",
+   "evidence": "90 chars",
+   "fix": "aim 120-155"
+  },
+  {
+   "severity": "P2",
+   "page": "notes/ai-agents-2027-security/index.html",
+   "check": "title length",
+   "evidence": "64 chars: AI agents in 2027: trust is the infrastructure. · Twinthos Notes",
+   "fix": "cut to 62"
+  }
+ ]
+}

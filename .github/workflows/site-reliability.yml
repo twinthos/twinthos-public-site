@@ -1,0 +1,54 @@
+name: Website reliability
+on:
+  push:
+    branches: [gh-pages, fix/mobile-nav-hero-20261102]
+  pull_request:
+    branches: [gh-pages]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  mobile-and-navigation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+      - name: Test publication guard
+        run: python3 -m unittest discover -s _src -p test_publication_guard.py
+      - name: Verify committed public files and internal links
+        run: python3 _src/site_published_check.py
+      - name: Verify committed public-site security invariants
+        run: python3 _src/site_security_check.py
+      - name: Verify committed Notes and source metadata
+        run: python3 _src/notes_quality_gate.py
+      - name: Browser prerequisites
+        run: |
+          python -m pip install playwright==1.55.0
+          python -m playwright install --with-deps chromium
+      - name: Browser-test committed pages before rebuilding
+        run: python3 _src/site_reliability_check.py
+      - name: Rebuild website from canonical source
+        run: python3 _src/build.py
+      - name: Verify rebuilt source and local links
+        run: python3 _src/site_published_check.py
+      - name: Verify generated security invariants
+        run: python3 _src/site_security_check.py
+      - name: Verify Notes article integrity and source metadata
+        run: python3 _src/notes_quality_gate.py
+      - name: Browser-test rebuilt pages and navigation
+        run: python3 _src/site_reliability_check.py
+      - name: Browser-test Notes imagery, search and filters
+        run: python3 _src/notes_browser_check.py
+      - name: Save mobile and desktop screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: twinthos-mobile-navigation-qa
+          path: _src/qa-mobile/
+          if-no-files-found: ignore
+          retention-days: 7

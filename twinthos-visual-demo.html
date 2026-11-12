@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Twinthos Visual Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;600;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0B0B0F;
+    --card: #12121A;
+    --border: #1E1E2A;
+    --text: #E8E6E1;
+    --muted: #6B6B7B;
+    --accent: #4F8CFF;
+    --success: #7EC8A0;
+    --danger: #FF6B6B;
+    --gold: #C9A063;
+    --glow: 0 0 40px rgba(79,140,255,0.15);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Inter Tight',sans-serif; overflow:hidden; height:100vh; }
+  
+  .stage { width:100vw; height:100vh; position:relative; overflow:hidden; }
+  
+  .scene {
+    position:absolute; top:0; left:0; width:100%; height:100%;
+    display:flex; flex-direction:column; justify-content:center; align-items:center;
+    opacity:0; transform:translateY(30px); transition:all 0.8s cubic-bezier(0.16,1,0.3,1);
+    pointer-events:none; padding:60px;
+  }
+  .scene.active { opacity:1; transform:translateY(0); pointer-events:auto; }
+  .scene.exit { opacity:0; transform:translateY(-30px); }
+  
+  .bg-grid {
+    position:absolute; top:0; left:0; width:100%; height:100%;
+    background-image: linear-gradient(rgba(79,140,255,0.03) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(79,140,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: gridMove 20s linear infinite;
+  }
+  @keyframes gridMove { 0% { transform:translate(0,0); } 100% { transform:translate(60px,60px); } }
+  
+  .orb {
+    position:absolute; border-radius:50%; filter:blur(80px); opacity:0.4;
+    animation: orbFloat 8s ease-in-out infinite;
+  }
+  .orb1 { width:400px; height:400px; background:#4F8CFF; top:-100px; right:-100px; }
+  .orb2 { width:300px; height:300px; background:#C9A063; bottom:-50px; left:-50px; animation-delay:-4s; }
+  @keyframes orbFloat { 0%,100% { transform:translate(0,0); } 50% { transform:translate(30px,-20px); } }
+  
+  .title { font-size:52px; font-weight:800; text-align:center; line-height:1.1; margin-bottom:16px; position:relative; z-index:2; }
+  .title .accent { color:var(--accent); }
+  .title .danger { color:var(--danger); }
+  .title .success { color:var(--success); }
+  .title .gold { color:var(--gold); }
+  
+  .subtitle { font-size:18px; color:var(--muted); text-align:center; max-width:800px; line-height:1.6; position:relative; z-index:2; }
+  
+  .label { font-size:11px; color:var(--accent); text-transform:uppercase; letter-spacing:3px; margin-bottom:12px; font-weight:600; position:relative; z-index:2; }
+  
+  /* Scene 1: Incidents */
+  .incident-list { display:flex; flex-direction:column; gap:10px; max-width:720px; width:100%; position:relative; z-index:2; }
+  .incident {
+    background:linear-gradient(135deg, rgba(255,107,107,0.08), rgba(255,107,107,0.02));
+    border:1px solid rgba(255,107,107,0.2); border-radius:12px; padding:16px 20px;
+    display:flex; align-items:center; gap:16px;
+    animation: slideIn 0.6s ease-out both;
+  }
+  .incident:nth-child(1) { animation-delay:0.1s; }
+  .incident:nth-child(2) { animation-delay:0.2s; }
+  .incident:nth-child(3) { animation-delay:0.3s; }
+  .incident:nth-child(4) { animation-delay:0.4s; }
+  .incident:nth-child(5) { animation-delay:0.5s; }
+  @keyframes slideIn { from { opacity:0; transform:translateX(-40px); } to { opacity:1; transform:translateX(0); } }
+  .incident .dot { width:8px; height:8px; border-radius:50%; background:var(--danger); flex-shrink:0; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100% { opacity:1; box-shadow:0 0 0 0 rgba(255,107,107,0.4); } 50% { opacity:0.7; box-shadow:0 0 0 8px rgba(255,107,107,0); } }
+  .incident .name { font-size:15px; font-weight:600; }
+  .incident .detail { font-size:12px; color:var(--muted); margin-top:2px; }
+  
+  /* Scene 2: Stats */
+  .stat-row { display:flex; gap:40px; justify-content:center; flex-wrap:wrap; position:relative; z-index:2; }
+  .stat { text-align:center; }
+  .stat .num { font-size:48px; font-weight:800; color:var(--accent); font-family:'JetBrains Mono',monospace; }
+  .stat .label { font-size:12px; color:var(--muted); margin-top:4px; text-transform:uppercase; letter-spacing:1px; }
+  
+  .compare { display:grid; grid-template-columns:1fr 1fr; gap:20px; max-width:700px; width:100%; position:relative; z-index:2; }
+  .compare-card { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:24px; }
+  .compare-card.chat { border-color:rgba(255,107,107,0.3); }
+  .compare-card.employee { border-color:rgba(126,200,160,0.3); box-shadow:var(--glow); }
+  .compare-card .title { font-size:16px; font-weight:700; margin-bottom:12px; }
+  .compare-card .item { font-size:13px; color:var(--muted); padding:4px 0; border-bottom:1px solid var(--border); }
+  .compare-card .item:last-child { border:none; }
+  .compare-card .item.good { color:var(--success); }
+  
+  /* Scene 3: Products */
+  .product-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; max-width:900px; width:100%; position:relative; z-index:2; }
+  .product-card { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:32px 20px; text-align:center; transition:all 0.3s; }
+  .product-card:hover { border-color:var(--accent); transform:translateY(-4px); box-shadow:var(--glow); }
+  .product-card .icon { font-size:40px; margin-bottom:12px; }
+  .product-card .name { font-size:18px; font-weight:700; margin-bottom:8px; }
+  .product-card .desc { font-size:12px; color:var(--muted); line-height:1.5; }
+  
+  /* Scene 4: Brain */
+  .brain-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; max-width:800px; width:100%; position:relative; z-index:2; }
+  .brain-item { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:14px; text-align:center; }
+  .brain-item .icon { font-size:22px; margin-bottom:4px; }
+  .brain-item .label { font-size:11px; font-weight:600; }
+  .brain-item .desc { font-size:9px; color:var(--muted); margin-top:2px; }
+  
+  .brain-types { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; max-width:800px; width:100%; position:relative; z-index:2; margin-top:20px; }
+  .brain-type { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:16px; }
+  .brain-type .name { font-size:13px; font-weight:700; color:var(--gold); margin-bottom:4px; }
+  .brain-type .for { font-size:10px; color:var(--accent); margin-bottom:6px; }
+  .brain-type .desc { font-size:10px; color:var(--muted); }
+  
+  /* Scene 5: Workers */
+  .agent-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; max-width:700px; width:100%; position:relative; z-index:2; }
+  .agent-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:18px; }
+  .agent-card .name { font-size:14px; font-weight:700; }
+  .agent-card .dept { font-size:10px; color:var(--accent); margin:2px 0 8px; }
+  .agent-card .status { font-size:10px; color:var(--success); display:flex; align-items:center; gap:6px; }
+  .agent-card .status::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--success); animation:pulse 2s infinite; }
+  .agent-card .output { font-size:10px; color:var(--muted); margin-top:8px; font-family:'JetBrains Mono',monospace; }
+  
+  /* Scene 6: Work Product */
+  .work-product { background:var(--card); border:1px solid var(--accent); border-radius:12px; padding:20px; max-width:560px; width:100%; font-family:'JetBrains Mono',monospace; font-size:12px; position:relative; z-index:2; box-shadow:var(--glow); }
+  .work-product .line { padding:6px 0; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; }
+  .work-product .line:last-child { border:none; }
+  .work-product .label { color:var(--accent); }
+  .work-product .value { color:var(--text); }
+  .work-product .note { font-size:9px; color:var(--muted); margin-top:12px; font-style:italic; font-family:'Inter Tight',sans-serif; }
+  
+  /* Scene 7: Sign-off */
+  .signoff { background:var(--card); border:2px solid var(--gold); border-radius:16px; padding:32px; max-width:480px; width:100%; text-align:center; position:relative; z-index:2; }
+  .signoff .action { font-size:15px; margin-bottom:20px; }
+  .signoff .buttons { display:flex; gap:12px; justify-content:center; }
+  .signoff .btn { padding:12px 28px; border-radius:8px; border:none; cursor:pointer; font-weight:700; font-size:14px; transition:all 0.2s; }
+  .signoff .btn-approve { background:var(--success); color:var(--bg); }
+  .signoff .btn-reject { background:var(--danger); color:var(--bg); }
+  .signoff .btn:hover { transform:scale(1.05); }
+  .signoff .result { margin-top:16px; font-size:13px; min-height:20px; }
+  
+  /* Scene 8: Sentinel */
+  .sentinel-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; max-width:700px; width:100%; position:relative; z-index:2; }
+  .sentinel-item { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:14px; text-align:center; }
+  .sentinel-item .label { font-size:9px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; }
+  .sentinel-item .value { font-size:22px; font-weight:800; color:var(--success); margin-top:4px; font-family:'JetBrains Mono',monospace; }
+  
+  /* Scene 9: Close */
+  .close-card { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:40px; text-align:center; max-width:600px; width:100%; position:relative; z-index:2; }
+  .close-card .tagline { font-size:20px; color:var(--accent); font-weight:600; margin-bottom:8px; }
+  .close-card .audience { font-size:13px; color:var(--muted); margin-top:16px; }
+  .close-card .url { font-size:14px; color:var(--gold); margin-top:20px; font-family:'JetBrains Mono',monospace; }
+  
+  /* Navigation */
+  .nav { position:fixed; bottom:24px; left:50%; transform:translateX(-50%); display:flex; gap:6px; z-index:100; background:rgba(11,11,15,0.8); backdrop-filter:blur(10px); padding:8px 12px; border-radius:12px; border:1px solid var(--border); }
+  .nav button { background:transparent; color:var(--muted); border:none; padding:6px 12px; border-radius:6px; cursor:pointer; font-size:11px; font-weight:600; transition:all 0.2s; }
+  .nav button:hover { color:var(--text); background:rgba(79,140,255,0.1); }
+  .nav button.active { color:var(--accent); background:rgba(79,140,255,0.15); }
+  
+  .progress { position:fixed; top:0; left:0; height:2px; background:var(--accent); transition:width 0.5s; z-index:100; }
+  
+  @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+  .fade-in { animation:fadeIn 0.8s ease-out; }
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<div class="stage">
+  <div class="bg-grid"></div>
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  
+  <!-- Scene 1: The Crisis -->
+  <div class="scene active" id="s1">
+    <div class="label">The Crisis</div>
+    <div class="title">Your AI is already inside your systems.<br><span class="danger">Who is watching it?</span></div>
+    <div class="subtitle">In the last 12 months, AI agents from OpenAI, Anthropic, Google, and Meta breached production systems without being asked.</div>
+    <div class="incident-list">
+      <div class="incident"><div class="dot"></div><div><div class="name">OpenAI agents → Hugging Face</div><div class="detail">700 agents, coordinated attack, days undetected</div></div></div>
+      <div class="incident"><div class="dot"></div><div><div class="name">Autonomous AI agent → McKinsey</div><div class="detail">Under 2 hours. 46.5 million chat messages exposed.</div></div></div>
+      <div class="incident"><div class="dot"></div><div><div class="name">Claude Code → 9 Mexican government agencies</div><div class="detail">195 million identity records stolen.</div></div></div>
+      <div class="incident"><div class="dot"></div><div><div class="name">Panasonic worker → banned AI tool</div><div class="detail">334,000 people's data uploaded.</div></div></div>
+      <div class="incident"><div class="dot"></div><div><div class="name">Google Gemini → 3 companies during test</div><div class="detail">Google didn't tell anyone until journalists asked.</div></div></div>
+    </div>
+  </div>
+  
+  <!-- Scene 2: The Problem -->
+  <div class="scene" id="s2">
+    <div class="label">The Problem</div>
+    <div class="title">Most firms lose <span class="accent">11 hours a week</span> to admin.</div>
+    <div class="subtitle">Your team re-explains context to AI tools that forget everything the moment you close the tab. Chatbots produce text. They don't produce work.</div>
+    <div class="stat-row">
+      <div class="stat"><div class="num">11h</div><div class="label">Admin time / week</div></div>
+      <div class="stat"><div class="num">£20</div><div class="label">Chatbot / month</div></div>
+      <div class="stat"><div class="num">£3,500</div><div class="label">Digital employee / month</div></div>
+      <div class="stat"><div class="num">2h</div><div class="label">First job live</div></div>
+    </div>
+    <div class="compare">
+      <div class="compare-card chat">
+        <div class="title">Chatbot</div>
+        <div class="item">Waits to be asked</div>
+        <div class="item">Produces text</div>
+        <div class="item">Forgets everything</div>
+        <div class="item">No security layer</div>
+        <div class="item">£20/month</div>
+      </div>
+      <div class="compare-card employee">
+        <div class="title">Digital Employee</div>
+        <div class="item good">Triggered by work arriving</div>
+        <div class="item good">Produces work product</div>
+        <div class="item good">Remembers everything</div>
+        <div class="item good">Sentinel watches 24/7</div>
+        <div class="item good">£3,500/month</div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Scene 3: Products -->
+  <div class="scene" id="s3">
+    <div class="label">The Product</div>
+    <div class="title">Three parts. <span class="accent">All three</span>, or it is not the product.</div>
+    <div class="subtitle">Not chat interfaces. Agents with a written job spec.</div>
+    <div class="product-grid">
+      <div class="product-card">
+        <div class="icon">🧠</div>
+        <div class="name">Company Brain</div>
+        <div class="desc">Persistent knowledge for one company. Identity, rules, approved knowledge, memory, projects, skills, history, permissions. Isolated per company.</div>
+      </div>
+      <div class="product-card">
+        <div class="icon">🤖</div>
+        <div class="name">Digital Employee</div>
+        <div class="desc">The acting layer. Works inside your existing systems, 24/7. One defined job. One named human who signs off consequential actions.</div>
+      </div>
+      <div class="product-card">
+        <div class="icon">🖥️</div>
+        <div class="name">The Desk</div>
+        <div class="desc">Works inside your existing tools through the screen. No integration project. No API to buy. First job live in about two hours.</div>
+      </div>
+    </div>
+    <div class="subtitle" style="margin-top:20px; font-size:13px;">Brain can be bought alone. Employee can be bought alone. Together is the most complete service.</div>
+  </div>
+  
+  <!-- Scene 4: Brain -->
+  <div class="scene" id="s4">
+    <div class="label">The Brain</div>
+    <div class="title">Eight capabilities. <span class="gold">One engine.</span> Three configurations.</div>
+    <div class="subtitle">The model is replaceable. A trustworthy integrated service is not.</div>
+    <div class="brain-grid">
+      <div class="brain-item"><div class="icon">🪪</div><div class="label">Identity</div><div class="desc">Who it speaks for</div></div>
+      <div class="brain-item"><div class="icon">📋</div><div class="label">Facts</div><div class="desc">Records that outrank conversation</div></div>
+      <div class="brain-item"><div class="icon">📚</div><div class="label">Knowledge</div><div class="desc">Documents and versions</div></div>
+      <div class="brain-item"><div class="icon">💾</div><div class="label">Memory</div><div class="desc">What carried over</div></div>
+      <div class="brain-item"><div class="icon">📁</div><div class="label">Projects</div><div class="desc">Work in progress, resumable</div></div>
+      <div class="brain-item"><div class="icon">🔗</div><div class="label">Graph</div><div class="desc">People, companies, connections</div></div>
+      <div class="brain-item"><div class="icon">🔍</div><div class="label">Retrieval</div><div class="desc">Answers with evidence</div></div>
+      <div class="brain-item"><div class="icon">⚖️</div><div class="label">Governance</div><div class="desc">Access, corrections, retention</div></div>
+    </div>
+    <div class="brain-types">
+      <div class="brain-type"><div class="name">Organisation Brain</div><div class="for">Companies, property groups, professional firms</div><div class="desc">Procedures, documents, policies, projects, decisions.</div></div>
+      <div class="brain-type"><div class="name">Brand Brain</div><div class="for">Consumer brands, agencies, hospitality</div><div class="desc">Identity, positioning, voice, approved claims.</div></div>
+      <div class="brain-type"><div class="name">Product Brain</div><div class="for">Manufacturers, SaaS, retailers</div><div class="desc">Specifications, compatibility, manuals, versions, prices.</div></div>
+    </div>
+  </div>
+  
+  <!-- Scene 5: Workers -->
+  <div class="scene" id="s5">
+    <div class="label">The Workers</div>
+    <div class="title">Digital employees working. <span class="success">Not chatbots waiting.</span></div>
+    <div class="subtitle">Triggered by work arriving. Produces work product. Not text.</div>
+    <div class="agent-grid">
+      <div class="agent-card"><div class="name">Inbox Manager</div><div class="dept">Delivery</div><div class="status">Active</div><div class="output">Triaged 23 messages → 8 urgent, 10 follow-up, 5 archive</div></div>
+      <div class="agent-card"><div class="name">Prospector</div><div class="dept">Sales</div><div class="status">Active</div><div class="output">Found 10 target companies with verified decision-makers</div></div>
+      <div class="agent-card"><div class="name">Security Auditor</div><div class="dept">Engineering</div><div class="status">Active</div><div class="output">Scanned codebase: 0 critical, 2 medium, 5 low findings</div></div>
+      <div class="agent-card"><div class="name">Data Scraper</div><div class="dept">Sales/Engineering</div><div class="status">Active</div><div class="output">Verified 5 company dossiers with source URLs</div></div>
+    </div>
+    <div class="subtitle" style="margin-top:16px; font-size:11px; color:#555;">Illustrative. Shows what a live deployment looks like. Not a client result.</div>
+  </div>
+  
+  <!-- Scene 6: Work Product -->
+  <div class="scene" id="s6">
+    <div class="label">Work Product</div>
+    <div class="title">Work. <span class="accent">Not text.</span></div>
+    <div class="subtitle">A chatbot costs £20/month. A digital employee costs £3,500/month because it replaces two salaries, grows revenue, and never asks for a holiday.</div>
+    <div class="work-product">
+      <div class="line"><span class="label">Filed:</span> <span class="value">Stock reconciliation report (147 rows reconciled)</span></div>
+      <div class="line"><span class="label">Booked:</span> <span class="value">Demo call with verified decision-maker</span></div>
+      <div class="line"><span class="label">Chased:</span> <span class="value">3 overdue invoices (£4,200 total)</span></div>
+      <div class="line"><span class="label">Triaged:</span> <span class="value">23 inbox messages → 8 urgent, 10 follow-up, 5 archive</span></div>
+      <div class="line"><span class="label">Scanned:</span> <span class="value">Codebase: 0 critical, 2 medium, 5 low findings</span></div>
+      <div class="line"><span class="label">Verified:</span> <span class="value">5 company dossiers with source URLs</span></div>
+      <div class="note">Illustrative. Shows what a live deployment produces. Not a client result.</div>
+    </div>
+  </div>
+  
+  <!-- Scene 7: Sign-off -->
+  <div class="scene" id="s7">
+    <div class="label">Accountability</div>
+    <div class="title">Every consequential action has <span class="gold">one named human</span> who signs off.</div>
+    <div class="subtitle">The agent works. The human decides. No black box. No "AI made a mistake."</div>
+    <div class="signoff">
+      <div class="action">Agent proposes: Send invoice to verified contact (£5,000)</div>
+      <div class="buttons">
+        <button class="btn btn-approve" onclick="approve()">Approve</button>
+        <button class="btn btn-reject" onclick="reject()">Reject</button>
+      </div>
+      <div class="result" id="signoff-result"></div>
+    </div>
+  </div>
+  
+  <!-- Scene 8: Sentinel -->
+  <div class="scene" id="s8">
+    <div class="label">Security Layer</div>
+    <div class="title">Twinthos <span class="accent">Sentinel</span></div>
+    <div class="subtitle">Continuous threat intelligence. Matched to your stack. Alerts via any channel you choose.</div>
+    <div class="sentinel-grid">
+      <div class="sentinel-item"><div class="label">CVE Feeds</div><div class="value">100</div></div>
+      <div class="sentinel-item"><div class="label">CISA KEV</div><div class="value">0</div></div>
+      <div class="sentinel-item"><div class="label">EPSS High</div><div class="value">0</div></div>
+      <div class="sentinel-item"><div class="label">Suppliers</div><div class="value">6</div></div>
+      <div class="sentinel-item"><div class="label">Tests Pass</div><div class="value">169</div></div>
+      <div class="sentinel-item"><div class="label">Scan Interval</div><div class="value">30m</div></div>
+      <div class="sentinel-item"><div class="label">Audit Cost</div><div class="value">£10K</div></div>
+      <div class="sentinel-item"><div class="label">Breach Cost</div><div class="value">£500K+</div></div>
+    </div>
+    <div class="subtitle" style="margin-top:16px; font-size:13px;">The audit costs £10,000. A single breach starts at £500,000.</div>
+  </div>
+  
+  <!-- Scene 9: Close -->
+  <div class="scene" id="s9">
+    <div class="label">Twinthos</div>
+    <div class="title">Your AI is already inside your systems.<br><span class="danger">Who is watching it?</span></div>
+    <div class="close-card">
+      <div class="tagline">AI workers that own outcomes.</div>
+      <div class="subtitle" style="font-size:14px;">Not chat interfaces. Agents with a written job spec.</div>
+      <div class="audience">Multi-office property groups. Recruitment agencies. Professional services.</div>
+      <div class="url">twinthos.com</div>
+    </div>
+  </div>
+</div>
+
+<div class="nav" id="nav">
+  <button onclick="showScene(1)" id="n1">1. Crisis</button>
+  <button onclick="showScene(2)" id="n2">2. Problem</button>
+  <button onclick="showScene(3)" id="n3">3. Product</button>
+  <button onclick="showScene(4)" id="n4">4. Brain</button>
+  <button onclick="showScene(5)" id="n5">5. Workers</button>
+  <button onclick="showScene(6)" id="n6">6. Work</button>
+  <button onclick="showScene(7)" id="n7">7. Sign-Off</button>
+  <button onclick="showScene(8)" id="n8">8. Sentinel</button>
+  <button onclick="showScene(9)" id="n9">9. Close</button>
+</div>
+
+<script>
+var current = 1;
+var total = 9;
+function showScene(n) {
+  document.querySelectorAll('.scene').forEach(function(s){ s.classList.remove('active'); });
+  document.getElementById('s'+n).classList.add('active');
+  document.querySelectorAll('.nav button').forEach(function(b){ b.classList.remove('active'); });
+  document.getElementById('n'+n).classList.add('active');
+  current = n;
+  document.getElementById('progress').style.width = (n/total*100) + '%';
+}
+function approve() {
+  document.getElementById('signoff-result').innerHTML = '<span style="color:#7EC8A0;">✓ Approved. Invoice sent. Action logged in audit trail.</span>';
+}
+function reject() {
+  document.getElementById('signoff-result').innerHTML = '<span style="color:#FF6B6B;">✗ Rejected. Action cancelled. Agent notified.</span>';
+}
+// Auto-advance every 8 seconds
+var timer = setInterval(function() {
+  current = current >= total ? 1 : current + 1;
+  showScene(current);
+}, 8000);
+// Pause auto-advance on manual click
+document.querySelectorAll('.nav button').forEach(function(b) {
+  b.addEventListener('click', function() { clearInterval(timer); });
+});
+showScene(1);
+</script>
+</body>
+</html>

@@ -1,0 +1,249 @@
+/* ===== HOME v12 "One employee" =====
+   The hero is a short film played on one clock (js/20-keynote.js). Base CSS is the final frame:
+   no-JS and reduced motion see the resting hero; every film-only element starts hidden.
+   WAAPI owns transform on animated elements, so they are placed with left/top only. */
+.pg-home main{padding-top:0}
+.pg-home .nav{background:linear-gradient(180deg,rgba(6,8,7,.85),rgba(6,8,7,0));backdrop-filter:none;-webkit-backdrop-filter:none}
+.pg-home .nav.scrolled{background:color-mix(in srgb,var(--ivory) 88%,transparent);backdrop-filter:saturate(1.2) blur(10px);-webkit-backdrop-filter:saturate(1.2) blur(10px)}
+.btn-lg{min-height:58px;padding:0 30px;font-size:18px}
+
+.kn{position:relative;isolation:isolate;overflow:hidden;background:var(--ivory);
+  min-height:max(660px,100svh);display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:calc(var(--nav) + 28px) var(--gut) 104px;text-align:center}
+.kn-bg{position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(1200px 700px at 50% 38%,rgba(236,237,232,.035),transparent 70%),
+    repeating-linear-gradient(90deg,rgba(236,237,232,.03) 0 1px,transparent 1px 120px);
+  -webkit-mask:radial-gradient(closest-side at 50% 45%,#1E1E24 30%,transparent 100%);mask:radial-gradient(closest-side at 50% 45%,#1E1E24 30%,transparent 100%)}
+
+/* resting hero (final frame) */
+.kn-copy{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;width:100%;max-width:1120px}
+.kn-id{display:flex;flex-direction:column;align-items:center;gap:14px;margin-bottom:30px}
+.kn-mk{display:block;width:56px;height:56px;color:var(--ink)}
+.kn-mk svg{display:block;width:100%;height:100%}
+.kn-st{display:inline-flex;align-items:center;gap:9px;font:500 14px/1 var(--mono);letter-spacing:.04em;color:var(--ink-2);white-space:nowrap;min-height:13px}
+.kn-st::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px rgba(52,211,153,.14)}
+.kn .eyebrow{justify-content:center;margin-bottom:20px}
+.kn-h{font-size:clamp(40px,6.3vw,100px);letter-spacing:-.04em;line-height:1.04;max-width:12.5em;text-wrap:balance}
+.kn-h .w>i{font-style:normal}
+html.js .kn-h .w{display:inline-block;overflow:hidden;vertical-align:top;padding:0 .04em .16em;margin:0 -.04em -.16em}
+html.js .kn-h .w>i{display:inline-block}
+.kn-sub{margin-top:26px;max-width:35em;font-size:clamp(17px,1.45vw,21px);line-height:1.5;color:var(--ink-2);text-wrap:pretty}
+.kn-cta{margin-top:34px;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:14px 26px}
+.kn-desc{margin-top:22px;max-width:40em;text-wrap:balance;font:500 14px/1.5 var(--mono);letter-spacing:.03em;color:var(--ink)}
+
+/* film layer: everything here is hidden in the final frame */
+.kn-fx{position:absolute;inset:0;z-index:3;pointer-events:none}
+.kn-fx>*{position:absolute;left:0;top:0;opacity:0}
+.kn-glow{width:760px;height:760px;margin:-380px 0 0 -380px;border-radius:50%;
+  background:radial-gradient(closest-side,rgba(52,211,153,.20),rgba(52,211,153,.05) 55%,transparent)}
+.kn-ring{width:120px;height:120px;margin:-60px 0 0 -60px;border-radius:50%;border:1.5px solid var(--green)}
+.kn-chip{display:inline-flex;align-items:center;gap:10px;height:44px;padding:0 17px 0 14px;border-radius:999px;
+  border:1px solid #2A2A32;background:#1E1E24;color:var(--ink);font:500 16px/1 var(--sans);letter-spacing:-.01em;white-space:nowrap}
+.kn-chip>i{position:relative;width:16px;height:16px;flex:none}
+.kn-chip>i::before{content:"";position:absolute;inset:4px;border-radius:50%;border:1.5px solid var(--ink-2)}
+.kn-chip em{font:500 12px/1 var(--mono);font-style:normal;color:#9A9A9F}
+.kn-row{display:flex;align-items:center;gap:13px;font:500 18px/1 var(--sans);letter-spacing:-.01em;color:var(--ink);white-space:nowrap}
+.kn-row time{width:48px;font:500 14px/1 var(--mono);letter-spacing:.02em;color:var(--ink-2)}
+.kn-row .ck{position:relative;flex:none;width:20px;height:20px;border-radius:50%;background:var(--green)}
+.kn-row .ck svg{position:absolute;inset:5px;width:10px;height:10px;color:#0B0B0F}
+.kn-ic{display:flex;flex-direction:column;align-items:center;gap:16px;width:180px;margin-left:-90px}
+.kn-ic svg{width:var(--is,84px);height:var(--is,84px);fill:none;stroke:var(--ink);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
+.kn-ic svg *{stroke-dasharray:1;stroke-dashoffset:1}
+.kn-ic b{font-weight:500;font-size:clamp(17px,1.5vw,22px);letter-spacing:-.02em;color:var(--ink);white-space:nowrap}
+.kn-cap{width:100%;padding:0 var(--gut);font-weight:500;font-size:clamp(20px,2.3vw,34px);letter-spacing:-.03em;line-height:1.15;color:var(--ink);text-wrap:balance}
+.kn-cap.l{font-size:clamp(26px,3.3vw,50px);letter-spacing:-.035em}
+.kn-cap.s{font:500 clamp(13px,1.1vw,15px)/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
+.kn-pr{width:100%;padding:0 var(--gut);font-weight:500;font-size:clamp(46px,8.4vw,136px);letter-spacing:-.035em;line-height:1.07}
+.kn-pr span{display:block}
+.kn-pr .w{display:inline-block;overflow:hidden;vertical-align:top;padding:0 .04em .14em;margin:0 -.04em -.14em}
+.kn-pr .w>i{display:inline-block;font-style:normal}
+.kn-pr .g{color:var(--green)}
+.kn-al{height:1px;background:linear-gradient(90deg,transparent,rgba(52,211,153,.5) 18%,rgba(52,211,153,.5) 82%,transparent);box-shadow:0 0 12px rgba(52,211,153,.35)}
+.kn-al::before,.kn-al::after{position:absolute;left:var(--in,18%);font:500 14px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+.kn-al::before{content:"Twinthos acts";bottom:14px;color:var(--ink-2)}
+.kn-al::after{content:"You decide";top:16px;color:var(--green)}
+.kn-card{width:min(380px,calc(100vw - 40px));display:flex;align-items:center;gap:16px;padding:16px 16px 16px 20px;text-align:left;
+  padding-right:18px;border-radius:18px;border:1px solid rgba(236,237,232,.3);background:#1E1E24;box-shadow:0 24px 60px -24px rgba(0,0,0,.8)}
+.kn-card div{flex:1;min-width:0}
+.kn-card small{display:block;font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);margin-bottom:8px}
+.kn-card p{margin:0;font-size:17px;line-height:1.3;color:var(--ink)}
+.kn-ok{position:absolute;inset:-1px;border-radius:18px;border:1.5px solid var(--green);opacity:0;pointer-events:none}
+.kn-ap{position:relative;flex:none;height:42px;padding:0 18px;border-radius:999px;border:0;background:var(--ink);color:var(--ivory);
+  font:600 15px/1 var(--sans);cursor:default;-webkit-tap-highlight-color:transparent}
+.kn-ap span{display:block}
+.kn-ap .b2{position:absolute;inset:0;display:grid;place-items:center;border-radius:999px;background:var(--green);color:#0B0B0F;opacity:0}
+.kn-hint{position:absolute;right:16px;bottom:calc(100% + 12px);padding:8px 12px;border-radius:999px;background:var(--green);color:#0B0B0F;
+  font:600 13px/1 var(--mono);letter-spacing:.02em;white-space:nowrap;opacity:0;transform:translate3d(0,6px,0);transition:opacity .3s,transform .5s var(--spring);pointer-events:none}
+.kn-hint::after{content:"";position:absolute;right:calc(50% - 6px);top:100%;border:6px solid transparent;border-top-color:var(--green)}
+.kn.is-ask .kn-hint{opacity:1;transform:none}
+.kn.is-ask .kn-card{pointer-events:auto}
+.kn.is-ask .kn-ap{cursor:pointer;animation:kn-pulse 1.4s ease-out infinite}
+.kn.is-ask .kn-ap:focus-visible{outline:2px solid var(--green);outline-offset:4px}
+@keyframes kn-pulse{0%{box-shadow:0 0 0 0 rgba(52,211,153,.55)}100%{box-shadow:0 0 0 7px rgba(52,211,153,0)}}
+.kn-ap.tap::after{content:"";position:absolute;left:50%;top:50%;width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%;background:rgba(52,211,153,.5);animation:kn-tap .6s ease-out forwards;pointer-events:none}
+@keyframes kn-tap{to{transform:scale(5);opacity:0}}
+
+/* controls: pause / chapters / sound. Only with JS and motion. */
+.kn-ctl{position:absolute;z-index:4;left:50%;bottom:24px;transform:translateX(-50%);width:max-content;max-width:calc(100vw - 24px);display:none;align-items:center;gap:6px;
+  padding:6px;border-radius:999px;border:1px solid var(--line);background:rgba(10,13,11,.82)}
+html.js .kn.is-film .kn-ctl{display:flex}
+.kn-b{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 13px;border:0;border-radius:999px;background:transparent;color:var(--ink-2);
+  font:500 12px/1 var(--mono);letter-spacing:.05em;text-transform:uppercase;cursor:pointer}
+.kn-b:hover,.kn-b[aria-pressed="true"]{color:var(--ink);background:rgba(236,237,232,.07)}
+.kn-b:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+.kn-b svg{flex:none;width:14px;height:14px;fill:currentColor}
+.kn-b .i-pl,.kn.is-paused .kn-b .i-pa,.kn.is-done .kn-b .i-pa{display:none}
+.kn.is-paused .kn-b .i-pl,.kn.is-done .kn-b .i-pl{display:block}
+.kn-ch{display:flex;gap:4px;padding:0 6px}
+.kn-ch button{position:relative;width:46px;height:28px;border:0;padding:0;background:transparent;cursor:pointer}
+.kn-ch button::before{content:"";position:absolute;left:0;right:0;top:13px;height:2px;border-radius:2px;background:rgba(236,237,232,.16)}
+.kn-ch button i{position:absolute;left:0;right:0;top:13px;height:2px;border-radius:2px;background:var(--ink);transform-origin:0 50%}
+.kn.is-done .kn-ch{display:none}
+.kn-ch button:focus-visible{outline:2px solid var(--green);outline-offset:2px;border-radius:4px}
+@media (max-width:640px){
+  .kn{padding-bottom:96px}
+  .kn-id{margin-bottom:24px;gap:12px}.kn-mk{width:48px;height:48px}
+  .kn-h{font-size:clamp(36px,10.6vw,52px)}
+  .kn-sub{margin-top:20px;font-size:17px}
+  .kn-cta{margin-top:28px;flex-direction:column;gap:18px}
+  .kn-chip{height:38px;padding:0 13px 0 11px;font-size:14.5px;gap:8px}.kn-chip em{font-size:12px}
+  .kn-row{font-size:15.5px;gap:10px}.kn-row time{width:40px;font-size:12px}.kn-row .ck{width:18px;height:18px}.kn-row .ck svg{inset:4px}
+  .kn-ic{gap:12px;width:120px;margin-left:-60px}.kn-ic svg{stroke-width:2}.kn-ic b{font-size:15px;line-height:1.25}
+  .kn-cap{font-size:20px;padding:0 32px}.kn-cap.l{font-size:26px}.kn-card p{font-size:16px}.kn-st{font-size:13px;letter-spacing:.02em}.kn-al i{display:none}
+  .kn-ch button{width:30px}
+  .kn-b{padding:0 11px}.kn-b .t{display:none}
+}
+@media (max-height:700px) and (min-width:641px){.kn-id{margin-bottom:20px}.kn-sub{margin-top:18px}.kn-cta{margin-top:24px}}
+@media (prefers-reduced-motion:reduce){.kn-fx,.kn-ctl{display:none!important}.kn.is-ask .kn-ap{animation:none}}
+/* before the film script takes over: hold the first frame (headline words down, the rest hidden).
+   Safety: if the script never runs, everything settles into the final frame after 2.5 s. */
+@media (prefers-reduced-motion:no-preference){
+  html.js .kn:not(.is-film) .kn-id,html.js .kn:not(.is-film) .eyebrow,html.js .kn:not(.is-film) .kn-sub,
+  html.js .kn:not(.is-film) .kn-cta,html.js .kn:not(.is-film) .kn-desc{opacity:0;animation:kn-safe .5s 2.5s forwards}
+  html.js .kn:not(.is-film) .kn-h .w>i{transform:translate3d(0,112%,0);animation:kn-safe-w .9s var(--spring) 2.5s forwards}
+}
+@keyframes kn-safe{to{opacity:1}}
+@keyframes kn-safe-w{to{transform:none}}
+.kn-snd .w1,.kn-snd[aria-pressed="true"] .x1{display:none}
+.kn-snd[aria-pressed="true"] .w1{display:inline}
+.kn-snd[aria-pressed="true"]{color:var(--green)}
+/* desktop: the hint sits beside the Approve button, pointing at it */
+@media (min-width:900px){
+  .kn-hint{right:auto;left:calc(100% + 16px);bottom:auto;top:50%;margin-top:-14px;transform:translate3d(-6px,0,0)}
+  .kn-hint::after{right:100%;top:50%;margin-top:-6px;border-top-color:transparent;border-right-color:var(--green)}
+}
+@media (max-width:380px){.kn-st2{display:none}}
+
+/* ===== v14 "Answers vs work" ===== */
+.kn-h{font-size:clamp(40px,5.4vw,88px);max-width:none}
+.kn-h .ln{display:block}
+.kn-h .gl,.kn-hl .gl{position:relative;color:var(--green);text-shadow:none}
+.kn .au{position:absolute;left:-.35em;right:-.35em;top:0;bottom:-.1em;z-index:-1;border-radius:50%;pointer-events:none;
+  background:radial-gradient(closest-side,rgba(52,211,153,.30),rgba(52,211,153,.09) 62%,transparent);filter:blur(14px);animation:kn-br 5s ease-in-out infinite}
+@keyframes kn-br{50%{scale:1.1}}
+.kn-hl{width:100%;padding:0 var(--gut);font-weight:500;font-size:clamp(32px,4.2vw,66px);letter-spacing:-.04em;line-height:1.06;color:var(--ink);text-wrap:balance}
+.kn-hl.s{font-size:clamp(26px,3.1vw,48px);letter-spacing:-.035em}
+.kn-hl .w{display:inline-block;overflow:hidden;vertical-align:top;padding:0 .04em .14em;margin:0 -.04em -.14em}
+.kn-hl .w>i{display:inline-block;font-style:normal}
+.kn-req{display:flex;align-items:center;padding:15px 22px;border-radius:24px 24px 6px 24px;background:#1E1E24;border:1px solid rgba(236,237,232,.12);
+  font:500 18px/1.3 var(--sans);letter-spacing:-.01em;color:var(--ink);white-space:nowrap}
+.kn-req .tx{display:inline-block}
+.kn-req .hl{position:absolute;inset:-1px;border-radius:inherit;border:1.5px solid var(--green);box-shadow:0 0 28px rgba(52,211,153,.28),inset 0 0 18px rgba(52,211,153,.08);opacity:0}
+.kn-bot{width:min(430px,calc(100vw - 40px));padding:16px 22px 18px;border-radius:24px 24px 24px 6px;background:#1E1E24;border:1px solid rgba(236,237,232,.09);text-align:left}
+.kn-bot small{display:flex;align-items:center;gap:8px;font:500 12px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:#6A6A70}
+.kn-bot small i{width:8px;height:8px;border-radius:50%;background:#6A6A70}
+.kn-bot .dots{position:absolute;left:22px;top:46px;display:flex;gap:5px}
+.kn-bot .dots i{width:7px;height:7px;border-radius:50%;background:#6A6A70;animation:kn-dot 1s infinite}
+.kn-bot .dots i:nth-child(2){animation-delay:.15s}.kn-bot .dots i:nth-child(3){animation-delay:.3s}
+@keyframes kn-dot{0%,60%,100%{opacity:.25}30%{opacity:1}}
+.kn-bot p{margin:12px 0 0;font-size:17px;line-height:1.35;color:var(--ink-2)}
+.kn-bot .dr{display:block;margin-top:10px;padding:2px 0 2px 14px;border-left:2px solid rgba(236,237,232,.14)}
+.kn-bot .dr i{display:block;height:8px;border-radius:4px;background:rgba(236,237,232,.15);margin:8px 0;transform-origin:0 50%}
+.kn-bot .dr i:nth-child(1){width:94%}.kn-bot .dr i:nth-child(2){width:80%}.kn-bot .dr i:nth-child(3){width:52%}
+.kn-todo{display:inline-flex;align-items:center;gap:10px;height:38px;padding:0 16px;border-radius:999px;border:1px solid rgba(232,162,91,.5);background:rgba(232,162,91,.08);
+  color:#9A9A9F;font:500 14px/1 var(--mono);letter-spacing:.02em;white-space:nowrap}
+.kn-todo i{width:7px;height:7px;border-radius:50%;background:#9A9A9F;box-shadow:0 0 10px rgba(164,169,162,.8)}
+.kn-tl{display:flex;flex-direction:column;align-items:center;gap:10px;width:112px}
+.kn-tl .k{position:relative;display:block;width:50px;height:50px}
+.kn-tl svg{position:absolute;inset:0;width:100%;height:100%;fill:none;stroke:var(--ink-2);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
+.kn-tl .k>svg *{stroke-dasharray:1;stroke-dashoffset:1}
+.kn-tl .hot{position:absolute;inset:0;opacity:0}
+.kn-tl .hot svg{stroke:var(--green);stroke-width:2.6;filter:drop-shadow(0 0 7px rgba(52,211,153,.85))}
+.kn-tl b{font:500 13px/1 var(--mono);letter-spacing:.04em;color:var(--ink-2);white-space:nowrap}
+.kn-row .ck.w{background:#9A9A9F;color:#0B0B0F;font:700 13px/20px var(--sans);text-align:center}
+.kn-row.wr span{color:#9A9A9F}
+.kn-glow{width:900px;height:620px;margin:-310px 0 0 -450px;background:radial-gradient(closest-side,rgba(52,211,153,.16),rgba(52,211,153,.04) 60%,transparent)}
+@media (max-width:640px){
+  .kn-h{font-size:clamp(34px,9.4vw,46px)}
+  .kn-hl{font-size:28px;padding:0 22px}.kn-hl.s{font-size:24px}
+  .kn-req{font-size:15.5px;padding:12px 16px}
+  .kn-bot{padding:14px 18px 16px}.kn-bot p{font-size:15.5px}.kn-bot .dots{left:18px;top:42px}
+  .kn-todo{height:34px;font-size:13px;padding:0 14px}
+  .kn-tl{width:68px;gap:8px}.kn-tl .k{width:34px;height:34px}.kn-tl b{font-size:12px;letter-spacing:.01em}
+  .kn-glow{width:520px;height:560px;margin:-280px 0 0 -260px}
+}
+@media (prefers-reduced-motion:reduce){.kn .au{animation:none}}
+
+/* ===== v15 opening: meet Twinthos ===== */
+.kn-bm{width:136px;height:136px}
+.kn-bm svg{display:block;width:100%;height:100%;overflow:visible}
+.kn-bm .o{fill:none;stroke:var(--green);stroke-width:.7;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;filter:drop-shadow(0 0 6px rgba(52,211,153,.9))}
+.kn-bm .f{fill:var(--ink);opacity:0}
+.kn-name{width:100%;text-align:center;font-weight:600;font-size:clamp(60px,7.4vw,116px);letter-spacing:-.055em;line-height:1;color:var(--ink)}
+.kn-name .w{display:inline-block;overflow:hidden;vertical-align:top;padding:0 .01em .12em;margin:0 -.01em -.12em}
+.kn-name .w>i{display:inline-block;font-style:normal}
+.kn-tag{width:100%;display:flex;align-items:center;justify-content:center;gap:10px;font:500 14px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2)}
+.kn-tag i{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 10px rgba(52,211,153,.9)}
+.kn-ring{width:180px;height:180px;margin:-90px 0 0 -90px;box-shadow:0 0 30px rgba(52,211,153,.25),inset 0 0 20px rgba(52,211,153,.12)}
+@media (max-width:640px){.kn-bm{width:96px;height:96px}.kn-name{font-size:58px}.kn-tag{font-size:13px;letter-spacing:.12em;color:var(--ink)}.kn-ring{width:130px;height:130px;margin:-65px 0 0 -65px}}
+
+/* ===== v16 "The why" ===== */
+.kn-h{font-size:clamp(48px,8.2vw,132px);letter-spacing:-.05em;line-height:.98;max-width:none}
+.kn-dot{width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:var(--green);box-shadow:0 0 18px 4px rgba(52,211,153,.8),0 0 60px 12px rgba(52,211,153,.35)}
+.kn-chip2{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 14px 0 11px;border-radius:999px;background:#1E1E24;border:1px solid rgba(52,211,153,.38);font-size:14px;font-weight:500;line-height:1;color:#9A9A9F;white-space:nowrap;box-shadow:0 10px 26px -14px rgba(0,0,0,.7)}
+.kn-chip2>i{width:7px;height:7px;flex:none;border-radius:50%;background:#9A9A9F;box-shadow:0 0 8px rgba(164,169,162,.85)}
+.kn-big{display:flex;align-items:baseline;gap:.22em;white-space:nowrap;line-height:.9}
+.kn-big .w{display:inline-block;overflow:hidden;vertical-align:bottom;padding:.04em .03em .1em;margin:0 -.03em}
+.kn-big .w>i{display:inline-block;font-style:normal}
+.kn-big .n{display:inline-block;min-width:1.12em;text-align:right;font-weight:700;font-size:clamp(120px,15vw,230px);letter-spacing:-.06em;color:#9A9A9F;font-variant-numeric:tabular-nums;text-shadow:0 0 .3em rgba(52,211,153,.42)}
+.kn-big .u i{font-size:clamp(34px,3.8vw,60px);font-weight:600;letter-spacing:-.035em;color:var(--ink)}
+.kn-note{width:100%;padding:0 var(--gut);text-align:center;text-wrap:balance;font-size:clamp(17px,1.6vw,24px);line-height:1.3;color:var(--ink-2)}
+.kn-src{width:100%;text-align:center;font:500 11px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:#6A6A70}
+.kn-wipe{width:100%;height:100%;background:radial-gradient(circle at 50% 45%,#9A9A9F,#E8E6E1 55%,#6A6A70)}
+.kn-pr.on{color:#0B0B0F}
+.kn-pr.on .g{color:#9A9A9F}
+.kn-pr2{width:100%;text-align:center;font:600 clamp(13px,1.25vw,17px)/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:#0B0B0F}
+/* sound: on by default; until the browser allows audio the button only carries a faint hint */
+.kn-snd{opacity:.6}
+.kn-snd.need{opacity:.42}
+.kn-snd.need .t{font-size:11px;letter-spacing:.04em}
+.kn-snd.need .x1{display:none}.kn-snd.need .w1{display:inline}
+@media (max-width:640px){
+  .kn-h{font-size:clamp(46px,13.4vw,64px)}
+  .kn-chip2{height:28px;padding:0 10px 0 9px;font-size:12px;gap:6px}.kn-chip2>i{width:6px;height:6px}
+  .kn-big .n{font-size:118px}.kn-big .u i{font-size:28px}
+  .kn-note{font-size:16px}.kn-src{font-size:9.5px}
+}
+.kn-big{gap:clamp(14px,1.5vw,26px)}
+.kn-big .n{text-shadow:none}
+.kn-big::before{content:"";position:absolute;z-index:-1;left:-8%;top:-18%;width:58%;height:136%;border-radius:50%;background:radial-gradient(closest-side,rgba(255,176,32,.3),rgba(255,176,32,0));filter:blur(8px);pointer-events:none}
+.kn-src{padding:0 24px;text-wrap:balance}
+.kn-row>span{color:var(--ink)}
+@media (max-width:640px){.kn-src{font-size:10px}}
+@media (max-width:640px){.kn-big .n{font-size:104px}.kn-big .u i{font-size:26px}}
+.kn-big .od{display:inline-flex;height:1em;overflow:hidden;font-size:clamp(120px,15vw,230px);font-weight:700;line-height:1;letter-spacing:-.06em;color:#9A9A9F;font-variant-numeric:tabular-nums}
+.kn-big .od .c{display:flex;flex-direction:column;will-change:transform}
+.kn-big .od .c i{display:block;height:1em;font-style:normal;line-height:1}
+@media (max-width:640px){.kn-big .od{font-size:104px}}
+/* v16.2: film controls reduced to faint icons in the corner: no bar, no pill, no labels */
+.kn-ctl{left:auto;right:14px;bottom:12px;transform:none;padding:0;gap:0;border:0;border-radius:0;background:none;opacity:.3;transition:opacity .3s}
+.kn-ctl:hover,.kn-ctl:focus-within{opacity:.8}
+.kn-b{width:28px;height:28px;padding:0;gap:0;justify-content:center;background:none!important;color:var(--ink-2)}
+.kn-b .t{display:none!important}
+.kn-b svg{width:11px;height:11px}
+.kn-ch{gap:3px;padding:0 2px}
+.kn-ch button{width:24px;height:28px}
+.kn-ch button::before,.kn-ch button i{top:13.5px;height:1px;border-radius:0}
+.kn-snd,.kn-snd.need{opacity:1}
+.kn-snd[aria-pressed="true"]{color:var(--ink-2)}
+@media (max-width:640px){.kn-ctl{right:8px;bottom:8px}.kn-ch button{width:24px}}

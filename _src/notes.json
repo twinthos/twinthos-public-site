@@ -1,0 +1,544 @@
+[
+  {
+    "slug": "questions-to-ask-managed-ai-agent",
+    "title": "Before you give an agent access.",
+    "category": "AI security",
+    "image": "questions-to-ask-managed-ai-agent-h",
+    "alt": "Two colleagues reviewing a business document together at a laptop",
+    "deck": "Questions that turn an impressive demonstration into a reviewable deployment.",
+    "takeaway": "Ask to see the boundary, the failure and the recovery. Not just the successful run.",
+    "sections": [
+      [
+        "What can it reach?",
+        "Ask for a concrete list of accounts, applications, folders and actions. “It connects to your tools” is not a permission model. A system that reads customer records does not automatically need permission to export them. Review access with the person responsible for each system."
+      ],
+      [
+        "Who can tell it what to do?",
+        "A request from the owner and text found on a webpage should not have the same authority. Prompt injection can arrive through external material the agent reads. Ask how the application limits the consequences of that material influencing the model. OWASP describes this as indirect prompt injection."
+      ],
+      [
+        "What needs a person?",
+        "Choose the actions that require approval: external messages, record changes, spending or unusual cases. Name the approver and decide what happens if they are unavailable. A button labelled “approve” is only useful if the action cannot bypass it."
+      ],
+      [
+        "How do you know it worked?",
+        "Ask to inspect a successful run, a failed run and a rejected action. What was attempted? What changed? Which evidence confirms the result? Establish who receives an alert and how to pause the workflow. Include a recovery exercise before accepting the deployment."
+      ],
+      [
+        "What changes after launch?",
+        "Find out who maintains credentials, integrations, source material and tests. Agree which changes require a fresh review. Finally, ask what you can export when you leave: your knowledge, configuration, records and operating documentation should be discussed before signing."
+      ]
+    ],
+    "sources": [
+      [
+        "OWASP: prompt injection",
+        "https://genai.owasp.org/llmrisk/llm01-prompt-injection/"
+      ],
+      [
+        "NIST: generative AI risk profile",
+        "https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence"
+      ]
+    ],
+    "published": "2026-10-21",
+    "modified": "2026-11-08",
+    "caption": "Before giving an agent business access, review the paperwork and who can approve its actions."
+  },
+  {
+    "slug": "ai-agents-2027-security",
+    "title": "AI agents in 2027: trust is the infrastructure.",
+    "category": "AI security",
+    "image": "agents-2027-security-h",
+    "alt": "Photograph of computing hardware and infrastructure for connected AI systems",
+    "deck": "The next wave of AI will act inside businesses. Its identity, permissions and evidence will matter as much as its intelligence.",
+    "takeaway": "The question for 2027 is not only what an agent can do. It is who authorised it, what it may touch, and how its real actions can be verified.",
+    "sections": [
+      [
+        "The question changes when software acts",
+        "An assistant that suggests a customer reply is one kind of business risk. An agent that can read records, alter a CRM, send the reply and open a new task is another. The difference is not a mythical level of intelligence. It is operational authority. Agents already interact with tools and external systems in 2026, and wider adoption is plausible in 2027. As those connections expand, buyers should stop asking only whether the model sounds capable. They should ask what identity the agent uses, what counts as an instruction, which actions are permitted and what proves a task actually finished. A company cannot outsource accountability to a language model. It must define the job and own the consequences."
+      ],
+      [
+        "A new perimeter forms around every action",
+        "Traditional security controls still matter: strong authentication, patching, network separation and secure application design have not become obsolete. But an agent introduces a moving boundary between the person who requested work, the information the model reads and the actions a tool can perform. NIST's 2026 work on agent identity and authority highlights identification, authorisation, auditing and non-repudiation as areas that need attention. The practical implication is simple: every operational agent needs a named owner and a specific identity. Access should be scoped to the smallest useful job, not inherited wholesale from the founder's account. If the agent can only draft an email, it should not also be able to export the client database."
+      ],
+      [
+        "The attack may arrive disguised as ordinary work",
+        "An email, search result, PDF, issue comment or tool response can contain instructions written by somebody other than the authorised user. This is the core danger of indirect prompt injection. A model might treat malicious document text as a command, even when the legitimate task was only to summarise it. OWASP's agent-security guidance places prompt injection alongside tool misuse, memory poisoning, excessive autonomy and data exfiltration. Defensive engineering should not depend on the model politely refusing every hostile request. Treat retrieved content as data, separate it from authority, and enforce dangerous-action restrictions in the application that actually executes the tool. Even if a model is persuaded to propose an unauthorised export, the export should still fail."
+      ],
+      [
+        "Company memory is an asset and an attack surface",
+        "Persistent company knowledge can make an agent more useful. Approved policies, client history and project context save employees from repeating themselves. But a permanent memory also preserves mistakes. An outdated refund rule, an unverified customer note or a deliberately poisoned document may influence work long after it was first ingested. In 2027, credible company-memory systems should have provenance: where each important fact came from, who owns it, when it was last reviewed and which roles can retrieve it. Correction and deletion must be routine operations. Memory should not silently upgrade an agent's guesses into company policy. And one customer's information must never become another customer's context merely because both agents use the same model."
+      ],
+      [
+        "Approval must mean more than a button",
+        "Many sales demonstrations include a green 'Approve' button. That is not, by itself, a security boundary. The enforceable rule must exist outside the model. Before a high-impact action runs, an execution component should check the exact tool, target, parameters, actor, approval and expiry. A reviewer needs to know whether they are authorising a draft, an email to a specific recipient, a payment or a broad data export. After approval, the system should prevent replay and detect changes to what was authorised. If the evidence log or policy service is unavailable, the safe behaviour for sensitive work is to stop rather than continue and promise to log later. Human oversight is valuable only when it cannot be bypassed by an alternate route."
+      ],
+      [
+        "Reliability and security are the same conversation",
+        "A correct instruction can still end badly if a network call times out after writing a record, a credential expires, or an external application changes. Retry logic may send two emails. A monitoring failure may look like a clean scan. A tool may report success while the customer system never changed. These are operational failures, but they also shape the security exposure of an agent. Every production workflow needs limits on duration, cost and retries, independent checks of meaningful results, an emergency stop, and a recoverable last-known state. Gartner argued in October 2026 that agent success hinges on reliability, accountability and governance rather than maximum autonomy. Its forecast for 2027 is a forecast, not a measured outcome."
+      ],
+      [
+        "The security architecture to look for in 2027",
+        "Rather than buying a claim that an agent is 'safe', ask for a diagram of its trust boundaries. First, identify the person, business and task behind an action. Second, authorise only the required accounts, files and commands; record the rules independently of model instructions. Third, route execution through an unavoidable broker or narrow adapter, with isolated runtime credentials and controlled outbound destinations. Fourth, verify externally that the intended result occurred. Fifth, keep a privacy-conscious audit trail and demonstrate how an operator can revoke access, investigate a failed task and restore service. The exact implementation varies by organisation. A chatbot with a policy prompt is not equivalent to an architecture in which the tool itself rejects disallowed actions."
+      ],
+      [
+        "Seven questions every buyer should ask",
+        "Ask the supplier: (1) Which human owns each agent and its account? (2) Can you show the complete list of applications, permissions and external destinations? (3) What prevents instructions hidden in an email or webpage from changing the job? (4) Which actions require approval tied to their exact parameters? (5) What happens when the policy service, credential, network or log fails? (6) Can you demonstrate one denied attempt, one partial failure and one verified successful result on synthetic data? (7) How are memories corrected, customer data separated and access revoked? A clear answer is more useful than a spectacular demonstration. Request the test artefacts and operating responsibilities in writing before granting real data or production credentials."
+      ],
+      [
+        "What Sentinel proves, and what it does not",
+        "Twinthos Sentinel's source contains offline security monitoring, synthetic cloud-audit triage, a policy-evaluation experiment and a bounded read-only MCP reference adapter. Those components are useful because their claims can be tested in a local environment. They do not establish live protection for every browser, shell, message channel or external agent runtime. Before making a production security claim, a company needs proof that there is no bypass around the enforcement point, that identities and approvals are trusted, that alert delivery works and that the deployed environment is isolated. Publishing honest limitations builds more credibility than describing an unfinished prototype as impossible to break."
+      ],
+      [
+        "The grounded 2027 outlook",
+        "More capable models, richer connectors and longer-running workflows are plausible developments in 2027; exact adoption, pricing and security outcomes are not known today. The strongest competitive advantage may therefore come from disciplined deployment rather than spectacular autonomous demos. A business that can inspect who requested a task, what its digital employee was allowed to do, which systems changed and what a human approved has a foundation for trust. A business that cannot answer those questions has a new source of operational uncertainty. Intelligence matters. Authority, evidence and recovery determine whether that intelligence belongs in a real business."
+      ]
+    ],
+    "sources": [
+      [
+        "OWASP: AI Agent Security Cheat Sheet",
+        "https://cheatsheetseries.owasp.org/cheatsheets/AI_Agent_Security_Cheat_Sheet.html"
+      ],
+      [
+        "OWASP: Top 10 for Agentic Applications 2026",
+        "https://genai.owasp.org/initiatives/agentic-security-initiative/"
+      ],
+      [
+        "NIST: Agent identity and authority, February 2026",
+        "https://www.nist.gov/news-events/news/2026/02/new-concept-paper-identity-and-authority-software-agents"
+      ],
+      [
+        "NIST: Security considerations for AI agents, May 2026",
+        "https://www.nist.gov/publications/summary-analysis-responses-request-information-regarding-security-considerations-ai"
+      ],
+      [
+        "Gartner: AI agent success requires reliability, October 2026",
+        "https://www.gartner.com/en/articles/ai-agent-reality-check"
+      ],
+      [
+        "Google Mandiant: AI risk and resilience, September 2026",
+        "https://cloud.google.com/security/resources/ai-risk-and-resilience-2026"
+      ],
+      [
+        "Twinthos Sentinel: source available on request",         "/contact/"
+      ]
+    ],
+    "published": "2026-11-08",
+    "modified": "2026-11-08",
+    "caption": "Computing infrastructure is only one part of agent security: identity, policy and authorisation must be designed into the workflow."
+  },
+  {
+    "slug": "the-company-brain",
+    "title": "Memory needs ownership, too.",
+    "category": "Agents & tools",
+    "image": "the-company-brain-h",
+    "alt": "Open filing cabinet holding business records in an office",
+    "deck": "A Company Brain is useful when its knowledge is current, attributable and available to the right people.",
+    "takeaway": "The valuable asset is approved context that can be maintained, corrected and used within a defined scope.",
+    "sections": [
+      [
+        "Start with a knowledge map",
+        "What information does the job actually need? List the procedures, policies, responsibilities and project records that affect the answer. Keep the first scope small enough for an owner to review. Copying every company file into a search system can make the knowledge harder to govern."
+      ],
+      [
+        "Separate fact from inference",
+        "A useful record says where a statement came from and when it was checked. A customer’s confirmed requirement, a colleague’s suggestion and an agent’s guess should not become indistinguishable memories. Give uncertain information an explicit status and an owner who can resolve it."
+      ],
+      [
+        "Make updates part of the job",
+        "Policies change. Projects close. People move roles. Define a review process and a way to correct or retire information. In our proposed Company Brain structure, identity, rules, responsibilities and project history are separate categories so that changes can be traced."
+      ],
+      [
+        "Treat retrieval as access",
+        "A knowledge system should only return information the requesting workflow is entitled to use. Decide how company separation, permissions, retention and deletion will work in the actual deployment. These controls need tests; they are not guaranteed by the word “memory”."
+      ],
+      [
+        "Know what it cannot promise",
+        "Persistent storage does not make a model infallible. The system may retrieve the wrong source or interpret a correct source badly. Make important answers reviewable against their origin and allow the agent to report that the available information is insufficient."
+      ]
+    ],
+    "sources": [
+      [
+        "NIST: generative AI risk profile",
+        "https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence"
+      ]
+    ],
+    "published": "2026-10-21",
+    "modified": "2026-11-08",
+    "caption": "Like a filing cabinet, business knowledge needs clear sources, ownership and updates."
+  },
+  {
+    "slug": "what-an-ai-agent-actually-does",
+    "title": "What an agent actually does.",
+    "category": "Agents & tools",
+    "image": "what-an-ai-agent-actually-does-h",
+    "alt": "Person working with organised task columns on a laptop in an office",
+    "deck": "The useful difference is the ability to move from a request to a tool action and a checked result.",
+    "takeaway": "Define the job through inputs, allowed actions and observable outputs.",
+    "sections": [
+      [
+        "A request starts the work",
+        "An agent receives a goal and context, chooses a next step and may call a tool. Anthropic distinguishes agents that select their own steps from workflows with predetermined paths. For a business, the important question is which approach makes the particular job dependable."
+      ],
+      [
+        "Tools make the action possible",
+        "A browser can read an approved website. A file tool can prepare a report. An email tool can draft a response. Each capability needs an account, permission and a clear definition of success. The model’s confidence is not proof that the external action happened."
+      ],
+      [
+        "An example: preparing a customer reply",
+        "Imagine a request asking whether a service is suitable. The agent could read the enquiry, consult approved service details and prepare a draft. If information is missing, it should flag the gap. If sending requires approval, drafting must not silently become sending. This is a possible workflow, not a report of a client deployment."
+      ],
+      [
+        "Check the result outside the conversation",
+        "Look for the saved document, the correct record or the approved draft. Record failed tool calls and incomplete steps. When comparing systems, ask the same question every time: can someone verify what happened without relying on the agent’s own summary?"
+      ]
+    ],
+    "sources": [
+      [
+        "Anthropic: building effective agents",
+        "https://www.anthropic.com/research/building-effective-agents"
+      ],
+      [
+        "Model Context Protocol: introduction",
+        "https://modelcontextprotocol.io/docs/getting-started/intro"
+      ]
+    ],
+    "published": "2026-10-21",
+    "modified": "2026-11-08",
+    "caption": "An agent's work can move between screens, files and tools; the finished result still needs checking."
+  },
+  {
+    "slug": "why-ai-automations-fail",
+    "title": "The failure behind the successful demo.",
+    "category": "AI security",
+    "image": "why-ai-automations-fail-h",
+    "alt": "Paperwork and a task checklist beside a keyboard",
+    "deck": "A demonstration follows a clean path. Real work includes missing data, expired access and contradictory instructions.",
+    "takeaway": "Test an incomplete run as carefully as a successful one.",
+    "sections": [
+      [
+        "The hidden assumptions",
+        "A demo often starts with the right file, a working login and an unambiguous request. Write those assumptions down. What happens when the file is absent, the session expires or two sources disagree? These are ordinary operating conditions, not obscure edge cases."
+      ],
+      [
+        "Retrying can make things worse",
+        "A tool timeout does not always mean that nothing happened. An email may have sent or a record may have changed before the connection failed. Before retrying a write, check the destination or use a mechanism that prevents duplicate actions. Set a retry limit and an escalation path."
+      ],
+      [
+        "Missing coverage is a result",
+        "If a monitoring source is unavailable, report the gap separately from findings. “No alerts” and “all sources checked successfully” are different statements. Sentinel’s recent coverage changes follow this principle: partial collection should not be presented as a completed scan."
+      ],
+      [
+        "Rehearse stopping and recovery",
+        "Test how a responsible person pauses the job and finds its last confirmed state. Keep the recovery instructions understandable to someone who did not build the system. Review failures regularly and change the workflow when the same uncertainty keeps recurring."
+      ]
+    ],
+    "sources": [
+      [
+        "Twinthos Sentinel: source available on request",         "/contact/"
+      ],
+      [
+        "NIST: generative AI risk profile",
+        "https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence"
+      ]
+    ],
+    "published": "2026-10-21",
+    "modified": "2026-11-08",
+    "caption": "When a process breaks, inspect what actually happened before trying the same action again."
+  },
+  {
+    "slug": "digital-employee-vs-chatbot",
+    "title": "From conversation to responsibility.",
+    "category": "Agents & tools",
+    "image": "digital-employee-vs-chatbot-h",
+    "alt": "A smartphone and a laptop being used for everyday work",
+    "deck": "A digital employee is a service role for software. The name matters less than the job, tools and accountability.",
+    "takeaway": "Buy a defined outcome and an operating responsibility, not a label.",
+    "sections": [
+      [
+        "The distinction is a contract for work",
+        "A conversational assistant may help someone think or draft. A managed agent is configured to take responsibility for specified steps using connected tools. Modern chat products can also use tools, so “chatbot” and “agent” are not a clean technical divide. Ask what the particular service will actually do."
+      ],
+      [
+        "Write a small job description",
+        "Define what starts the job, what information it needs and what the finished output looks like. Add what it must never do. A useful first role might prepare a daily project brief from approved sources, with a clear rule for missing updates and a person who checks the result."
+      ],
+      [
+        "Separate software hours from support hours",
+        "A scheduled job may run outside the working day. That does not mean there is a human support team available all night. Specify both the operating schedule and the support arrangement, including who receives urgent failures."
+      ],
+      [
+        "Keep human accountability",
+        "“Digital employee” does not mean a legal employee or a substitute for professional responsibility. A person must own the workflow, maintain its access and decide when it is safe to expand. At Twinthos, the managed offer starts with one agreed recurring job."
+      ]
+    ],
+    "sources": [
+      [
+        "Anthropic: building effective agents",
+        "https://www.anthropic.com/research/building-effective-agents"
+      ],
+      [
+        "Twinthos service scope",
+        "https://twinthos.com/pricing/"
+      ]
+    ],
+    "published": "2026-10-21",
+    "modified": "2026-11-08",
+    "caption": "A conversation and a finished business task are different things."
+  },
+  {
+    "slug": "intro-to-ai",
+    "title": "AI, without the fog.",
+    "category": "Agents & tools",
+    "image": "coworking-morning",
+    "alt": "Professionals collaborating at a table in a contemporary office",
+    "deck": "A practical vocabulary for deciding what belongs in your business.",
+    "takeaway": "Start with the task you can describe and the result you can check.",
+    "sections": [
+      [
+        "A model works with information",
+        "A language model can produce and transform text in response to context. It can help classify requests, summarise material or prepare a draft. Its output can be plausible and still be wrong. Decide how the work will be checked before making it part of a business process."
+      ],
+      [
+        "A workflow gives the work a shape",
+        "A workflow defines the steps around the model: receiving input, reading approved information, using tools and checking an output. Some steps may use ordinary deterministic software. There is no need to use a model for a rule that simpler software can apply reliably."
+      ],
+      [
+        "An agent can choose steps",
+        "An agent may select tools and adjust its plan as it works. This can be useful when the path varies, but it introduces more decisions to inspect. Keep the initial job narrow and decide how many attempts, how much time and which actions it is allowed."
+      ],
+      [
+        "A connector is not a permission slip",
+        "MCP means Model Context Protocol: a standard for connecting AI applications to external systems. Whether a connection uses MCP, an API or a browser, access still needs approval and configuration. A tool being available in an ecosystem does not mean it is connected or safe for your task."
+      ]
+    ],
+    "sources": [
+      [
+        "Anthropic: building effective agents",
+        "https://www.anthropic.com/research/building-effective-agents"
+      ],
+      [
+        "Model Context Protocol: introduction",
+        "https://modelcontextprotocol.io/docs/getting-started/intro"
+      ]
+    ],
+    "published": "2026-10-21",
+    "modified": "2026-11-08",
+    "caption": "Practical AI starts with people, useful tasks and clear instructions."
+  },
+  {
+    "slug": "digital-employee-cost",
+    "title": "Price the work, not the label.",
+    "category": "Business decisions",
+    "image": "digital-employee-cost-h",
+    "alt": "A calculator and financial documents used to evaluate business costs",
+    "deck": "A way to compare a managed AI service without inventing savings.",
+    "takeaway": "Use your own baseline. Count review, exceptions and maintenance as part of the cost.",
+    "sections": [
+      [
+        "Measure the job today",
+        "Choose a representative period and record how often the task occurs, who handles it and what a correct result looks like. Include exceptions and rework. If the baseline is a guess, present the business case as a hypothesis to test rather than a promised return."
+      ],
+      [
+        "Define the service boundary",
+        "Ask whether the price includes setup, connectors, model usage, hosting, support and future changes. Agree a volume limit and what happens if it is exceeded. A small software subscription and a managed service cover different responsibilities, even if both use the term “AI employee”."
+      ],
+      [
+        "Compare like for like",
+        "Count the work people still do: approving sensitive actions, handling exceptions and checking results. A workflow may free capacity without reducing payroll. Separate time returned, cash savings and service improvements instead of collapsing them into one headline number."
+      ],
+      [
+        "Twinthos’s published offer",
+        "The operations audit is £999 once. The managed digital employee is £3,500 per month for one agreed workflow, with a three-month minimum. Both exclude VAT where applicable. The written proposal defines usage and extras. AI security reviews are scoped separately; these prices do not imply a fixed-price security engagement."
+      ]
+    ],
+    "sources": [
+      [
+        "Twinthos pricing and terms",
+        "https://twinthos.com/pricing/"
+      ]
+    ],
+    "published": "2026-10-21",
+    "modified": "2026-11-08",
+    "caption": "A useful price comparison includes the work, the software and human review."
+  },
+  {
+    "slug": "cost-of-an-ai-employee",
+    "title": "The costs around the model.",
+    "category": "Business decisions",
+    "image": "cost-of-an-ai-employee-h",
+    "alt": "Photograph of server racks and cables showing the infrastructure behind running AI systems",
+    "deck": "Model usage is one line in a wider operating budget.",
+    "takeaway": "A useful quote explains who owns each recurring cost and each failure.",
+    "sections": [
+      [
+        "Build and integration",
+        "Someone must understand the workflow, connect the right accounts and test the result. Existing data may need organising before an agent can use it. Ask for a delivery scope that separates the first working version from additional tools or larger changes."
+      ],
+      [
+        "Run and review",
+        "An operating budget can include model usage, hosting, application subscriptions and human review. Costs may vary with task frequency, document size, failed attempts and the complexity of the tools involved. Request a usage assumption and a clear treatment of overages."
+      ],
+      [
+        "Maintain and recover",
+        "Credentials expire. Applications change. Policies are revised. Account for the person who maintains the workflow and investigates failures. A low initial price can be misleading if the owner later becomes an unpaid full-time operator."
+      ],
+      [
+        "Make the comparison testable",
+        "Ask for a short measurement period with agreed outputs and acceptance criteria. Track useful completed work, failures and the time people spend correcting it. Use those observations to decide whether to continue. We do not assume a salary replacement or a guaranteed saving from the presence of an agent."
+      ]
+    ],
+    "sources": [
+      [
+        "Twinthos managed-service scope",
+        "https://twinthos.com/pricing/"
+      ]
+    ],
+    "published": "2026-10-21",
+    "modified": "2026-11-08",
+    "caption": "Software usage is only one part of the full cost of running the work."
+  },
+  {
+    "slug": "small-businesses-already-hired-ai",
+    "title": "The first job to hand over.",
+    "category": "Business decisions",
+    "image": "small-businesses-already-hired-ai-h",
+    "alt": "Counter and payment terminal inside a small bakery",
+    "deck": "Small businesses can start with a manageable workflow instead of a company-wide transformation.",
+    "takeaway": "Choose something frequent, bounded and easy to verify.",
+    "sections": [
+      [
+        "Look for repeatable work",
+        "List the tasks that return every day or week. Good candidates often have a recognisable input and a concrete output: a report, a draft, an organised file or a list of items needing attention. Avoid choosing purely on how impressive a demo looks."
+      ],
+      [
+        "Choose a responsible owner",
+        "The owner should know what a good result looks like and have time to review early runs. They do not need to become an AI specialist, but they must be able to correct the operating rules and stop the job when the output is wrong."
+      ],
+      [
+        "Begin with preparation",
+        "A useful starting point is often work that prepares a decision: a draft response, a summary or an exception list. This allows the business to learn from real inputs while a person retains the consequential action. Expand permissions only after reviewing the evidence."
+      ],
+      [
+        "Set a decision date",
+        "Agree when you will assess the trial and what would justify continuing. Measure completed work and review effort, not just the number of tool calls. These are suggested starting principles, not a claim about how many small businesses have adopted agents or achieved savings."
+      ]
+    ],
+    "sources": [
+      [
+        "Twinthos delivery approach",
+        "https://twinthos.com/how-it-works/"
+      ]
+    ],
+    "published": "2026-10-21",
+    "modified": "2026-11-08",
+    "caption": "A small business can start by handing over one bounded, repeatable task."
+  },
+  {
+    "slug": "the-2-dollar-ai-that-answers-the-phone",
+    "title": "What an AI phone service really costs.",
+    "category": "Business decisions",
+    "image": "the-2-dollar-ai-that-answers-the-phone-h",
+    "alt": "Businesswoman handling a customer phone call beside a laptop",
+    "deck": "A cheap headline rate does not describe a complete telephone workflow.",
+    "takeaway": "Price the whole call journey, including handoff, review and failure.",
+    "sections": [
+      [
+        "Start with the call journey",
+        "What should happen when someone rings? Is the system answering a simple question, collecting details or arranging a booking? Decide when a person needs to take over. A pleasant voice is only one part of a working service."
+      ],
+      [
+        "Ask what the rate includes",
+        "Voice processing, model usage, telephony, numbers and business-system connections may be priced separately. Ask how transferred calls, failed calls and long silences are billed. This note does not quote a current vendor rate: prices and included features must be checked with the actual supplier."
+      ],
+      [
+        "Test the uncomfortable calls",
+        "Try background noise, interruptions, unclear names and a request the system cannot fulfil. Verify that a handoff reaches the right person and that the business record accurately reflects the call. Agree the information the system should collect and avoid."
+      ],
+      [
+        "Confirm the integration",
+        "A phone capability is not included just because an agent has email or messaging. For Twinthos, voice and phone integrations require separate scoping and verification. Confirm provider terms, consent requirements and data handling for your intended use before enabling recording or automated calls."
+      ]
+    ],
+    "sources": [
+      [
+        "Twinthos agent capabilities",
+        "https://twinthos.com/workforce/"
+      ]
+    ],
+    "published": "2026-10-21",
+    "modified": "2026-11-08",
+    "caption": "A call is not finished until the message, booking or handoff is handled."
+  },
+  {
+    "slug": "atm-and-bank-tellers",
+    "title": "Automation changes the shape of a job.",
+    "category": "Business decisions",
+    "image": "atm-and-bank-tellers-h",
+    "alt": "Cash machine inside a bright modern bank lobby",
+    "deck": "Historical analogies can start a discussion. They cannot forecast your staffing needs.",
+    "takeaway": "Evaluate the tasks and service outcomes in your own business.",
+    "sections": [
+      [
+        "A story is not a forecast",
+        "The ATM is often used as an analogy for workplace automation. But an example from another industry cannot establish what will happen to your team. Demand, regulation, customer expectations and the remaining work all affect the outcome. We avoid treating the analogy as evidence of a guaranteed employment effect."
+      ],
+      [
+        "Look at the bundle of tasks",
+        "A role can include administration, judgement, relationship building and responsibility for unusual cases. Automating one part does not remove the rest. Map the work before making claims about an entire job becoming unnecessary."
+      ],
+      [
+        "Plan where the capacity goes",
+        "If a workflow frees time, decide how that time will be used. Faster customer responses, better quality checks and fewer missed follow-ups may be valuable outcomes. Measure them directly. Time returned is not automatically the same as money saved."
+      ],
+      [
+        "Keep people in the operating design",
+        "The people who do the work often know the exceptions that a process document misses. Include them in defining the job and reviewing early results. Twinthos’s purpose is to make people more capable; the deployment should be assessed against that purpose."
+      ]
+    ],
+    "sources": [
+      [
+        "Twinthos purpose",
+        "https://twinthos.com/about/"
+      ]
+    ],
+    "published": "2026-10-21",
+    "modified": "2026-11-08",
+    "caption": "Automating cash withdrawals is different from automating an entire banking role."
+  },
+  {
+    "slug": "super-intelligence-si",
+    "title": "Superintelligence is not a deployment plan.",
+    "category": "AI security",
+    "image": "super-intelligence-si-h",
+    "alt": "Close-up photograph of a semiconductor and surrounding circuitry",
+    "deck": "Future capability is a different question from what your system can safely do today.",
+    "takeaway": "Judge the deployed system through its actual tools, permissions and evidence.",
+    "sections": [
+      [
+        "Bring the discussion back to the system",
+        "Claims about increasingly capable AI can be interesting without telling you whether a particular business workflow is ready. Ask which model, tools, data and controls the proposed system uses. Document what has actually been tested and what remains an assumption."
+      ],
+      [
+        "A stronger model still needs a boundary",
+        "Capability does not remove the need for access controls, approvals or recovery procedures. A system that can reason well may still receive bad information or make an inappropriate tool call. The consequences depend on what the surrounding application allows it to do."
+      ],
+      [
+        "Use a practical acceptance test",
+        "Take representative inputs from the agreed job, including incomplete and contradictory examples. Check the output against a defined standard. Try the actions it must not take. Record failures as well as successes and decide who is responsible for the remaining risk."
+      ],
+      [
+        "Improve from observed behaviour",
+        "Changes to models or tools can alter performance. Keep a repeatable set of tests and review material changes before widening access. The relevant question is not whether a system deserves a futuristic label. It is whether this version performs this job within the boundaries you agreed."
+      ]
+    ],
+    "sources": [
+      [
+        "NIST: generative AI risk profile",
+        "https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence"
+      ]
+    ],
+    "published": "2026-10-21",
+    "modified": "2026-11-08",
+    "caption": "Big claims about future intelligence do not replace present-day system controls."
+  }
+]

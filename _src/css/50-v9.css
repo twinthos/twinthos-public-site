@@ -1,0 +1,20 @@
+/* v9 motion layer: spring easing, scroll reveals, progress hairline, pointer spotlight */
+:root{--spring:cubic-bezier(.16,1,.3,1)}
+@supports (animation-timing-function:linear(0,1)){:root{--spring:linear(0,0.0878,0.2848,0.513,0.7224,0.8873,1.0003,1.0651,1.0919,1.0926,1.0781,1.0572,1.036,1.018,1.0048,0.9964,0.9922,0.991,0.9918,0.9935,0.9956,0.9975,0.999,1,1.0006,1.0008,1)}}
+/* scroll progress under the nav */
+.nav-prog{position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--green);transform:scaleX(0);transform-origin:0 50%;pointer-events:none;opacity:.9;will-change:transform}
+/* reveals: only classed by JS, so no-JS and reduced motion see everything */
+.rv-pre{opacity:0;transform:translate3d(0,22px,0)}
+.rv-pre.rv-h{clip-path:inset(0 0 100% 0);transform:translate3d(0,.5em,0)}
+.rv-in{opacity:1;transform:none;clip-path:inset(0 0 0 0);transition:opacity .6s ease calc(var(--i,0)*70ms),transform .95s var(--spring) calc(var(--i,0)*70ms),clip-path .8s cubic-bezier(.16,1,.3,1) calc(var(--i,0)*70ms)}
+/* springy press on every button */
+.btn{transition:transform .55s var(--spring),background-color .2s,border-color .2s,color .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-1px)}
+.btn:active{transform:scale(.97);transition-duration:.12s}
+/* workspace tour: the number badge and its annotation light together */
+.ws-list li{transition:background .25s,padding-left .5s var(--spring)}
+.ws-list li.hi{background:rgba(52,211,153,.06)}
+@media (prefers-reduced-motion:reduce){.rv-pre,.rv-pre.rv-h{opacity:1;transform:none;clip-path:none}.nav-prog{display:none}.btn,.btn:hover,.btn:active{transform:none;transition:none}}
+.ic-act{position:absolute;inset:-1px;border-radius:12px;border:1px solid rgba(52,211,153,.6);box-shadow:0 0 0 4px rgba(52,211,153,.07),0 10px 30px -12px rgba(52,211,153,.35);pointer-events:none;opacity:0}
+/* magnetic primary CTA on laptops */
+.btn-mag{transition:translate .5s var(--spring),transform .55s var(--spring),background-color .2s,border-color .2s,color .2s}

@@ -1,0 +1,45 @@
+# Build caches and local-only artefacts
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+*.sqlite
+*.sqlite3
+*.db
+*.log
+.DS_Store
+# Private sales notes, customer exports and unmanaged scratch data
+hotbox-pitch-*
+*private-pitch*
+client-exports/
+customer-data/
+
+# Local agent memory, runtime state, backups and browser QA
+SOUL.md
+MEMORY.md
+USER.md
+IDENTITY.md
+HEARTBEAT.md
+.hermes/
+.ssh/
+.aws/
+private/
+backups/
+credentials.json
+secrets.json
+service-account.json
+*.bak
+*.bak-*
+guardian_ledger.jsonl
+sentinel_state.json
+sentinel_feedback.json
+engagement-report*
+engagement-audit*
+offers.md
+jobs_opportunities.pdf
+_src/qa-mobile/

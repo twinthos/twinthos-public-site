@@ -1,0 +1,33 @@
+/* TwinThos sitewide visual consistency / 2026-11-02.
+   Open editorial pricing, predictable page hierarchy, no floated cards. */
+body.pg-home .offers,body.pg-pricing .offers{background:#1E1E24}
+body.pg-home .offer-grid,body.pg-pricing .offer-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;align-items:stretch;border-block:1px solid #2A2A32}
+body.pg-home .offer-grid #audit,body.pg-home .offer-grid #managed,body.pg-pricing .offer-grid #audit,body.pg-pricing .offer-grid #managed{
+  min-width:0;display:flex;flex-direction:column;grid-column:auto;grid-row:auto;
+  margin:0;padding:clamp(31px,4vw,64px) clamp(19px,4vw,65px);
+  border:0;border-radius:0;clip-path:none;background:transparent;color:#9A9A9F;
+  box-shadow:none;overflow:visible;transform:none;transition:none
+}
+body.pg-home .offer-grid #audit,body.pg-pricing .offer-grid #audit{padding-left:0;border-right:1px solid #2A2A32}
+body.pg-home .offer-grid #managed,body.pg-pricing .offer-grid #managed{padding-right:0}
+body.pg-home .offer-grid .offer:hover,body.pg-pricing .offer-grid .offer:hover{border-color:transparent;box-shadow:none;transform:none;background:transparent}
+body .offer-grid .o-eyeline{border-bottom:1px solid #6A6A70;color:#9A9A9F;padding-bottom:20px}
+body .offer-grid .o-name{font-size:clamp(23px,2.25vw,35px);line-height:1.1}
+body .offer-grid .o-price{border:0}
+body .offer-grid .o-list{border-top:1px solid #6A6A70}
+body .offer-grid .o-note{color:#9A9A9F}
+body .offer-grid .o-cta .btn{border-radius:2px}
+body.pg-pricing .phead,body.pg-about .phead,body.pg-page .phead{background:radial-gradient(ellipse at 85% 20%,#1E1E24,transparent 65%),#1E1E24}
+body .phead .d2{font-weight:570;letter-spacing:-.055em;line-height:1.06}
+body .phead .lede{font-size:clamp(18px,1.45vw,23px);line-height:1.5;color:#9A9A9F}
+body .psec .rows .row{border-color:#6A6A70}
+body .foot{background:#1E1E24}
+body .foot a{color:#9A9A9F}
+body .foot a:hover{text-decoration-color:#9A9A9F}
+@media(max-width:760px){
+ body.pg-home .offer-grid,body.pg-pricing .offer-grid{grid-template-columns:minmax(0,1fr);border-bottom:0}
+ body.pg-home .offer-grid #audit,body.pg-home .offer-grid #managed,body.pg-pricing .offer-grid #audit,body.pg-pricing .offer-grid #managed{padding:32px 0 40px;border:0;border-bottom:1px solid #2A2A32}
+ body.pg-home .offer-grid .o-cta .btn,body.pg-pricing .offer-grid .o-cta .btn{min-height:56px}
+ body .phead .d2{font-size:clamp(38px,9.5vw,58px)}
+}
+@media(prefers-reduced-motion:reduce){body .offer-grid .offer{transition:none!important}}

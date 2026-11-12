@@ -1,0 +1,90 @@
+{
+  "questions-to-ask-managed-ai-agent": {
+    "title": "Before you give an agent access.",
+    "subject": "Two colleagues reviewing a business document together at a laptop",
+    "provider": "Unsplash",
+    "photo_url": "https://images.unsplash.com/photo-1758611972678-bc3b29b4718f",
+    "license": "https://unsplash.com/license"
+  },
+  "ai-agents-2027-security": {
+    "title": "AI agents in 2027: trust is the infrastructure.",
+    "subject": "Photograph of computing hardware and infrastructure for connected AI systems",
+    "provider": "Unsplash",
+    "photo_url": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31",
+    "license": "https://unsplash.com/license"
+  },
+  "the-company-brain": {
+    "title": "Memory needs ownership, too.",
+    "subject": "Open filing cabinet holding business records in an office",
+    "provider": "Existing Twinthos photographic source",
+    "path": "assets/notes-img/the-company-brain-h-1600.jpg"
+  },
+  "what-an-ai-agent-actually-does": {
+    "title": "What an agent actually does.",
+    "subject": "Person working with organised task columns on a laptop in an office",
+    "provider": "Unsplash",
+    "photo_url": "https://images.unsplash.com/photo-1768483538267-fce52de424d5",
+    "license": "https://unsplash.com/license"
+  },
+  "why-ai-automations-fail": {
+    "title": "The failure behind the successful demo.",
+    "subject": "Paperwork and a task checklist beside a keyboard",
+    "provider": "Unsplash",
+    "photo_url": "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b",
+    "license": "https://unsplash.com/license"
+  },
+  "digital-employee-vs-chatbot": {
+    "title": "From conversation to responsibility.",
+    "subject": "A smartphone and a laptop being used for everyday work",
+    "provider": "Unsplash",
+    "photo_url": "https://images.unsplash.com/photo-1423666639041-f56000c27a9a",
+    "license": "https://unsplash.com/license"
+  },
+  "intro-to-ai": {
+    "title": "AI, without the fog.",
+    "subject": "Professionals collaborating at a table in a contemporary office",
+    "provider": "Unsplash",
+    "photo_url": "https://images.unsplash.com/photo-1553877522-43269d4ea984",
+    "license": "https://unsplash.com/license"
+  },
+  "digital-employee-cost": {
+    "title": "Price the work, not the label.",
+    "subject": "A calculator and financial documents used to evaluate business costs",
+    "provider": "Unsplash",
+    "photo_url": "https://images.unsplash.com/photo-1554224155-6726b3ff858f",
+    "license": "https://unsplash.com/license"
+  },
+  "cost-of-an-ai-employee": {
+    "title": "The costs around the model.",
+    "subject": "Photograph of server racks and cables showing the infrastructure behind running AI systems",
+    "provider": "Unsplash",
+    "photo_url": "https://images.unsplash.com/photo-1695668548342-c0c1ad479aee",
+    "license": "https://unsplash.com/license"
+  },
+  "small-businesses-already-hired-ai": {
+    "title": "The first job to hand over.",
+    "subject": "Counter and payment terminal inside a small bakery",
+    "provider": "Existing Twinthos photographic source",
+    "path": "assets/notes-img/small-businesses-already-hired-ai-h-1600.jpg"
+  },
+  "the-2-dollar-ai-that-answers-the-phone": {
+    "title": "What an AI phone service really costs.",
+    "subject": "Businesswoman handling a customer phone call beside a laptop",
+    "provider": "Unsplash",
+    "photo_url": "https://images.unsplash.com/photo-1758876022783-8d6ea0842840",
+    "license": "https://unsplash.com/license"
+  },
+  "atm-and-bank-tellers": {
+    "title": "Automation changes the shape of a job.",
+    "subject": "Cash machine inside a bright modern bank lobby",
+    "provider": "Existing Twinthos photographic source",
+    "path": "assets/notes-img/bank-atm-1600.jpg"
+  },
+  "super-intelligence-si": {
+    "title": "Superintelligence is not a deployment plan.",
+    "subject": "Close-up photograph of a semiconductor and surrounding circuitry",
+    "provider": "Unsplash",
+    "photo_url": "https://images.unsplash.com/photo-1518770660439-4636190af475",
+    "license": "https://unsplash.com/license"
+  }
+}

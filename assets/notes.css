@@ -1,0 +1,1190 @@
+/* ==========================================================================
+   Twinthos Notes — v5 (editorial rebuild)
+   Scope: body.notes (article pages + /notes/ index).
+   Loads AFTER /assets/tw.css and re-uses its tokens exclusively:
+     --ivory / --ivory-2 / --paper / --ink / --ink-2 / --line / --line-2
+     --green / --green-t / --sans / --mono / --nav / --gut / --max
+   No new colours. No new fonts: --sans (Inter Tight) carries every headline,
+   standfirst and body line; --mono (Geist Mono) is used only for small
+   uppercase labels, counters, table heads and captions. The old --serif
+   (IBM Plex Serif) is retired here — it was carrying the "cheap" signal.
+   Brand easing: cubic-bezier(.2,.7,.1,1).
+
+   Rules:
+     - Nothing is a bordered card except where a surface is genuinely needed
+       (the end-card and the corrections log). everything else is rule lines.
+     - .wrap, .btn, .nav, .foot come from tw.css and are never redefined.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Tokens
+   -------------------------------------------------------------------------- */
+body.notes{
+  --nx-ease:cubic-bezier(.2,.7,.1,1);
+  --nx-read:760px;
+  --nx-rail:200px;
+  --nx-rule-strong:rgba(236,237,232,.42);
+  --nx-green-wash:rgba(52,211,153,.05);
+  --nx-thumb:clamp(150px,19vw,260px);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+body.notes *{box-sizing:border-box}
+body.notes img{max-width:100%;height:auto}
+body.notes p{text-wrap:pretty}
+body.notes h1,body.notes h2,body.notes h3{text-wrap:balance}
+
+/* visually-hidden utility used by the index brief form (tw.css ships .sr-only) */
+body.notes .vh{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* the one shared measure helper: every prose line is capped, never full-bleed */
+body.notes .nx-src p,
+body.notes .nx-twinthos p,
+body.notes .nx-twinthos-note{max-width:62ch}
+
+/* ==========================================================================
+   2. INDEX — masthead
+   ========================================================================== */
+body.notes-index .nx-masthead{padding:clamp(34px,4.6vw,64px) 0 clamp(24px,2.6vw,36px)}
+
+/* eyebrow with a green leading rule */
+body.notes .nx-kicker{
+  display:flex;align-items:center;gap:clamp(12px,1.4vw,18px);
+  margin:0 0 clamp(22px,2.6vw,34px);
+  font-family:var(--mono);font-weight:500;font-size:11.5px;line-height:1.2;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--ink-2);
+}
+body.notes .nx-kicker::before{content:"";flex:none;width:clamp(26px,3.4vw,46px);height:1px;background:var(--green)}
+
+body.notes-index .nx-masthead h1{
+  margin:0;
+  font-family:var(--sans);font-weight:500;
+  font-size:clamp(44px,5.6vw,76px);line-height:1.02;letter-spacing:-.032em;
+  color:var(--ink);max-width:21ch;
+}
+body.notes-index .nx-masthead .nx-lede{
+  margin:clamp(24px,2.8vw,36px) 0 0;
+  font-size:clamp(18px,1.55vw,21px);line-height:1.5;letter-spacing:-.011em;
+  color:var(--ink-2);max-width:58ch;
+}
+/* promise strip: mono, slash-divided, one green mark */
+body.notes .nx-promise{
+  display:flex;flex-wrap:wrap;align-items:center;gap:6px 0;
+  margin:clamp(26px,3vw,38px) 0 0;padding-top:clamp(18px,2vw,26px);
+  border-top:1px solid var(--line);
+  font-family:var(--mono);font-weight:500;font-size:11.5px;line-height:1.5;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2);
+}
+body.notes .nx-promise span+span::before{content:"/";margin:0 13px;color:var(--green)}
+
+/* subscribe: a rule-line panel, not a boxed form */
+body.notes .nx-brief{
+  margin:clamp(34px,4.2vw,56px) 0 0;padding-top:clamp(22px,2.4vw,30px);
+  border-top:1px solid var(--line);max-width:640px;
+}
+body.notes .nx-brief label{
+  display:block;font-size:clamp(16px,1.35vw,17.5px);line-height:1.5;
+  letter-spacing:-.008em;color:var(--ink-2);
+}
+body.notes .nx-brief label b{color:var(--ink);font-weight:600}
+body.notes .nx-brief label span{display:block;margin-top:6px;font-size:14.5px;color:var(--ink-2)}
+body.notes .nx-brief-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:clamp(16px,1.8vw,20px)}
+body.notes .nx-brief-row input[type=email]{
+  flex:1 1 260px;min-width:0;min-height:52px;padding:0 22px;
+  background:transparent;border:1px solid var(--line-2);border-radius:999px;
+  color:var(--ink);font-family:var(--sans);font-size:16px;letter-spacing:-.005em;
+  transition:border-color .3s var(--nx-ease),box-shadow .3s var(--nx-ease);
+}
+body.notes .nx-brief-row input[type=email]::placeholder{color:rgba(164,169,162,.7)}
+body.notes .nx-brief-row input[type=email]:focus{
+  outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(52,211,153,.15);
+}
+body.notes .nx-brief-row button[type=submit]{
+  flex:none;min-height:52px;padding:0 28px;border-radius:999px;
+  border:1.5px solid var(--ink);background:var(--ink);color:var(--ivory);
+  font-family:var(--sans);font-weight:600;font-size:15.5px;letter-spacing:-.005em;cursor:pointer;
+  transition:background-color .3s var(--nx-ease),border-color .3s var(--nx-ease),color .3s var(--nx-ease),transform .5s var(--nx-ease);
+}
+body.notes .nx-brief-row button[type=submit]:hover{background:var(--green);border-color:var(--green);color:#04120C;transform:translateY(-1px)}
+body.notes .nx-brief-note{margin:clamp(14px,1.6vw,18px) 0 0;font-size:13.5px;line-height:1.6;color:var(--ink-2);max-width:56ch}
+
+/* ==========================================================================
+   3. INDEX — desk navigation
+   ========================================================================== */
+body.notes .nx-desk-toc{
+  position:sticky;top:var(--nav);z-index:20;
+  background:color-mix(in srgb,var(--ivory) 88%,transparent);
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);
+}
+body.notes .nx-desk-toc ol{
+  display:flex;flex-wrap:wrap;gap:0 clamp(20px,3vw,40px);
+  margin:0;padding:0;list-style:none;
+  font-family:var(--mono);font-weight:500;font-size:11.5px;
+  letter-spacing:.16em;text-transform:uppercase;
+}
+body.notes .nx-desk-toc a{
+  position:relative;display:inline-block;padding:15px 0;
+  color:var(--ink-2);text-decoration:none;
+  transition:color .3s var(--nx-ease);
+}
+body.notes .nx-desk-toc a::after{
+  content:"";position:absolute;left:0;right:0;bottom:11px;height:1px;
+  background:var(--green);transform:scaleX(0);transform-origin:0 50%;
+  transition:transform .5s var(--nx-ease);
+}
+body.notes .nx-desk-toc a:hover{color:var(--ink)}
+body.notes .nx-desk-toc a:hover::after{transform:scaleX(1)}
+
+/* ==========================================================================
+   4. INDEX — desks
+   ========================================================================== */
+body.notes .nx-desk{border-top:1px solid var(--line)}
+body.notes .nx-desk-toc + .nx-desk{border-top:0}
+body.notes .nx-desk > .wrap > header{
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr);
+  column-gap:clamp(14px,1.8vw,30px);row-gap:clamp(8px,1vw,14px);
+  padding:clamp(30px,3.6vw,48px) 0 clamp(22px,2.6vw,34px);
+}
+body.notes .nx-desk-num{
+  grid-column:1;grid-row:1 / span 2;align-self:start;
+  padding-top:.28em;
+  font-family:var(--mono);font-weight:500;font-size:11.5px;line-height:1;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--green);
+}
+body.notes .nx-desk > .wrap > header h2{
+  grid-column:2;grid-row:1;margin:0;
+  font-family:var(--sans);font-weight:500;
+  font-size:clamp(30px,3.6vw,46px);line-height:1.04;letter-spacing:-.03em;
+  color:var(--ink);
+}
+body.notes .nx-desk > .wrap > header p{
+  grid-column:2;grid-row:2;margin:0;
+  font-size:clamp(16px,1.25vw,17.5px);line-height:1.55;
+  letter-spacing:-.006em;color:var(--ink-2);max-width:46ch;
+}
+body.notes .nx-desk-count{
+  grid-column:2;grid-row:3;justify-self:start;
+  font-family:var(--mono);font-weight:500;font-size:11px;line-height:1;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--ink-2);
+}
+@media (min-width:1000px){
+  body.notes .nx-desk > .wrap > header{
+    grid-template-columns:auto minmax(0,1fr) auto;
+    column-gap:clamp(32px,5vw,80px);row-gap:clamp(10px,1.2vw,16px);
+  }
+  body.notes .nx-desk-count{
+    grid-column:3;grid-row:1 / span 2;justify-self:end;align-self:start;padding-top:.3em;
+  }
+}
+
+/* ---- index list: rows, not cards ---------------------------------------- */
+body.notes .nx-cards{display:grid;grid-template-columns:minmax(0,1fr);grid-auto-rows:min-content}
+body.notes .nx-card{
+  position:relative;display:grid;grid-template-columns:minmax(0,1fr);
+  gap:clamp(18px,2vw,26px);align-items:start;
+  padding:clamp(26px,2.8vw,40px) 0;
+  border-top:1px solid var(--line);
+  color:inherit;text-decoration:none;
+}
+/* thumbnail integrated into the row; degrades to stacked without :has() */
+@supports selector(:has(*)){
+  body.notes .nx-card:has(> .nx-card-img){
+    grid-template-columns:minmax(0,1fr) var(--nx-thumb);
+    gap:clamp(22px,2.8vw,48px);align-items:center;
+  }
+}
+body.notes .nx-card::after{
+  content:"";position:absolute;left:0;right:0;top:-1px;height:1px;
+  background:var(--green);transform:scaleX(0);transform-origin:0 50%;
+  transition:transform .7s var(--nx-ease);pointer-events:none;
+}
+body.notes a.nx-card:hover::after,body.notes a.nx-card:focus-visible::after{transform:scaleX(1)}
+
+body.notes .nx-card-b{position:relative;display:grid;gap:clamp(9px,1vw,13px);min-width:0;padding-right:clamp(22px,2.6vw,40px)}
+body.notes a.nx-card .nx-card-b::after{
+  content:"";position:absolute;right:0;top:.42em;width:11px;height:11px;
+  border-top:1px solid var(--green);border-right:1px solid var(--green);
+  opacity:0;transform:rotate(45deg) translate(-7px,-7px);
+  transition:opacity .45s var(--nx-ease),transform .55s var(--nx-ease);
+}
+body.notes a.nx-card:hover .nx-card-b::after,
+body.notes a.nx-card:focus-visible .nx-card-b::after{opacity:1;transform:rotate(45deg) translate(0,0)}
+
+body.notes .nx-card .nx-tag{
+  font-family:var(--mono);font-weight:500;font-size:11px;line-height:1;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--green);
+}
+body.notes .nx-card .nx-card-t{
+  font-family:var(--sans);font-weight:500;
+  font-size:clamp(23px,2.15vw,30px);line-height:1.14;letter-spacing:-.028em;
+  color:var(--ink);max-width:clamp(320px,34vw,560px);
+}
+body.notes .nx-card .nx-card-d{
+  font-size:clamp(15.5px,1.15vw,17px);line-height:1.6;letter-spacing:-.004em;
+  color:var(--ink-2);max-width:clamp(320px,40vw,640px);
+}
+body.notes .nx-card .nx-card-m{
+  margin-top:2px;font-family:var(--mono);font-weight:500;font-size:11px;line-height:1;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--ink-2);
+}
+
+body.notes .nx-card-img{display:block;overflow:hidden;border-radius:10px;background:var(--ivory-2)}
+body.notes .nx-card-img img{
+  display:block;width:100%;aspect-ratio:3/2;object-fit:cover;
+  filter:grayscale(1) contrast(1.02);opacity:.82;
+  transition:transform .9s var(--nx-ease),filter .6s var(--nx-ease),opacity .6s var(--nx-ease);
+}
+body.notes a.nx-card:hover .nx-card-img img{filter:grayscale(0);opacity:1;transform:scale(1.035)}
+
+/* the newsletter row inside The Brief desk (no link affordance) */
+body.notes .nx-card-brief{padding-bottom:clamp(26px,2.8vw,40px)}
+body.notes .nx-card-brief::after{display:none}
+body.notes .nx-card-brief .nx-card-b::after{display:none}
+body.notes .nx-card-brief-form{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+body.notes .nx-card-brief-form input[type=email]{
+  flex:1 1 220px;min-width:0;min-height:48px;padding:0 20px;
+  background:transparent;border:1px solid var(--line-2);border-radius:999px;
+  color:var(--ink);font-family:var(--sans);font-size:15.5px;
+  transition:border-color .3s var(--nx-ease),box-shadow .3s var(--nx-ease);
+}
+body.notes .nx-card-brief-form input[type=email]::placeholder{color:rgba(164,169,162,.7)}
+body.notes .nx-card-brief-form input[type=email]:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(52,211,153,.15)}
+body.notes .nx-card-brief-form button[type=submit]{
+  flex:none;min-height:48px;padding:0 24px;border-radius:999px;
+  border:1.5px solid var(--ink);background:var(--ink);color:var(--ivory);
+  font-family:var(--sans);font-weight:600;font-size:15px;cursor:pointer;
+  transition:background-color .3s var(--nx-ease),border-color .3s var(--nx-ease),color .3s var(--nx-ease),transform .5s var(--nx-ease);
+}
+body.notes .nx-card-brief-form button[type=submit]:hover{background:var(--green);border-color:var(--green);color:#04120C;transform:translateY(-1px)}
+
+/* ==========================================================================
+   5. ARTICLE — hero
+   ========================================================================== */
+body.notes .nx-hero{padding:clamp(46px,7.5vw,104px) 0 clamp(26px,3.2vw,40px)}
+body.notes .nx-meta{
+  display:flex;flex-wrap:wrap;align-items:center;gap:4px 0;margin:0;
+  font-family:var(--mono);font-weight:500;font-size:11.5px;line-height:1.3;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--ink-2);
+}
+body.notes .nx-meta>*{display:inline-block}
+body.notes .nx-meta>*+*::before{content:"/";margin:0 13px;color:var(--line-2)}
+body.notes .nx-meta a{color:var(--ink);text-decoration:none;transition:color .3s var(--nx-ease)}
+body.notes .nx-meta a:hover{color:var(--green)}
+
+body.notes .nx-hero h1{
+  margin:clamp(20px,2.4vw,30px) 0 0;
+  font-family:var(--sans);font-weight:500;
+  font-size:clamp(36px,4.6vw,60px);line-height:1.03;letter-spacing:-.032em;
+  color:var(--ink);max-width:24ch;
+}
+body.notes .nx-dek{
+  margin:clamp(22px,2.5vw,32px) 0 0;
+  font-size:clamp(19px,1.65vw,23px);line-height:1.42;letter-spacing:-.017em;
+  color:var(--ink-2);max-width:52ch;
+}
+body.notes .nx-byline{
+  display:flex;flex-wrap:wrap;gap:10px clamp(24px,3vw,44px);
+  margin:clamp(30px,3.4vw,44px) 0 0;padding-top:clamp(16px,1.8vw,22px);
+  border-top:1px solid var(--line);
+  font-family:var(--mono);font-weight:500;font-size:11.5px;line-height:1.5;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2);
+}
+body.notes .nx-byline>span{display:inline-flex;align-items:baseline;gap:8px;min-width:0}
+body.notes .nx-byline>span:first-child{color:var(--ink)}
+body.notes .nx-byline b{color:var(--ink);font-weight:500}
+body.notes .nx-byline time{white-space:nowrap}
+body.notes .nx-byline-stat{display:inline-flex;gap:clamp(14px,2vw,26px);flex-wrap:wrap}
+body.notes .nx-byline-role{color:var(--ink-2)}
+body.notes .nx-byline-read::before{
+  content:"";width:5px;height:5px;border-radius:50%;background:var(--green);
+  display:inline-block;margin-right:9px;transform:translateY(-1px);
+}
+body.notes .nx-byline-words{color:var(--ink-2)}
+
+/* ==========================================================================
+   6. ARTICLE — feature figure
+   ========================================================================== */
+body.notes .nx-fig{
+  width:100%;max-width:var(--max,1360px);margin:0 auto clamp(34px,4.4vw,64px);
+  padding:0 var(--gut,clamp(20px,4vw,56px));
+}
+body.notes .nx-fig picture{display:block}
+body.notes .nx-fig img{
+  display:block;width:100%;aspect-ratio:16/9;object-fit:cover;
+  border:1px solid var(--line);border-radius:14px;background:var(--ivory-2);
+}
+body.notes .nx-fig figcaption{
+  display:flex;align-items:baseline;gap:12px;margin-top:16px;
+  font-size:13.5px;line-height:1.6;color:var(--ink-2);max-width:64ch;
+}
+body.notes .nx-fig figcaption::before{
+  content:"";flex:none;width:22px;height:1px;background:var(--green);transform:translateY(-4px);
+}
+@media (min-width:1000px){body.notes .nx-fig img{aspect-ratio:2.1/1;border-radius:18px}}
+
+/* ==========================================================================
+   7. ARTICLE — layout + contents rail
+   ========================================================================== */
+body.notes .nx-layout{
+  display:grid;grid-template-columns:minmax(0,1fr);
+  gap:clamp(36px,4.5vw,56px);
+  padding:clamp(4px,1vw,12px) 0 clamp(56px,7vw,96px);
+}
+body.notes .nx-toc{align-self:start;border-top:1px solid var(--line);padding-top:clamp(16px,1.8vw,22px)}
+body.notes .nx-toc p{
+  margin:0 0 clamp(12px,1.4vw,16px);
+  font-family:var(--mono);font-weight:500;font-size:11px;line-height:1.2;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--ink-2);
+}
+body.notes .nx-toc ol{list-style:none;margin:0;padding:0;border-left:1px solid var(--line)}
+body.notes .nx-toc li{margin:0}
+body.notes .nx-toc a{
+  position:relative;display:block;padding:9px 0 9px 18px;
+  font-size:14.5px;line-height:1.4;letter-spacing:-.006em;
+  color:var(--ink-2);text-decoration:none;
+  transition:color .3s var(--nx-ease);
+}
+body.notes .nx-toc a::before{
+  content:"";position:absolute;left:-1px;top:0;width:1px;height:100%;
+  background:var(--green);transform:scaleY(0);transform-origin:50% 0;
+  transition:transform .5s var(--nx-ease);
+}
+body.notes .nx-toc a:hover,body.notes .nx-toc a.on{color:var(--ink)}
+body.notes .nx-toc a:hover::before,body.notes .nx-toc a.on::before{transform:scaleY(1)}
+
+@media (min-width:1040px){
+  body.notes .nx-layout{
+    grid-template-columns:var(--nx-rail) minmax(0,var(--nx-read));
+    justify-content:center;gap:clamp(48px,6vw,96px);
+  }
+  body.notes .nx-toc{position:sticky;top:calc(var(--nav) + 34px);border-top:0;padding-top:0}
+}
+
+/* ==========================================================================
+   8. ARTICLE — the short version
+   ========================================================================== */
+body.notes .nx-take{
+  margin:0 0 clamp(44px,5vw,66px);padding-top:clamp(22px,2.4vw,30px);
+  border-top:1px solid var(--nx-rule-strong);
+}
+body.notes .nx-article .nx-take h2{
+  margin:0 0 clamp(14px,1.6vw,20px);padding:0;border:0;counter-increment:none;
+  max-width:none;
+  font-family:var(--mono);font-weight:500;font-size:11.5px;line-height:1.2;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--green);
+}
+body.notes .nx-article .nx-take h2::before{content:none;display:none}
+body.notes .nx-take ul{list-style:none;margin:0;padding:0;counter-reset:nxtake}
+body.notes .nx-take li{
+  position:relative;counter-increment:nxtake;
+  padding:clamp(13px,1.5vw,17px) 0 clamp(13px,1.5vw,17px) clamp(34px,4vw,52px);
+  border-top:1px solid var(--line);
+  font-size:clamp(16.5px,1.2vw,18px);line-height:1.55;letter-spacing:-.006em;color:var(--ink);
+}
+body.notes .nx-take li:first-child{border-top:0;padding-top:0}
+body.notes .nx-take li::before{
+  content:counter(nxtake,decimal-leading-zero);
+  position:absolute;left:0;top:calc(clamp(13px,1.5vw,17px) + .18em);
+  font-family:var(--mono);font-weight:500;font-size:11.5px;letter-spacing:.14em;color:var(--green);
+}
+body.notes .nx-take li:first-child::before{top:.18em}
+body.notes .nx-take li strong{font-weight:600;color:var(--ink)}
+
+/* ==========================================================================
+   9. ARTICLE — body typography
+   ========================================================================== */
+body.notes .nx-article{min-width:0;max-width:var(--nx-read);font-size:clamp(17px,.42vw + 15.5px,19px);line-height:1.68;letter-spacing:-.004em;color:var(--ink)}
+body.notes .nx-article p{margin:0 0 clamp(20px,2vw,26px);color:var(--ink)}
+body.notes .nx-article>p:first-of-type{
+  font-size:clamp(20px,.9vw + 10px,22.5px);line-height:1.55;letter-spacing:-.014em;color:var(--ink);
+}
+body.notes .nx-article strong,body.notes .nx-article b{font-weight:600;color:var(--ink)}
+body.notes .nx-article em,body.notes .nx-article i{font-style:italic}
+body.notes .nx-article a{
+  color:var(--ink);text-decoration:underline;text-decoration-color:var(--line-2);
+  text-underline-offset:3px;text-decoration-thickness:1px;
+  transition:text-decoration-color .3s var(--nx-ease);
+}
+body.notes .nx-article a:hover{text-decoration-color:var(--green)}
+
+body.notes .nx-article h2{
+  position:relative;margin:clamp(52px,6vw,88px) 0 clamp(14px,1.6vw,20px);
+  padding-top:clamp(22px,2.4vw,32px);border-top:1px solid var(--line);
+  font-family:var(--sans);font-weight:500;
+  font-size:clamp(26px,2.9vw,36px);line-height:1.08;letter-spacing:-.03em;
+  color:var(--ink);max-width:26ch;
+  scroll-margin-top:calc(var(--nav) + 40px);counter-increment:nxsec;
+}
+body.notes .nx-article h2::before{
+  content:counter(nxsec,decimal-leading-zero);
+  display:block;margin-bottom:clamp(10px,1.2vw,14px);
+  font-family:var(--mono);font-weight:500;font-size:11.5px;line-height:1;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--green);
+}
+body.notes .nx-article h3{
+  margin:clamp(34px,3.6vw,48px) 0 clamp(10px,1.2vw,14px);
+  font-family:var(--sans);font-weight:500;
+  font-size:clamp(20px,1.9vw,24px);line-height:1.2;letter-spacing:-.024em;color:var(--ink);
+}
+body.notes .nx-article h4{
+  margin:clamp(26px,3vw,36px) 0 10px;
+  font-family:var(--sans);font-weight:600;
+  font-size:clamp(16.5px,1.2vw,18px);line-height:1.3;letter-spacing:-.012em;color:var(--ink);
+}
+body.notes .nx-article>ul,body.notes .nx-article>ol{margin:0 0 clamp(20px,2vw,26px);padding:0;list-style:none}
+body.notes .nx-article>ul li{position:relative;padding-left:24px;margin:0 0 11px}
+body.notes .nx-article>ul li::before{
+  content:"";position:absolute;left:2px;top:.78em;width:10px;height:1px;background:var(--green);
+}
+body.notes .nx-article>ol{counter-reset:nxlist;padding-left:0}
+body.notes .nx-article>ol li{position:relative;padding-left:38px;margin:0 0 11px;counter-increment:nxlist}
+body.notes .nx-article>ol li::before{
+  content:counter(nxlist,decimal-leading-zero);
+  position:absolute;left:0;top:.1em;
+  font-family:var(--mono);font-weight:500;font-size:11.5px;letter-spacing:.14em;color:var(--green);
+}
+body.notes .nx-article li>ul,body.notes .nx-article li>ol{margin:10px 0 0}
+
+/* ==========================================================================
+   10. ARTICLE — premium data table
+   ========================================================================== */
+body.notes .nx-table{
+  margin:clamp(32px,3.6vw,48px) 0;
+  overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:thin;
+}
+body.notes .nx-table table{
+  width:100%;min-width:520px;border-collapse:collapse;
+  font-family:var(--sans);font-size:clamp(14.5px,1.05vw,16px);line-height:1.5;
+  font-variant-numeric:tabular-nums;
+}
+body.notes .nx-table thead th{
+  padding:0 clamp(12px,1.2vw,18px) 12px;text-align:left;vertical-align:bottom;
+  border-bottom:1px solid var(--nx-rule-strong);white-space:nowrap;
+  font-family:var(--mono);font-weight:500;font-size:11px;line-height:1.3;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2);
+}
+body.notes .nx-table thead th:first-child,
+body.notes .nx-table tbody td:first-child{padding-left:0}
+body.notes .nx-table thead th:last-child,
+body.notes .nx-table tbody td:last-child{padding-right:0}
+body.notes .nx-table tbody td{
+  padding:clamp(13px,1.2vw,16px) clamp(12px,1.2vw,18px);
+  border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink-2);
+}
+body.notes .nx-table tbody td:first-child{color:var(--ink);font-weight:500;letter-spacing:-.01em}
+body.notes .nx-table tbody tr:last-child td{border-bottom:0}
+body.notes .nx-table tbody tr{transition:background-color .35s var(--nx-ease)}
+body.notes .nx-table tbody tr:hover td{background:var(--nx-green-wash);color:var(--ink)}
+body.notes .nx-table td.num{color:var(--ink);font-variant-numeric:tabular-nums;letter-spacing:-.004em}
+body.notes .nx-table th.num{text-align:left}
+@media (max-width:700px){
+  body.notes .nx-table table{min-width:480px;font-size:14px}
+  body.notes .nx-table thead th{font-size:10.5px;letter-spacing:.12em}
+}
+
+/* ==========================================================================
+   11. ARTICLE — pull quote
+   ========================================================================== */
+body.notes .nx-pull{
+  margin:clamp(44px,5.5vw,78px) 0;padding:clamp(26px,3vw,38px) 0;
+  border-top:1px solid var(--nx-rule-strong);border-bottom:1px solid var(--nx-rule-strong);
+}
+body.notes .nx-pull p{
+  margin:0;
+  font-family:var(--sans);font-weight:500;
+  font-size:clamp(21px,2.4vw,29px);line-height:1.28;letter-spacing:-.027em;
+  color:var(--ink);
+}
+body.notes .nx-pull cite{
+  display:block;margin-top:clamp(14px,1.6vw,18px);
+  font-family:var(--mono);font-style:normal;font-weight:500;font-size:11.5px;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2);
+}
+
+/* ==========================================================================
+   12. ARTICLE — signature end-card
+   ========================================================================== */
+body.notes .nx-twinthos{
+  position:relative;overflow:hidden;
+  margin:clamp(52px,6vw,88px) 0 clamp(40px,5vw,64px);
+  padding:clamp(32px,3.6vw,54px) clamp(26px,3.4vw,52px) clamp(30px,3.4vw,48px);
+  border:1px solid var(--line);border-radius:18px;
+  background:radial-gradient(130% 150% at 0% 0%,rgba(52,211,153,.10),rgba(52,211,153,0) 58%),var(--ivory-2);
+}
+body.notes .nx-twinthos::before{
+  content:"";position:absolute;left:0;right:0;top:0;height:1px;
+  background:linear-gradient(90deg,var(--green),rgba(52,211,153,0) 62%);
+}
+body.notes .nx-twinthos h2{
+  margin:0 0 clamp(16px,1.8vw,22px);padding:0;border:0;counter-increment:none;
+  font-family:var(--sans);font-weight:500;
+  font-size:clamp(24px,2.5vw,33px);line-height:1.1;letter-spacing:-.03em;
+  color:var(--ink);max-width:26ch;
+}
+body.notes .nx-twinthos h2::before{
+  content:"Twinthos";display:block;margin-bottom:clamp(12px,1.4vw,18px);
+  font-family:var(--mono);font-weight:500;font-size:11.5px;line-height:1;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--green);
+}
+body.notes .nx-twinthos p{margin:0 0 clamp(14px,1.6vw,18px);font-size:clamp(16px,1.15vw,17.5px);line-height:1.65;color:var(--ink-2)}
+body.notes .nx-twinthos p:last-of-type{margin-bottom:0}
+body.notes .nx-twinthos strong{font-weight:600;color:var(--ink)}
+body.notes .nx-twinthos-cta-h{
+  margin:clamp(26px,3vw,36px) 0 clamp(14px,1.6vw,18px);padding-top:clamp(16px,1.8vw,22px);
+  border-top:1px solid var(--line);
+  font-family:var(--mono);font-weight:500;font-size:11.5px;line-height:1.2;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--ink-2);
+}
+body.notes .nx-twinthos-cta{display:flex;flex-wrap:wrap;gap:12px 14px;margin:0}
+body.notes .nx-twinthos-cta .btn-ink{background:var(--green);border-color:var(--green);color:#04120C}
+body.notes .nx-twinthos-cta .btn-line{border-color:rgba(236,237,232,.3);color:var(--ink)}
+body.notes .nx-twinthos-note{
+  margin:clamp(20px,2.4vw,28px) 0 0;padding-top:clamp(14px,1.6vw,18px);
+  border-top:1px solid var(--line);
+  font-size:14px;line-height:1.6;color:var(--ink-2);
+}
+
+/* ==========================================================================
+   13. ARTICLE — questions
+   ========================================================================== */
+body.notes .nx-faq{margin:0}
+body.notes .nx-faq details{border-top:1px solid var(--line)}
+body.notes .nx-faq details:last-of-type{border-bottom:1px solid var(--line)}
+body.notes .nx-faq summary{
+  position:relative;display:block;cursor:pointer;list-style:none;
+  padding:clamp(18px,2vw,24px) clamp(38px,4vw,56px) clamp(18px,2vw,24px) 0;
+  font-family:var(--sans);font-weight:500;
+  font-size:clamp(17px,1.5vw,20px);line-height:1.32;letter-spacing:-.02em;color:var(--ink);
+  transition:color .3s var(--nx-ease);
+}
+body.notes .nx-faq summary::-webkit-details-marker{display:none}
+body.notes .nx-faq summary:hover{color:var(--green)}
+body.notes .nx-faq summary:focus-visible{outline-offset:2px}
+body.notes .nx-faq summary::before,
+body.notes .nx-faq summary::after{
+  content:"";position:absolute;right:2px;top:calc(50% - .5px);width:14px;height:1px;background:var(--green);
+  transition:transform .5s var(--nx-ease),opacity .3s var(--nx-ease);
+}
+body.notes .nx-faq summary::before{transform:translateX(0)}
+body.notes .nx-faq summary::after{transform:rotate(90deg)}
+body.notes .nx-faq details[open] summary::after{transform:rotate(0deg);opacity:0}
+body.notes .nx-faq .a{
+  padding:0 clamp(38px,4vw,56px) clamp(20px,2.2vw,26px) 0;
+  font-size:clamp(15.5px,1.1vw,17px);line-height:1.65;color:var(--ink-2);
+}
+body.notes .nx-faq .nx-faq-body p{margin:0 0 12px;color:inherit}
+body.notes .nx-faq .nx-faq-body p:last-child{margin-bottom:0}
+body.notes .nx-faq .a a{color:var(--ink);text-decoration-color:var(--line-2)}
+
+/* ==========================================================================
+   14. ARTICLE — sources + corrections
+   ========================================================================== */
+body.notes .nx-src ol{list-style:none;margin:0;padding:0;counter-reset:nxsrc}
+body.notes .nx-src li{
+  position:relative;counter-increment:nxsrc;
+  padding:clamp(15px,1.7vw,19px) 0 clamp(15px,1.7vw,19px) clamp(34px,4vw,48px);
+  border-top:1px solid var(--line);
+  font-size:clamp(15.5px,1.1vw,17px);line-height:1.55;color:var(--ink-2);
+}
+body.notes .nx-src li:first-child{border-top:0;padding-top:0}
+body.notes .nx-src li::before{
+  content:"[" counter(nxsrc,decimal-leading-zero) "]";
+  position:absolute;left:0;top:calc(clamp(15px,1.7vw,19px) + .05em);
+  font-family:var(--mono);font-weight:500;font-size:11.5px;letter-spacing:.1em;color:var(--green);
+}
+body.notes .nx-src li:first-child::before{top:.05em}
+body.notes .nx-src li a{
+  color:var(--ink);overflow-wrap:anywhere;
+  text-decoration:underline;text-decoration-color:var(--line-2);text-underline-offset:3px;
+  transition:text-decoration-color .3s var(--nx-ease);
+}
+body.notes .nx-src li a:hover{text-decoration-color:var(--green)}
+body.notes .nx-src li span{display:block;margin-top:8px;font-size:14.5px;line-height:1.55;color:var(--ink-2)}
+
+body.notes .nx-log{
+  margin:clamp(38px,4.4vw,56px) 0 0;
+  padding:clamp(20px,2.2vw,28px) clamp(22px,2.6vw,30px);
+  border:1px solid var(--line);border-radius:14px;
+  background:linear-gradient(90deg,rgba(52,211,153,.05),rgba(52,211,153,0) 46%),var(--ivory-2);
+}
+body.notes .nx-log b{
+  display:block;margin-bottom:10px;
+  font-family:var(--mono);font-weight:500;font-size:11.5px;line-height:1.2;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--green);
+}
+body.notes .nx-log p{margin:0;font-size:14.5px;line-height:1.6;color:var(--ink-2)}
+body.notes .nx-log p+p{margin-top:8px}
+
+/* ==========================================================================
+   15. ARTICLE — keep reading
+   ========================================================================== */
+body.notes .nx-related{
+  margin-top:clamp(48px,6vw,80px);
+  border-top:1px solid var(--line);
+  padding:clamp(44px,5.5vw,76px) 0 clamp(52px,6.5vw,88px);
+}
+body.notes .nx-related h2{
+  margin:0 0 clamp(18px,2.2vw,28px);
+  font-family:var(--mono);font-weight:500;font-size:11.5px;line-height:1.2;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--ink-2);
+}
+body.notes .nx-related .nx-cards{
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));
+  column-gap:clamp(32px,4vw,72px);row-gap:0;
+}
+body.notes .nx-related .nx-card{padding:clamp(20px,2vw,26px) 0}
+body.notes .nx-related .nx-card-b{gap:8px;padding-right:clamp(18px,2vw,30px)}
+body.notes .nx-related .nx-card-t{font-size:clamp(18px,1.7vw,22px);max-width:32ch}
+body.notes .nx-related .nx-card-d{font-size:15.5px;line-height:1.55;max-width:52ch}
+body.notes .nx-related .nx-card-m{margin-top:4px}
+
+/* ==========================================================================
+   16. Motion — CSS-only reveal driven by scroll position
+   ========================================================================== */
+@keyframes nx-rise{from{opacity:0;transform:translate3d(0,18px,0)}to{opacity:1;transform:none}}
+@supports (animation-timeline:view()){
+  @media (prefers-reduced-motion:no-preference){
+    body.notes .nx-fig,
+    body.notes .nx-card,
+    body.notes .nx-take,
+    body.notes .nx-table,
+    body.notes .nx-pull,
+    body.notes .nx-twinthos,
+    body.notes .nx-desk>.wrap>header{
+      animation:nx-rise linear both;
+      animation-timeline:view();
+      animation-range:entry 4% cover 22%;
+    }
+  }
+}
+@media (prefers-reduced-motion:reduce){
+  body.notes *,body.notes *::before,body.notes *::after{
+    animation-duration:.001ms!important;animation-delay:0ms!important;
+    animation-iteration-count:1!important;transition-duration:.001ms!important;
+    scroll-behavior:auto!important;
+  }
+}
+
+/* ==========================================================================
+   17. Breakpoints
+   ========================================================================== */
+@media (max-width:700px){
+  body.notes .nx-card:has(> .nx-card-img),
+  body.notes .nx-card{grid-template-columns:minmax(0,1fr)}
+  body.notes .nx-card-img img{aspect-ratio:16/9}
+  body.notes .nx-card-b{padding-right:0}
+  body.notes a.nx-card .nx-card-b::after{display:none}
+  body.notes .nx-card{gap:16px}
+  body.notes .nx-byline{gap:8px 20px;letter-spacing:.13em}
+  body.notes .nx-desk-toc{position:static;background:transparent;backdrop-filter:none}
+  body.notes .nx-desk-toc ol{gap:0 18px;font-size:11px}
+  body.notes .nx-desk-toc a{padding:12px 0}
+}
+@media (max-width:900px){
+  body.notes .nx-meta>*{font-size:11px}
+  body.notes .nx-byline>span{flex:1 1 auto}
+}
+
+/* ==========================================================================
+   18. Print
+   ========================================================================== */
+@media print{
+  body.notes .nav,body.notes .nx-desk-toc,body.notes .nx-toc,body.notes .nx-related,
+  body.notes .nx-twinthos-cta,body.notes .nx-brief,body.notes .nx-card-brief-form{display:none!important}
+  body.notes{background:#fff;color:#000}
+  body.notes .nx-article{color:#000}
+  body.notes .nx-article h2,body.notes .nx-hero h1{color:#000;border-color:#bbb}
+  body.notes .nx-table tbody td,body.notes .nx-src li{color:#222}
+}
+
+/* ==========================================================================
+   12. INDEX — Latest article feature block
+   ========================================================================== */
+body.notes .nx-latest{
+  padding:clamp(24px,2.6vw,40px) 0 clamp(26px,3vw,44px);
+  border-top:1px solid var(--nx-rule-strong);
+}
+body.notes .nx-latest>.wrap>.nx-kicker{margin:0 0 clamp(12px,1.3vw,18px)}
+body.notes .nx-latest .nx-kicker time{color:var(--ink-2);font-variant-numeric:tabular-nums}
+body.notes .nx-latest-grid{
+  display:grid;grid-template-columns:minmax(0,0.78fr) minmax(0,1.22fr);
+  gap:clamp(20px,2.4vw,38px);align-items:center;
+}
+body.notes .nx-latest-img{display:block;overflow:hidden;border:1px solid var(--line);border-radius:2px}
+body.notes .nx-latest-img img{
+  display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;
+  filter:grayscale(.34) contrast(1.06);transition:filter .5s var(--nx-ease),transform .9s var(--nx-ease);
+}
+body.notes .nx-latest-img:hover img{filter:grayscale(.12) contrast(1.08);transform:scale(1.02)}
+body.notes .nx-latest-body h2{
+  margin:0 0 clamp(10px,1.1vw,15px);font-family:var(--sans);font-weight:600;
+  font-size:clamp(21px,2.05vw,30px);line-height:1.14;letter-spacing:-.024em;
+}
+body.notes .nx-latest-body h2 a{color:var(--ink);text-decoration:none}
+body.notes .nx-latest-body h2 a:hover{color:var(--green)}
+body.notes .nx-latest-body>p:not(.nx-latest-meta){
+  margin:0 0 clamp(14px,1.5vw,20px);max-width:60ch;
+  color:var(--ink-2);font-size:clamp(15px,1.15vw,17px);line-height:1.62;
+}
+body.notes .nx-latest-meta{
+  display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin:0;
+  font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);
+}
+body.notes .nx-latest-go{color:var(--ink);border-bottom:1px solid var(--nx-rule-strong);padding-bottom:2px}
+@media (max-width:860px){
+  body.notes .nx-latest-grid{grid-template-columns:minmax(0,1fr);gap:20px}
+  body.notes .nx-latest-img{order:-1}
+}
+@media (prefers-reduced-motion:reduce){
+  body.notes .nx-latest-img img{transition:none}
+  body.notes .nx-latest-img:hover img{transform:none}
+}
+body.notes .nx-brief-wrap{
+  padding:clamp(26px,2.6vw,40px) 0 clamp(8px,1vw,14px);
+  border-top:1px solid var(--line);
+}
+body.notes .nx-brief-wrap .nx-brief{margin:0}
+
+/* Masthead lede + promise trimmed so the Latest article lands in the first screen */
+@media (min-width:861px){
+  body.notes-index .nx-masthead h1{font-size:clamp(40px,4.4vw,62px)}
+  body.notes-index .nx-masthead .nx-lede{margin-top:clamp(16px,1.8vw,24px);font-size:clamp(17px,1.3vw,19px)}
+  body.notes .nx-promise{margin-top:clamp(16px,1.8vw,22px);padding-top:clamp(12px,1.3vw,16px)}
+  body.notes .nx-kicker{margin-bottom:clamp(14px,1.5vw,20px)}
+}
+
+/* Final fold fit: the Latest article must be fully visible without scrolling */
+@media (min-width:861px){
+  body.notes-index .nx-masthead{padding:clamp(26px,3.4vw,44px) 0 clamp(18px,2vw,26px)}
+  body.notes .nx-latest{padding:clamp(18px,2vw,28px) 0 clamp(20px,2.2vw,30px)}
+  body.notes .nx-latest-img img{aspect-ratio:16/9}
+  body.notes .nx-latest-body h2{font-size:clamp(20px,1.85vw,28px);margin-bottom:clamp(8px,0.9vw,12px)}
+  body.notes .nx-latest-body>p:not(.nx-latest-meta){
+    margin-bottom:clamp(10px,1.1vw,14px);
+    font-size:clamp(14.5px,1.05vw,16px);line-height:1.58;
+  }
+}
+
+/* ==========================================================================
+   17. IA revision — three groups, glossary, motion and defect fixes
+   ========================================================================== */
+
+/* 17.1 Sticky desk-nav offset.
+   .nx-desk-toc sits at top:var(--nav) and is ~46px tall, but
+   html{scroll-padding-top} only clears the 68px nav. Every #desk-* jump
+   therefore landed the desk heading under the sticky bar. Clear both. */
+body.notes .nx-desk{scroll-margin-top:calc(var(--nav) + 56px)}
+body.notes .nx-glossary{scroll-margin-top:calc(var(--nav) + 56px)}
+
+/* Smooth scrolling, gated so reduced-motion never gets it. The existing
+   kill switch targets body.notes * and cannot match <html>. */
+@media (prefers-reduced-motion:no-preference){
+  html{scroll-behavior:smooth}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto!important}
+}
+
+/* 17.2 Pointer-gated hover.
+   Bare :hover latches on touch: the first tap leaves the card un-greyscaled
+   with its rule drawn after you come back. Gate on a real pointer, but keep
+   :focus-visible unconditional so keyboard users always see the affordance. */
+@media (hover:hover) and (pointer:fine){
+  body.notes a.nx-card:hover::after,
+  body.notes a.nx-card:focus-visible::after{transform:scaleX(1)}
+  body.notes a.nx-card:hover .nx-card-b::after,
+  body.notes a.nx-card:focus-visible .nx-card-b::after{opacity:1;transform:rotate(45deg) translate(0,0)}
+  body.notes a.nx-card:hover .nx-card-img img{filter:grayscale(0);opacity:1;transform:scale(1.035)}
+  body.notes .nx-latest-img:hover img{filter:grayscale(.12) contrast(1.08);transform:scale(1.02)}
+  body.notes .nx-latest-grid:hover .nx-latest-go{transform:translateX(4px)}
+}
+body.notes a.nx-card:focus-visible::after{transform:scaleX(1)}
+body.notes a.nx-card:focus-visible .nx-card-b::after{opacity:1;transform:rotate(45deg) translate(0,0)}
+body.notes .nx-latest-go{display:inline-block;transition:transform .38s var(--nx-ease)}
+
+/* 17.3 Masthead entrance, capped at 360ms total.
+   The h1 is the LCP candidate and must paint static and final, so only the
+   kicker, lede and promise move. */
+@keyframes nx-mast-in{from{opacity:0;transform:translate3d(0,10px,0)}to{opacity:1;transform:none}}
+@keyframes nx-rule-draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@media (prefers-reduced-motion:no-preference){
+  body.notes-index .nx-masthead .nx-kicker,
+  body.notes-index .nx-masthead .nx-lede,
+  body.notes-index .nx-masthead .nx-promise{animation:nx-mast-in .24s var(--nx-ease) both}
+  body.notes-index .nx-masthead .nx-kicker{animation-delay:0ms}
+  body.notes-index .nx-masthead .nx-lede{animation-delay:70ms}
+  body.notes-index .nx-masthead .nx-promise{animation-delay:130ms}
+  body.notes-index .nx-masthead .nx-kicker::before{
+    animation:nx-rule-draw .42s var(--nx-ease) 60ms both;transform-origin:0 50%;
+  }
+}
+
+/* 17.4 Scroll-reveal stagger.
+   animation-delay is a silent no-op on a scroll timeline (progress is bound
+   to scroll position, there is no duration to delay), so stagger must be
+   expressed as animation-range offsets. Scoped to notes-index because the
+   article page's .nx-related grid puts nth-child(2) BESIDE nth-child(1),
+   where a stagger would read as a rendering bug.
+   The 'cover' end guarantees full opacity while on screen, so a deep link
+   can never leave a card stuck invisible. */
+@supports (animation-timeline:view()){
+  @media (prefers-reduced-motion:no-preference){
+    body.notes .nx-card,
+    body.notes .nx-take,
+    body.notes .nx-table,
+    body.notes .nx-pull,
+    body.notes .nx-twinthos,
+    body.notes .nx-fig,
+    body.notes .nx-desk>.wrap>header{
+      animation:nx-rise linear both;
+      animation-timeline:view();
+      animation-range:entry 6% cover 18%;
+    }
+    body.notes-index .nx-cards>.nx-card:nth-child(2){animation-range:entry 8% cover 20%}
+    body.notes-index .nx-cards>.nx-card:nth-child(3){animation-range:entry 10% cover 22%}
+    body.notes-index .nx-cards>.nx-card:nth-child(4){animation-range:entry 12% cover 24%}
+    body.notes-index .nx-desk>.wrap>header{animation-range:entry 10% cover 26%}
+  }
+}
+
+/* 17.5 Glossary — the plain-English definitions block */
+body.notes .nx-glossary{border-top:1px solid var(--line);padding:clamp(30px,3.6vw,48px) 0 clamp(40px,5vw,64px)}
+body.notes .nx-glossary h2{
+  font-size:clamp(19px,1.7vw,24px);line-height:1.2;letter-spacing:-.02em;margin:0 0 clamp(16px,1.8vw,24px);
+}
+body.notes .nx-glossary dl{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));
+  gap:clamp(16px,1.8vw,28px) clamp(24px,3vw,48px);margin:0;
+}
+body.notes .nx-glossary dt{
+  font-weight:600;font-size:15px;line-height:1.35;color:var(--ink);margin-bottom:5px;
+}
+body.notes .nx-glossary dd{
+  margin:0;font-size:15px;line-height:1.6;color:var(--ink-2);max-width:44ch;
+}
+
+/* 17.6 Long desk heading on narrow screens.
+   'What it costs, and what goes wrong' is ~430px at clamp max, which wraps to
+   three lines beside the 01 counter at 390px. Stack the counter above it. */
+@media (max-width:560px){
+  body.notes .nx-desk>.wrap>header{grid-template-columns:minmax(0,1fr)}
+  body.notes .nx-desk-num{grid-row:auto;padding-top:0;margin-bottom:8px}
+}
+
+/* Super intelligence: every visible mention glows in the brand emerald, set in the headline face. */
+body.notes .si-term{
+  font-family:var(--sans);font-weight:600;letter-spacing:-.01em;
+  color:var(--green);
+  text-shadow:0 0 14px rgba(52,211,153,.55),0 0 2px rgba(52,211,153,.35);
+  white-space:nowrap;
+}
+
+
+/* NOTES 2026-11: deliberate editorial publication, no dashboard imitation */
+body.notes{--ink-2:#C2D0C6;--nx-read:780px;--nx-rail:220px;--nx-rule-strong:#616469}
+body.notes .nav{background:#090F0B!important;border-bottom-color:#4d5054!important}
+body.notes .nx-kicker{color:#ccd3dc;font-size:12px;letter-spacing:.08em}
+body.notes-index .nx-masthead{padding:clamp(48px,6.5vw,96px) 0 clamp(34px,4vw,60px);background:radial-gradient(ellipse at 95% 18%,#4f525630,transparent 65%)}
+body.notes-index .nx-masthead h1{font-weight:570;font-size:clamp(46px,6.3vw,93px);line-height:1;letter-spacing:-.05em;max-width:18ch}
+body.notes-index .nx-masthead .nx-lede{font-size:clamp(18px,1.55vw,22px);max-width:55ch;margin-top:24px;color:#D2DDD4}
+body.notes .nx-promise{font-size:11px;letter-spacing:.07em;color:#BED1C3}
+body.notes .nx-latest{background:linear-gradient(118deg,#232426,#0C150F);border-color:#4b4e52;padding:clamp(32px,4.5vw,65px) 0}
+body.notes .nx-latest-grid{grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);gap:clamp(25px,4.5vw,69px)}
+body.notes .nx-latest-img{border-radius:16px;border:1px solid #686c71;box-shadow:0 17px 39px #0004}
+body.notes .nx-latest-img img{aspect-ratio:1.55;filter:none!important;opacity:1!important;object-fit:cover}
+body.notes .nx-latest-body h2{font-size:clamp(32px,3.5vw,55px);line-height:1.07;letter-spacing:-.042em;font-weight:600}
+body.notes .nx-latest-body>p:not(.nx-latest-meta){font-size:clamp(17px,1.35vw,20px);line-height:1.53;color:#D2DDD2}
+body.notes .nx-latest-go{font:650 15px var(--sans);text-transform:none;letter-spacing:0;border:0;color:#d8e0ea}
+body.notes .nx-brief-wrap{padding:30px 0;border-top:0;border-bottom:1px solid #4e5155}
+body.notes .nx-follow{display:flex;justify-content:space-between;align-items:center;gap:23px;padding:clamp(23px,3vw,39px);border:1px solid #666a6f;border-radius:15px;background:linear-gradient(110deg,#2d2f31,#102116)}
+body.notes .nx-follow h2{margin:0 0 8px;font-size:clamp(25px,2.3vw,35px);font-weight:600;letter-spacing:-.035em}
+body.notes .nx-follow p{font-size:16px;line-height:1.5;color:#D1E0D3;max-width:57ch}
+body.notes .nx-follow a{display:inline-flex;align-items:center;justify-content:center;flex:none;min-height:52px;padding:12px 19px;border-radius:6px;background:#F0F8EE;color:#212224;font-weight:650;text-decoration:none;font-size:16px}
+body.notes .nx-follow a:hover{background:#d4dce6;color:#212224}
+body.notes .nx-desk-toc{background:#0C1A11;border-color:#4e5155}
+body.notes .nx-desk-toc a{color:#D2E1D4;letter-spacing:.045em;font-size:12px;min-height:44px}
+body.notes .nx-desk{padding-bottom:clamp(26px,4vw,54px);border-color:#4a4d50}
+body.notes .nx-desk>.wrap>header{padding:clamp(43px,5vw,75px) 0 26px}
+body.notes .nx-desk>.wrap>header h2{font-size:clamp(32px,3.6vw,51px);font-weight:580}
+body.notes .nx-desk-count{font-size:12px;letter-spacing:.06em;color:#C6D6C8}
+body.notes-index .nx-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-rows:1fr;gap:clamp(14px,1.7vw,23px)}
+body.notes-index .nx-card,body.notes-index .nx-card:has(>.nx-card-img){display:flex;flex-direction:column;align-items:stretch;gap:0;width:100%;height:100%;min-width:0;padding:0;border:1px solid #54575b;border-radius:15px;overflow:hidden;background:linear-gradient(145deg,#262729,#111C15);box-shadow:0 12px 32px #0003;transition:border-color .3s,box-shadow .3s}
+body.notes-index .nx-card::after{display:none}
+body.notes-index .nx-card:hover,body.notes-index .nx-card:focus-visible{border-color:#bcc3cc;box-shadow:0 24px 49px #0006}
+body.notes-index .nx-card-img{display:block;order:-1;overflow:hidden;border:0;border-radius:0;width:100%}
+body.notes-index .nx-card-img picture{display:block}
+body.notes-index .nx-card-img img{width:100%;height:auto;aspect-ratio:1.6;object-fit:cover;filter:none;opacity:1;transition:transform .6s}
+body.notes-index .nx-card:hover .nx-card-img img{filter:none;opacity:1;transform:scale(1.035)}
+body.notes-index .nx-card-b{display:flex;flex:1;flex-direction:column;min-width:0;gap:13px;padding:clamp(20px,2vw,29px)}
+body.notes-index .nx-card-b::after{display:none!important}
+body.notes-index .nx-card .nx-tag{color:#d0d8e2;font-size:11px;letter-spacing:.09em;font-weight:600}
+body.notes-index .nx-card .nx-card-t{max-width:none;font-size:clamp(22px,1.9vw,30px);font-weight:600;letter-spacing:-.032em;line-height:1.14;color:#F5FAF2}
+body.notes-index .nx-card .nx-card-d{font-size:clamp(15px,1.08vw,17px);line-height:1.5;color:#CEDECF;max-width:none}
+body.notes-index .nx-card .nx-card-m{margin-top:auto;padding-top:15px;border-top:1px solid #53565a;display:flex;justify-content:space-between;gap:10px;color:#C3D5C7;font-size:11px;letter-spacing:.04em}
+body.notes-index .nx-card .nx-card-m:after{content:"Read ↗";font:650 14px var(--sans);letter-spacing:0;text-transform:none;color:#d4dce6}
+body.notes .nx-glossary{border-color:#585b5f;padding:clamp(50px,6vw,88px) 0}
+body.notes .nx-editorial-disclosure{margin:25px 0 0;font:500 12px/1.5 var(--mono);color:#BCD0C0;max-width:70ch}
+body.notes:not(.notes-index) .nx-hero{padding:clamp(52px,7vw,108px) 0 clamp(28px,4vw,54px)}
+body.notes:not(.notes-index) .nx-hero h1{font-size:clamp(44px,5.5vw,81px);font-weight:570;line-height:1.04;letter-spacing:-.047em;max-width:22ch}
+body.notes:not(.notes-index) .nx-dek{font-size:clamp(19px,1.8vw,26px);line-height:1.45;color:#D1DDD2}
+body.notes .nx-byline{border-color:#5f6266;color:#C8D9CB}
+body.notes .nx-fig{margin-bottom:clamp(49px,6vw,84px)}
+body.notes .nx-fig picture{overflow:hidden;display:block;border:1px solid #5e6165;border-radius:16px}
+body.notes .nx-fig img{width:100%;height:auto;aspect-ratio:1.9;object-fit:cover;border:0;border-radius:0;filter:none;opacity:1}
+body.notes .nx-fig figcaption{display:block;font-size:14px;color:#C8D5CB;margin-top:14px}
+body.notes .nx-fig figcaption:before{display:none}
+body.notes .nx-image-disclosure{display:inline-block;margin-right:12px;color:#d2dae4;font:600 11px/1.4 var(--mono);letter-spacing:.06em;text-transform:uppercase}
+body.notes .nx-toc{padding:19px;border:1px solid #55585c;border-radius:12px;background:#121F16}
+body.notes .nx-toc ol{border-left:0}
+body.notes .nx-toc a{color:#D1E0D4;font-size:14px;line-height:1.45}
+body.notes .nx-article{font-size:clamp(18px,1.1vw,20px);line-height:1.74}
+body.notes .nx-article p{color:#E1EBE1}
+body.notes .nx-article h2{font-size:clamp(30px,3vw,44px);font-weight:570;max-width:31ch}
+body.notes .nx-article a{color:#d6dee8;text-decoration-color:#7e8389}
+body.notes .nx-take{padding:clamp(24px,3vw,43px);border:1px solid #686c71;border-radius:15px;background:linear-gradient(120deg,#2f3133,#102016)}
+body.notes .nx-table{overflow-x:auto;max-width:100%;padding:0 18px;border:1px solid #595c60;border-radius:12px;background:#121D15}
+body.notes .nx-twinthos{background:linear-gradient(135deg,#2e3032,#102016);border-color:#6a6e73}
+body.notes .nx-related .nx-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+body.notes .nx-related .nx-card{padding:23px;border:1px solid #5e6165;border-radius:12px;background:#212224}
+body.notes .nx-related .nx-card:hover{border-color:#a5abb3;background:#303234}
+body.notes .nx-card,body.notes .nx-fig,body.notes .nx-take,body.notes .nx-table,body.notes .nx-pull,body.notes .nx-twinthos,body.notes .nx-desk>.wrap>header{animation:none!important;opacity:1!important}
+@media(max-width:1100px){body.notes-index .nx-cards{grid-template-columns:repeat(2,minmax(0,1fr))}body.notes .nx-latest-grid{grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr)}}
+@media(max-width:760px){body.notes-index .nx-masthead h1{font-size:clamp(43px,9vw,63px)}body.notes .nx-latest-grid{grid-template-columns:minmax(0,1fr);gap:21px}body.notes .nx-latest-img img{aspect-ratio:16/10}body.notes .nx-latest-body h2{font-size:clamp(30px,6vw,44px)}body.notes-index .nx-cards{grid-template-columns:minmax(0,1fr)}body.notes-index .nx-card-img img{aspect-ratio:16/10}body.notes .nx-follow{flex-direction:column;align-items:stretch}body.notes .nx-follow a{align-self:stretch}body.notes .nx-desk-toc ol{flex-wrap:nowrap;white-space:nowrap;overflow-x:auto;gap:21px}body.notes:not(.notes-index) .nx-hero h1{font-size:clamp(40px,8.4vw,64px)}body.notes .nx-fig img{aspect-ratio:16/10}body.notes .nx-toc{position:static}body.notes .nx-related .nx-cards{grid-template-columns:minmax(0,1fr)}}
+
+/* The reading task: one useful action tied to the article's subject. */
+body.notes .nx-field-test{margin:0 0 clamp(37px,4vw,58px);padding:clamp(21px,2.5vw,32px);border-radius:12px;border:1px solid #71757a;background:linear-gradient(120deg,#2d2f31,#14241A)}
+body.notes .nx-field-test span{display:block;font:600 11px/1.3 var(--mono);letter-spacing:.11em;color:#cfd7e1;margin:0 0 11px}
+body.notes .nx-field-test p{font-size:clamp(17px,1.3vw,19px);line-height:1.55;margin:0;color:#EAF6EA}
+body.notes .nx-field-test+.nx-article h2{margin-top:clamp(48px,5vw,73px)}
+@media print{body.notes .nx-field-test{background:white;color:#111;border-color:#aaa}body.notes .nx-field-test p{color:#111}}
+
+/* Article takeaway that can be put to work immediately */
+body.notes .nx-field-test{margin:0 0 clamp(38px,4.5vw,64px);padding:clamp(22px,2.6vw,36px);border:1px solid #7c8086;border-radius:15px;background:linear-gradient(120deg,#323436,#122319)}
+body.notes .nx-field-test span{display:block;margin-bottom:12px;font:600 11px/1.4 var(--mono);letter-spacing:.11em;color:#d3dbe5}
+body.notes .nx-field-test p{margin:0!important;color:#ECF7ED!important;font-size:clamp(17px,1.35vw,20px);line-height:1.58}
+@media print{body.notes .nx-field-test{background:#fff;border-color:#777}body.notes .nx-field-test p{color:#111!important}}
+
+/* Editorial reading-room filters and precision-designed original covers */
+body.notes .nx-discover{padding:clamp(34px,4.2vw,65px) 0 clamp(16px,2.8vw,35px)}
+body.notes .nx-discover-top{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(270px,.7fr);gap:clamp(25px,5vw,82px);align-items:end}
+body.notes .nx-discover-kicker{font:600 11px/1.4 var(--mono);color:#d6dee8;letter-spacing:.12em;margin:0 0 13px}
+body.notes .nx-discover h2{font-weight:580;font-size:clamp(29px,3.1vw,45px);letter-spacing:-.037em;line-height:1.08}
+body.notes .nx-discover-top p:not(.nx-discover-kicker){margin-top:12px;font-size:16px;color:#C9D6CC;max-width:55ch;line-height:1.55}
+body.notes .nx-search-label{display:block;font:600 11px/1.4 var(--mono);letter-spacing:.08em;color:#B8DCC2}
+body.notes #nx-search{display:block;margin-top:10px;width:100%;height:56px;padding:0 20px;border:1px solid #797d83;border-radius:9px;color:#F5FAF4;background:#17271B;font:500 16px/1.4 var(--sans);outline-offset:3px}
+body.notes #nx-search::placeholder{color:#BACBBB;opacity:1}
+body.notes #nx-search:focus-visible{outline:2px solid #dbe3ed}
+body.notes .nx-filter-row{display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin-top:clamp(22px,3vw,39px);border-top:1px solid #515458;padding-top:20px}
+body.notes .nx-filter-row button{min-height:45px;cursor:pointer;padding:10px 15px;border:1px solid #637A66;border-radius:7px;background:transparent;color:#E0EDE2;font:600 14px/1.25 var(--sans);transition:background .2s,border-color .2s}
+body.notes .nx-filter-row button:hover{border-color:#cdd4de;background:#303234}
+body.notes .nx-filter-row button[aria-pressed="true"]{background:#EFF8ED;color:#142519;border-color:#EFF8ED}
+body.notes .nx-filter-row button:focus-visible{outline:2px solid #d9e1eb;outline-offset:3px}
+body.notes .nx-result-count{margin-left:auto;color:#BBD2C0;font:500 12px/1.5 var(--mono);white-space:nowrap}
+body.notes .nx-empty{padding:28px;margin-top:16px;border:1px solid #696d72;border-radius:12px;background:#122118;color:#E7F4E7}
+body.notes-index .nx-desk[hidden],body.notes-index .nx-card[hidden],body.notes-index .nx-desk-toc[hidden],body.notes-index .nx-empty[hidden]{display:none!important}
+body.notes .nx-desk{scroll-margin-top:calc(var(--nav) + 20px)}
+body.notes-index .nx-card-img img,body.notes .nx-latest-img img{filter:none!important;opacity:1!important;object-fit:cover}
+body.notes .nx-fig img{background:#121E15;object-fit:cover}
+body.notes-index .nx-card-img{background:#0B110D}
+body.notes-index .nx-card .nx-card-m:after{content:"Read & apply ↗"}
+@media(max-width:800px){body.notes .nx-discover-top{grid-template-columns:1fr;gap:25px}body.notes .nx-result-count{flex:1 0 100%;margin-top:5px;margin-left:0}}
+@media(max-width:550px){body.notes .nx-filter-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}body.notes .nx-filter-row button{min-width:0;padding:10px 11px;font-size:13px}body.notes .nx-filter-row .nx-result-count{grid-column:1/-1}}
+
+
+/* Poster artwork must never be cropped: every cover contains a distinct
+   visual argument, including a headline in the left safe area. */
+body.notes-index img[src^="/assets/notes-covers/"],
+body.notes:not(.notes-index) .nx-fig>img[src^="/assets/notes-covers/"]{
+ display:block;width:100%;height:auto;aspect-ratio:16/9!important;
+ object-fit:contain!important;object-position:center;
+ filter:none!important;opacity:1!important;background:#0C130E;
+}
+body.notes:not(.notes-index) .nx-fig>img[src^="/assets/notes-covers/"]{
+ border:1px solid #686c71!important;border-radius:16px!important;
+ box-shadow:0 18px 50px #0005;
+}
+@media(max-width:760px){
+ body.notes-index img[src^="/assets/notes-covers/"],
+ body.notes:not(.notes-index) .nx-fig>img[src^="/assets/notes-covers/"]{
+  aspect-ratio:16/9!important;object-fit:contain!important;
+ }
+}
+
+/* ==========================================================================
+   Notes / Photo Stories · November 2026
+   Strict editorial system: original photo assets, real scenes, one visual idea.
+   Do not reinstate SVG posters, cartoon icons or neon/cyber backgrounds.
+   ========================================================================== */
+body.notes{--nx-warm:#F4F4EE;--nx-faded:#C7CEC7;--nx-tint:#c5ccd5;--nx-rule:#424940;--nx-paper:#101411;color:var(--nx-warm)}
+body.notes .nx-kicker{font-size:11px;letter-spacing:.12em;color:#C3DEC6}
+body.notes-index .nx-masthead{padding:clamp(42px,5vw,78px) 0 clamp(28px,3vw,45px);background:radial-gradient(ellipse at 100% -20%,#2B3A2A23,transparent 58%)}
+body.notes-index .nx-masthead h1{font-size:clamp(46px,6.1vw,86px);line-height:1.01;letter-spacing:-.055em;max-width:16ch;font-weight:650;color:#F8F8F3}
+body.notes-index .nx-masthead h1 em{font-family:var(--sans);font-weight:420;color:#BCD8C0;font-style:normal}
+body.notes-index .nx-masthead .nx-lede{color:#C9D2C9;font-size:clamp(18px,1.4vw,22px);max-width:60ch;line-height:1.48}
+body.notes .nx-promise{gap:9px 0;padding-top:21px;border-color:#484b4e;letter-spacing:.09em}
+body.notes .nx-latest{background:#101812;border-top:1px solid #444649;border-bottom:1px solid #444649;padding:clamp(30px,3.8vw,56px) 0}
+body.notes .nx-latest-grid{grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(30px,4vw,64px)}
+body.notes .nx-latest-img{display:block;position:relative;min-width:0;overflow:hidden;border-radius:9px;background:#141916;border:1px solid #50584E;box-shadow:0 24px 60px #0006}
+body.notes .nx-latest-img picture{display:block}
+body.notes .nx-latest-img img{display:block;width:100%;height:100%;aspect-ratio:1.56;object-fit:cover;filter:none!important;opacity:1!important;transform:none}
+body.notes .nx-latest-body h2{font-size:clamp(32px,3.6vw,58px);font-weight:650;letter-spacing:-.045em}
+body.notes .nx-latest-body>p:not(.nx-latest-meta){color:#D1DAD0;font-size:clamp(17px,1.35vw,20px)}
+body.notes .nx-feature-photo-hook{position:absolute;z-index:2;left:clamp(20px,4vw,50px);bottom:clamp(20px,4vw,48px);max-width:78%;font:760 clamp(28px,3.6vw,52px)/.96 var(--sans);letter-spacing:-.045em;color:#fff;text-shadow:0 2px 24px #000C}
+body.notes .nx-photo-shade{position:absolute;z-index:1;inset:0;pointer-events:none;background:linear-gradient(180deg,transparent 17%,#070B09A8 74%,#030605E8 100%)}
+body.notes-index .nx-cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(17px,2.3vw,28px);grid-auto-rows:1fr}
+body.notes-index .nx-card,body.notes-index .nx-card:has(>.nx-card-img){background:#151B16;border:1px solid #465349;border-radius:10px;box-shadow:0 16px 34px #0003;transition:transform .26s ease,border-color .26s ease,box-shadow .26s ease}
+body.notes-index .nx-card:hover,body.notes-index .nx-card:focus-visible{transform:translateY(-4px);border-color:#A5C3AA;box-shadow:0 28px 60px #0006}
+body.notes-index .nx-card-img{display:block;position:relative;isolation:isolate;overflow:hidden;width:100%;aspect-ratio:16/9;background:#1A211A}
+body.notes-index .nx-card-img picture{display:block;width:100%;height:100%}
+body.notes-index .nx-card-img img{display:block;width:100%;height:100%;aspect-ratio:16/9!important;object-fit:cover!important;object-position:center;filter:none!important;opacity:1!important;transform:none!important;transition:transform .5s ease!important}
+body.notes-index .nx-card:hover .nx-card-img img{transform:scale(1.045)!important}
+body.notes-index .nx-card-img .nx-photo-shade{inset:0}
+body.notes-index .nx-cover-hook{position:absolute;z-index:2;bottom:clamp(18px,2.5vw,32px);left:clamp(18px,2.5vw,32px);right:20px;max-width:82%;font-family:var(--sans);font-weight:760;font-size:clamp(27px,3vw,44px);line-height:.99;letter-spacing:-.045em;color:#fff;text-shadow:0 2px 25px #000D;text-transform:uppercase;text-wrap:balance}
+body.notes-index .nx-card-b{background:#151B16;padding:clamp(21px,2.3vw,34px);gap:11px}
+body.notes-index .nx-card .nx-tag{font-size:11px;font-weight:650;letter-spacing:.11em;color:#c7ced7}
+body.notes-index .nx-card .nx-card-t{font-size:clamp(23px,2.15vw,34px);line-height:1.14;letter-spacing:-.035em;color:#F6F6F0}
+body.notes-index .nx-card .nx-card-d{font-size:clamp(16px,1.25vw,18px);line-height:1.55;color:#C9D3C9}
+body.notes-index .nx-card .nx-card-m{margin-top:auto;padding-top:17px;color:#B8C8B9;border-top:1px solid #455248}
+body.notes-index .nx-card .nx-card-m:after{content:"Read the story ↗";font-size:14px;color:#BCDFBD}
+body.notes .nx-desk>.wrap>header h2{font-weight:640;letter-spacing:-.04em}
+body.notes .nx-desk{border-color:#39463C}
+body.notes .nx-brief-wrap{border-bottom-color:#4f5256}
+body.notes .nx-follow{background:#1B241C;border:1px solid #55585c}
+body.notes .nx-follow a{background:#F2F3EB;color:#131D13}
+body.notes:not(.notes-index) .nx-hero h1{font-size:clamp(43px,5.5vw,78px);line-height:1.04;font-weight:660;letter-spacing:-.047em}
+body.notes:not(.notes-index) .nx-dek{font-size:clamp(20px,1.75vw,25px);line-height:1.49;color:#CDD9D0}
+body.notes:not(.notes-index) .nx-fig picture{display:block;border-radius:9px;overflow:hidden;border:1px solid #505E53}
+body.notes:not(.notes-index) .nx-fig img{display:block;width:100%;height:auto;aspect-ratio:16/9!important;object-fit:cover!important;filter:none!important;opacity:1!important;border-radius:0!important;box-shadow:none!important}
+body.notes .nx-fig figcaption{color:#C4CFC6;margin-top:13px}
+body.notes .nx-image-disclosure{color:#B9D6BC;font-size:11px}
+body.notes .nx-reader-lead{font-size:clamp(20px,1.6vw,24px)!important;font-weight:480;line-height:1.56;color:#E6EDE5!important;max-width:64ch;margin:0 0 28px!important}
+body.notes .nx-share-row{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px 18px;margin:22px 0 0;color:#C1D0C3}
+body.notes .nx-share-prompt{font:500 12px/1.4 var(--mono);letter-spacing:.07em;text-transform:uppercase}
+body.notes .nx-share-btn{display:inline-flex;align-items:center;gap:8px;min-height:43px;padding:8px 15px;border:1px solid #80858b;border-radius:6px;background:#27282a;color:#EFF8EE;font:650 14px/1.25 var(--sans);cursor:pointer}
+body.notes .nx-share-btn:hover{border-color:#C1E6C8;background:#3b3d40}
+body.notes .nx-share-btn:focus-visible{outline:2px solid #d5dde7;outline-offset:3px}
+body.notes .nx-field-test{background:#19271D;border-color:#61656a}
+body.notes .nx-field-test span{font-size:11px;letter-spacing:.09em}
+body.notes .nx-field-test p{font-size:clamp(17px,1.35vw,20px)}
+body.notes .nx-article h2{font-weight:650}
+@media(max-width:900px){body.notes .nx-latest-grid{grid-template-columns:minmax(0,1fr)}body.notes .nx-latest-body h2{font-size:clamp(31px,5vw,44px)}}
+@media(max-width:720px){
+ body.notes-index .nx-cards{grid-template-columns:minmax(0,1fr);gap:18px}
+ body.notes-index .nx-card-img{aspect-ratio:16/9}
+ body.notes-index .nx-card-img img{aspect-ratio:16/9!important}
+ body.notes-index .nx-cover-hook{font-size:clamp(27px,7.7vw,43px);max-width:87%;left:20px;bottom:22px}
+ body.notes .nx-feature-photo-hook{font-size:clamp(28px,7vw,44px)}
+ body.notes .nx-latest-img img{aspect-ratio:16/9!important}
+ body.notes-index .nx-card-b{padding:23px}
+ body.notes-index .nx-card .nx-card-t{font-size:27px}
+ body.notes .nx-reader-lead{font-size:20px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ body.notes-index .nx-card-img img,body.notes-index .nx-card,body.notes .nx-latest-img img{transition:none!important;transform:none!important}
+}
+
+/* Keeping the reader moving: contextual follow-up photography and utility */
+body.notes .nx-next-reads{border-top:1px solid #4a4d50;padding:clamp(45px,5.5vw,82px) 0 clamp(60px,7vw,104px);background:#0E140F}
+body.notes .nx-next-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:14px;margin:0 0 22px}
+body.notes .nx-next-head span{display:block;font:650 11px/1.4 var(--mono);letter-spacing:.12em;color:#B7DFBE}
+body.notes .nx-next-head h2{font-size:clamp(31px,3.6vw,50px);font-weight:660;letter-spacing:-.044em;line-height:1.1;margin:10px 0 0}
+body.notes .nx-next-head>a{color:#CDD9CD;font:600 14px var(--sans);text-underline-offset:5px}
+body.notes .nx-next-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+body.notes .nx-next-card{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:stretch;min-width:0;min-height:225px;overflow:hidden;text-decoration:none;background:#182219;border:1px solid #525559;border-radius:10px;transition:border-color .2s,transform .25s}
+body.notes .nx-next-card:hover{transform:translateY(-2px);border-color:#A5C2A8}
+body.notes .nx-next-photo{position:relative;display:block;overflow:hidden;min-height:200px}
+body.notes .nx-next-photo picture{display:block;width:100%;height:100%}
+body.notes .nx-next-photo img{display:block;object-fit:cover!important;object-position:center;width:100%;height:100%;filter:none!important;aspect-ratio:auto!important;border:0!important;border-radius:0!important}
+body.notes .nx-next-copy{display:flex;flex-direction:column;min-width:0;padding:20px;gap:13px}
+body.notes .nx-next-kicker{font:600 11px/1.4 var(--mono);color:#c6cdd6;letter-spacing:.09em}
+body.notes .nx-next-title{font:650 clamp(19px,1.7vw,25px)/1.17 var(--sans);color:#F1F7EF;letter-spacing:-.03em}
+body.notes .nx-next-action{margin-top:auto;font:600 14px/1.3 var(--sans);color:#cfd7e1}
+@media(max-width:900px){body.notes .nx-next-grid{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:600px){body.notes .nx-next-card{grid-template-columns:minmax(0,1fr);gap:0}body.notes .nx-next-photo{min-height:0;aspect-ratio:16/9}body.notes .nx-next-copy{padding:22px;min-height:168px}}
+@media(prefers-reduced-motion:reduce){body.notes .nx-next-card{transition:none!important;transform:none!important}}
+
+
+/* Notes: reader literacy, source-backed evidence and measurable on-page progress */
+body.notes .nx-reading-track{position:fixed;top:var(--nav,68px);height:3px;left:0;right:0;background:#3a3c3f;z-index:80;pointer-events:none}
+body.notes .nx-reader-bar{display:block;width:100%;height:100%;transform:scaleX(0);transform-origin:left;background:linear-gradient(90deg,#C2EAD0,#b0b6be);will-change:transform}
+body.notes .nx-reading-note{display:flex;gap:10px 20px;flex-wrap:wrap;align-items:center;margin:17px 0 5px;font:500 12px/1.45 var(--mono);color:#BCD5C4}
+body.notes .nx-reading-note .nx-reader-progress-count{color:#E8F5E9}
+body.notes .nx-reading-note a{color:#BFE6C9;text-underline-offset:3px}
+body.notes button.nx-term{display:inline;vertical-align:baseline;appearance:none;background:transparent;border:0;border-bottom:1.5px dotted #c1c8d1;border-radius:0;outline-offset:4px;color:inherit;padding:0;font:inherit;line-height:inherit;cursor:help;text-decoration:none;white-space:normal}
+body.notes button.nx-term:hover,body.notes button.nx-term:focus-visible{color:#D2FFDE;background:#46494c60;border-bottom-color:#D2FFDE;outline-color:#d1d9e3}
+body.notes .nx-term-popover{position:fixed;z-index:99999;box-sizing:border-box;min-height:98px;max-height:min(260px,65vh);overflow-y:auto;padding:17px 18px 16px;border:1px solid #83888e;border-radius:11px;background:#122018;color:#EEF7EE;box-shadow:0 18px 60px #000C;text-align:left}
+body.notes .nx-term-popover[hidden]{display:none!important}
+body.notes .nx-term-popover strong{display:block;font:700 17px/1.3 var(--sans);letter-spacing:-.02em}
+body.notes .nx-term-popover span{display:block;margin:7px 0 12px;font:450 15px/1.47 var(--sans);color:#D9E5DA}
+body.notes .nx-term-popover a{color:#d4dce6;font:650 13px/1.4 var(--sans);text-underline-offset:3px}
+body.notes .nx-decoder{padding:clamp(60px,7vw,100px) 0;border-top:1px solid #525559;background:#0F1711}
+body.notes .nx-decoder-eyebrow{font:650 11px/1.3 var(--mono);letter-spacing:.13em;color:#d2dae4}
+body.notes .nx-decoder-header h2{font-weight:650;line-height:1.07;letter-spacing:-.045em;font-size:clamp(34px,4.1vw,56px);margin:14px 0}
+body.notes .nx-decoder-header>p:last-child{color:#C5D4C8;font-size:clamp(16px,1.4vw,19px);max-width:65ch;line-height:1.52}
+body.notes .nx-decoder-details{margin-top:30px;border-top:1px solid #4f5256}
+body.notes .nx-decoder-details summary{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:19px 0;color:#EAF7EC;cursor:pointer;font-weight:650;font-size:16px;list-style:none}
+body.notes .nx-decoder-details summary::-webkit-details-marker{display:none}
+body.notes .nx-decoder-details summary span{font-size:25px;font-weight:400;color:#d3dbe5}
+body.notes .nx-decoder-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px 18px;padding:17px 0 30px;margin:0}
+body.notes .nx-decoder-item{padding:18px;background:#17251B;border:1px solid #505357;border-radius:9px;scroll-margin-top:120px}
+body.notes .nx-decoder-item dt{font-size:17px;font-weight:700;letter-spacing:-.015em;color:#E8F6E9;line-height:1.3}
+body.notes .nx-decoder-item dd{margin:9px 0 0;color:#C7D8CA;font-size:14.5px;line-height:1.48}
+body.notes .nx-decoder-item:target{border-color:#d4dce6;box-shadow:0 0 0 2px #cbd2db44}
+body.notes .nx-library-facts{display:flex;flex-wrap:wrap;gap:12px 30px;margin:24px 0 7px}
+body.notes .nx-library-facts>div{display:flex;align-items:baseline;gap:9px}
+body.notes .nx-library-facts strong{font:700 clamp(20px,2vw,29px)/1.1 var(--sans);letter-spacing:-.03em;color:#E9F5E8}
+body.notes .nx-library-facts span{font:500 12px/1.3 var(--mono);color:#BCCEBF}
+body.notes .nx-data-viz{margin:clamp(30px,4vw,53px) 0 clamp(35px,5vw,68px);padding:clamp(20px,3.2vw,42px);border:1px solid #61656a;background:linear-gradient(145deg,#14251A,#0E1711);border-radius:13px}
+body.notes .nx-data-label{margin:0 0 12px;color:#cbd2db;font:700 11px/1.4 var(--mono);letter-spacing:.12em}
+body.notes .nx-data-viz h3{font-size:clamp(24px,2.5vw,36px);font-weight:670;letter-spacing:-.04em;line-height:1.12;margin:0 0 12px;color:#F5F9F4}
+body.notes .nx-data-intro{font-size:15.5px;line-height:1.52;color:#C8D8CA;max-width:58ch;margin:0 0 25px}
+body.notes .nx-data-table{width:100%;border-collapse:separate;border-spacing:0 13px;table-layout:fixed}
+body.notes .nx-data-table th{width:38%;font-size:14px;line-height:1.34;text-align:left;font-weight:540;color:#DDE9DF;padding:4px 16px 4px 0;overflow-wrap:break-word}
+body.notes .nx-data-table td.nx-data-track-cell{width:48%;padding:0 13px 0 0}
+body.notes .nx-data-table td.nx-data-value{width:14%;text-align:right;font:750 clamp(19px,2vw,26px)/1.1 var(--sans);color:#EBF7ED;white-space:nowrap}
+body.notes .nx-data-track{display:block;height:17px;position:relative;background:#3b3d40;border-radius:3px;overflow:hidden}
+body.notes .nx-data-track span{height:100%;display:block;width:var(--nx-value);background:linear-gradient(90deg,#7c8187,#c7ced7);border-radius:3px}
+body.notes .nx-data-viz figcaption{margin-top:18px;padding-top:17px;border-top:1px solid #474a4d;color:#BDCFBF;font:450 13px/1.52 var(--sans)}
+body.notes .nx-data-viz figcaption a{color:#C8EDD0;text-underline-offset:3px}
+@media(max-width:850px){body.notes .nx-decoder-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){
+ body.notes .nx-decoder-grid{grid-template-columns:minmax(0,1fr);gap:9px}
+ body.notes .nx-term-popover{max-height:48vh;box-shadow:0 12px 40px #000B}
+ body.notes .nx-data-viz{padding:20px 15px}
+ body.notes .nx-data-table th{width:44%;padding-right:8px;font-size:12.5px}
+ body.notes .nx-data-table td.nx-data-track-cell{width:39%;padding-right:7px}
+ body.notes .nx-data-table td.nx-data-value{width:17%;font-size:19px}
+ body.notes .nx-data-track{height:13px}
+ body.notes .nx-reading-note{gap:7px 14px}
+}
+@media(prefers-reduced-motion:reduce){body.notes .nx-reader-bar{will-change:auto}}
+
+
+/* 2026-11-02 / Covers now carry the article-specific editorial headline.
+   Retire legacy image captions that would duplicate or obscure the new art. */
+body.notes-index .nx-feature-photo-hook,
+body.notes-index .nx-cover-hook,
+body.notes-index .nx-photo-shade,
+body.notes .nx-hero-hook {display:none!important}
+
+
+/* Twinthos 2026-11-02 / Notes aligned to human-first editorial system.
+   Preserve article-specific imagery and reader motion; update colour and legibility only. */
+body.notes{--nx-rule-strong:#72767b;--nx-green-wash:rgba(207,255,87,.055);background:#0B101C;color:#F6F5F0}
+body.notes .nx-kicker{color:#C9D2DD}
+body.notes .nx-kicker:before{background:#e1e9f3}
+body.notes .nx-card .nx-tag,body.notes .nx-article .nx-take h2{color:#e5edf3}
+body.notes .nx-card,.notes .nx-next-card{border-color:#5c5f63}
+body.notes .nx-card:hover{border-color:#e1e9f3}
+body.notes .nx-fig img{border-radius:5px;border-color:#65696e}
+body.notes .nx-reading-track{background:#333537}
+body.notes .nx-reader-bar{background:#e1e9f3}
+body.notes .nx-reading-note,body.notes .nx-share-row{color:#D0D8E2}
+body.notes .nx-share-btn{border:1px solid #8c9198;background:#232426;color:#F5F5F2;border-radius:3px}
+body.notes .nx-share-btn:hover{background:#393b3e;border-color:#e1e9f3}
+body.notes .nx-next-card{background:#232426;border-color:#61656a;border-radius:5px}
+body.notes .nx-next-card:hover{border-color:#e1e9f3}
+body.notes .nx-progress-value{color:#e5edf3}
+body.notes a:focus-visible,body.notes button:focus-visible{outline:3px solid #e1e9f3;outline-offset:3px}

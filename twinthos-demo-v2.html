@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Twinthos Live Demo v2</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0B0B0F; color: #E8E6E1; font-family: 'Inter', Arial, sans-serif; overflow-x: hidden; }
+  
+  .scene { display: none; min-height: 100vh; padding: 40px; }
+  .scene.active { display: flex; flex-direction: column; justify-content: center; align-items: center; }
+  
+  .title { font-size: 42px; font-weight: 800; margin-bottom: 16px; text-align: center; line-height: 1.2; }
+  .subtitle { font-size: 18px; color: #9A9A9F; margin-bottom: 32px; text-align: center; max-width: 900px; line-height: 1.5; }
+  .label { font-size: 12px; color: #4F8CFF; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; }
+  
+  .nav { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 100; flex-wrap: wrap; justify-content: center; max-width: 90vw; }
+  .nav button { background: #15151A; color: #E8E6E1; border: 1px solid #333; padding: 8px 14px; border-radius: 6px; cursor: pointer; font-size: 12px; }
+  .nav button:hover { background: #4F8CFF; border-color: #4F8CFF; }
+  .nav button.active { background: #4F8CFF; border-color: #4F8CFF; }
+  
+  .card { background: #15151A; border: 1px solid #222; border-radius: 12px; padding: 20px; margin: 8px; }
+  .card-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+  .card-body { font-size: 13px; color: #9A9A9F; }
+  
+  .incident { background: #1A1215; border: 1px solid #FF6B6B; border-radius: 8px; padding: 12px 16px; margin-bottom: 8px; width: 100%; max-width: 700px; }
+  .incident .name { font-size: 14px; font-weight: 700; color: #FF6B6B; }
+  .incident .detail { font-size: 12px; color: #9A9A9F; margin-top: 4px; }
+  
+  .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 900px; }
+  .product-card { background: #15151A; border: 2px solid #4F8CFF; border-radius: 12px; padding: 24px; text-align: center; }
+  .product-card .icon { font-size: 36px; margin-bottom: 12px; }
+  .product-card .name { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+  .product-card .desc { font-size: 13px; color: #9A9A9F; }
+  
+  .brain-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; max-width: 900px; }
+  .brain-item { background: #15151A; border: 1px solid #222; border-radius: 8px; padding: 12px; text-align: center; }
+  .brain-item .icon { font-size: 24px; margin-bottom: 4px; }
+  .brain-item .label { font-size: 12px; font-weight: 600; }
+  .brain-item .desc { font-size: 10px; color: #9A9A9F; margin-top: 2px; }
+  
+  .agent-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; max-width: 800px; }
+  .agent-card { background: #15151A; border: 1px solid #222; border-radius: 8px; padding: 16px; }
+  .agent-card .name { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+  .agent-card .dept { font-size: 11px; color: #4F8CFF; margin-bottom: 6px; }
+  .agent-card .status { font-size: 11px; color: #7EC8A0; }
+  .agent-card .output { font-size: 11px; color: #9A9A9F; margin-top: 6px; font-family: monospace; }
+  
+  .work-product { background: #15151A; border: 1px solid #4F8CFF; border-radius: 8px; padding: 16px; max-width: 600px; font-family: monospace; font-size: 12px; }
+  .work-product .line { margin-bottom: 4px; }
+  .work-product .label { color: #4F8CFF; }
+  .work-product .value { color: #E8E6E1; }
+  .work-product .note { color: #9A9A9F; font-size: 10px; margin-top: 8px; font-style: italic; }
+  
+  .signoff { background: #15151A; border: 2px solid #C9A063; border-radius: 12px; padding: 24px; max-width: 500px; text-align: center; }
+  .signoff .action { font-size: 15px; margin-bottom: 16px; }
+  .signoff .buttons { display: flex; gap: 12px; justify-content: center; }
+  .signoff .btn-approve { background: #7EC8A0; color: #0B0B0F; padding: 10px 24px; border-radius: 8px; border: none; cursor: pointer; font-weight: 700; }
+  .signoff .btn-reject { background: #FF6B6B; color: #0B0B0F; padding: 10px 24px; border-radius: 8px; border: none; cursor: pointer; font-weight: 700; }
+  
+  .sentinel-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; max-width: 800px; }
+  .sentinel-item { background: #15151A; border: 1px solid #222; border-radius: 8px; padding: 12px; text-align: center; }
+  .sentinel-item .label { font-size: 10px; color: #9A9A9F; }
+  .sentinel-item .value { font-size: 18px; font-weight: 700; color: #7EC8A0; margin-top: 4px; }
+  
+  .stat-row { display: flex; gap: 24px; justify-content: center; margin: 20px 0; flex-wrap: wrap; }
+  .stat { text-align: center; }
+  .stat .num { font-size: 36px; font-weight: 800; color: #4F8CFF; }
+  .stat .label { font-size: 12px; color: #9A9A9F; margin-top: 4px; }
+  
+  .brain-types { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; max-width: 800px; }
+  .brain-type { background: #15151A; border: 1px solid #222; border-radius: 8px; padding: 16px; }
+  .brain-type .name { font-size: 14px; font-weight: 700; color: #C9A063; margin-bottom: 4px; }
+  .brain-type .for { font-size: 11px; color: #4F8CFF; margin-bottom: 6px; }
+  .brain-type .desc { font-size: 11px; color: #9A9A9F; }
+  
+  .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 700px; }
+  .compare-card { background: #15151A; border: 1px solid #222; border-radius: 8px; padding: 16px; }
+  .compare-card .title { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+  .compare-card .item { font-size: 12px; color: #9A9A9F; margin-bottom: 4px; }
+  .compare-card .highlight { color: #7EC8A0; }
+  
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+  .pulse { animation: pulse 2s infinite; }
+  @keyframes slideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .slide-in { animation: slideIn 0.5s ease-out; }
+  
+  .illustrative { font-size: 10px; color: #666; font-style: italic; margin-top: 8px; }
+</style>
+</head>
+<body>
+
+<!-- Scene 1: The Crisis -->
+<div class="scene active" id="scene1">
+  <div class="label">The Crisis</div>
+  <div class="title">Your AI is already inside your systems.<br>Who is watching it?</div>
+  <div class="subtitle">In the last 12 months, AI agents from OpenAI, Anthropic, Google, and Meta breached production systems without being asked.</div>
+  <div class="incident">
+    <div class="name">OpenAI agents → Hugging Face</div>
+    <div class="detail">700 agents, coordinated attack, days undetected</div>
+  </div>
+  <div class="incident">
+    <div class="name">Autonomous AI agent → McKinsey</div>
+    <div class="detail">Under 2 hours. 46.5 million chat messages exposed.</div>
+  </div>
+  <div class="incident">
+    <div class="name">Claude Code → 9 Mexican government agencies</div>
+    <div class="detail">195 million identity records stolen.</div>
+  </div>
+  <div class="incident">
+    <div class="name">Panasonic worker → banned AI tool</div>
+    <div class="detail">334,000 people's data uploaded.</div>
+  </div>
+  <div class="incident">
+    <div class="name">Google Gemini → 3 companies during test</div>
+    <div class="detail">Google didn't tell anyone until journalists asked.</div>
+  </div>
+</div>
+
+<!-- Scene 2: The Problem -->
+<div class="scene" id="scene2">
+  <div class="label">The Problem</div>
+  <div class="title">Most firms lose 11 hours a week to admin.</div>
+  <div class="subtitle">Your team re-explains context to AI tools that forget everything the moment you close the tab. Chatbots produce text. They don't produce work.</div>
+  <div class="stat-row">
+    <div class="stat"><div class="num">11h</div><div class="label">Admin time per week</div></div>
+    <div class="stat"><div class="num">£20</div><div class="label">Chatbot cost/month</div></div>
+    <div class="stat"><div class="num">£3,500</div><div class="label">Digital employee/month</div></div>
+    <div class="stat"><div class="num">2h</div><div class="label">First job live</div></div>
+  </div>
+  <div class="compare">
+    <div class="compare-card">
+      <div class="title">Chatbot</div>
+      <div class="item">Waits to be asked</div>
+      <div class="item">Produces text</div>
+      <div class="item">Forgets everything</div>
+      <div class="item">No security layer</div>
+      <div class="item">£20/month</div>
+    </div>
+    <div class="compare-card">
+      <div class="title">Digital Employee</div>
+      <div class="item highlight">Triggered by work arriving</div>
+      <div class="item highlight">Produces work product</div>
+      <div class="item highlight">Remembers everything</div>
+      <div class="item highlight">Sentinel watches 24/7</div>
+      <div class="item highlight">£3,500/month</div>
+    </div>
+  </div>
+</div>
+
+<!-- Scene 3: The 3 Products -->
+<div class="scene" id="scene3">
+  <div class="label">The Product</div>
+  <div class="title">Three parts. All three, or it is not the product.</div>
+  <div class="subtitle">Not chat interfaces. Agents with a written job spec.</div>
+  <div class="product-grid">
+    <div class="product-card">
+      <div class="icon">🧠</div>
+      <div class="name">Company Brain</div>
+      <div class="desc">Persistent knowledge for one company. Identity, rules, approved knowledge, memory, projects, skills, history, permissions. Isolated per company.</div>
+    </div>
+    <div class="product-card">
+      <div class="icon">🤖</div>
+      <div class="name">Digital Employee</div>
+      <div class="desc">The acting layer. Works inside your existing systems, 24/7. One defined job. One named human who signs off consequential actions.</div>
+    </div>
+    <div class="product-card">
+      <div class="icon">🖥️</div>
+      <div class="name">The Desk</div>
+      <div class="desc">Works inside your existing tools through the screen. No integration project. No API to buy. First job live in about two hours.</div>
+    </div>
+  </div>
+  <div class="subtitle" style="margin-top: 24px; font-size: 14px;">Brain can be bought alone. Employee can be bought alone. Together is the most complete service.</div>
+</div>
+
+<!-- Scene 4: The Brain -->
+<div class="scene" id="scene4">
+  <div class="label">The Brain</div>
+  <div class="title">Eight capabilities. One engine. Three configurations.</div>
+  <div class="subtitle">The model is replaceable. A trustworthy integrated service is not.</div>
+  <div class="brain-grid">
+    <div class="brain-item"><div class="icon">🪪</div><div class="label">Identity</div><div class="desc">Who it speaks for</div></div>
+    <div class="brain-item"><div class="icon">📋</div><div class="label">Facts</div><div class="desc">Records that outrank conversation</div></div>
+    <div class="brain-item"><div class="icon">📚</div><div class="label">Knowledge</div><div class="desc">Documents and versions</div></div>
+    <div class="brain-item"><div class="icon">💾</div><div class="label">Memory</div><div class="desc">What carried over</div></div>
+    <div class="brain-item"><div class="icon">📁</div><div class="label">Projects</div><div class="desc">Work in progress, resumable</div></div>
+    <div class="brain-item"><div class="icon">🔗</div><div class="label">Graph</div><div class="desc">People, companies, connections</div></div>
+    <div class="brain-item"><div class="icon">🔍</div><div class="label">Retrieval</div><div class="desc">Answers with evidence</div></div>
+    <div class="brain-item"><div class="icon">⚖️</div><div class="label">Governance</div><div class="desc">Access, corrections, retention</div></div>
+  </div>
+  <div class="brain-types" style="margin-top: 24px;">
+    <div class="brain-type"><div class="name">Organisation Brain</div><div class="for">Companies, property groups, professional firms</div><div class="desc">Procedures, documents, policies, projects, decisions. Helps staff find answers, onboard, resume projects.</div></div>
+    <div class="brain-type"><div class="name">Brand Brain</div><div class="for">Consumer brands, agencies, hospitality</div><div class="desc">Identity, positioning, voice, approved claims. Makes brand machine-readable.</div></div>
+    <div class="brain-type"><div class="name">Product Brain</div><div class="for">Manufacturers, SaaS, retailers</div><div class="desc">Specifications, compatibility, manuals, versions, prices. Answers from records, not marketing text.</div></div>
+  </div>
+</div>
+
+<!-- Scene 5: The Workers -->
+<div class="scene" id="scene5">
+  <div class="label">The Workers</div>
+  <div class="title">Digital employees working. Not chatbots waiting.</div>
+  <div class="subtitle">Triggered by work arriving. Produces work product. Not text.</div>
+  <div class="agent-grid">
+    <div class="agent-card">
+      <div class="name">Inbox Manager</div>
+      <div class="dept">Delivery</div>
+      <div class="status pulse">● Active</div>
+      <div class="output">Triaged 23 messages → 8 urgent, 10 follow-up, 5 archive</div>
+    </div>
+    <div class="agent-card">
+      <div class="name">Prospector</div>
+      <div class="dept">Sales</div>
+      <div class="status pulse">● Active</div>
+      <div class="output">Found 10 target companies with verified decision-makers</div>
+    </div>
+    <div class="agent-card">
+      <div class="name">Security Auditor</div>
+      <div class="dept">Engineering</div>
+      <div class="status pulse">● Active</div>
+      <div class="output">Scanned codebase: 0 critical, 2 medium, 5 low findings</div>
+    </div>
+    <div class="agent-card">
+      <div class="name">Data Scraper</div>
+      <div class="dept">Sales/Engineering</div>
+      <div class="status pulse">● Active</div>
+      <div class="output">Verified 5 company dossiers with source URLs</div>
+    </div>
+  </div>
+  <div class="illustrative">Illustrative. Shows what a live deployment looks like. Not a client result.</div>
+</div>
+
+<!-- Scene 6: Work Product -->
+<div class="scene" id="scene6">
+  <div class="label">Work Product</div>
+  <div class="title">Work. Not text.</div>
+  <div class="subtitle">A chatbot costs £20/month. A digital employee costs £3,500/month because it replaces two salaries, grows revenue, and never asks for a holiday.</div>
+  <div class="work-product">
+    <div class="line"><span class="label">Filed:</span> <span class="value">Stock reconciliation report (147 rows reconciled)</span></div>
+    <div class="line"><span class="label">Booked:</span> <span class="value">Demo call with verified decision-maker</span></div>
+    <div class="line"><span class="label">Chased:</span> <span class="value">3 overdue invoices (£4,200 total)</span></div>
+    <div class="line"><span class="label">Triaged:</span> <span class="value">23 inbox messages → 8 urgent, 10 follow-up, 5 archive</span></div>
+    <div class="line"><span class="label">Scanned:</span> <span class="value">Codebase: 0 critical, 2 medium, 5 low findings</span></div>
+    <div class="line"><span class="label">Verified:</span> <span class="value">5 company dossiers with source URLs</span></div>
+    <div class="note">Illustrative. Shows what a live deployment produces. Not a client result.</div>
+  </div>
+</div>
+
+<!-- Scene 7: Sign-Off -->
+<div class="scene" id="scene7">
+  <div class="label">Accountability</div>
+  <div class="title">Every consequential action has one named human who signs off.</div>
+  <div class="subtitle">The agent works. The human decides. No black box. No "AI made a mistake."</div>
+  <div class="signoff">
+    <div class="action">Agent proposes: Send invoice to verified contact (£5,000)</div>
+    <div class="buttons">
+      <button class="btn-approve" onclick="approve()">Approve</button>
+      <button class="btn-reject" onclick="reject()">Reject</button>
+    </div>
+    <div id="signoff-result" style="margin-top: 16px; font-size: 14px;"></div>
+  </div>
+</div>
+
+<!-- Scene 8: Sentinel -->
+<div class="scene" id="scene8">
+  <div class="label">Security Layer</div>
+  <div class="title">Twinthos Sentinel</div>
+  <div class="subtitle">Continuous threat intelligence. Matched to your stack. Alerts via any channel you choose.</div>
+  <div class="sentinel-grid">
+    <div class="sentinel-item"><div class="label">CVE Feeds</div><div class="value">100</div></div>
+    <div class="sentinel-item"><div class="label">CISA KEV</div><div class="value">0</div></div>
+    <div class="sentinel-item"><div class="label">EPSS High</div><div class="value">0</div></div>
+    <div class="sentinel-item"><div class="label">Suppliers</div><div class="value">6</div></div>
+    <div class="sentinel-item"><div class="label">Tests Pass</div><div class="value">169</div></div>
+    <div class="sentinel-item"><div class="label">Scan Interval</div><div class="value">30m</div></div>
+    <div class="sentinel-item"><div class="label">Audit Cost</div><div class="value">£10K</div></div>
+    <div class="sentinel-item"><div class="label">Breach Cost</div><div class="value">£500K+</div></div>
+  </div>
+  <div class="subtitle" style="margin-top: 16px; font-size: 13px;">The audit costs £10,000. A single breach starts at £500,000.</div>
+</div>
+
+<!-- Scene 9: Closing -->
+<div class="scene" id="scene9">
+  <div class="label">Twinthos</div>
+  <div class="title">Your AI is already inside your systems.<br>Who is watching it?</div>
+  <div class="subtitle">Twinthos. AI workers that own outcomes. Not chat interfaces. Agents with a written job spec.</div>
+  <div class="subtitle" style="font-size: 14px; color: #4F8CFF;">Multi-office property groups. Recruitment agencies. Professional services.</div>
+  <div class="subtitle" style="font-size: 12px; color: #666; margin-top: 24px;">twinthos.com</div>
+</div>
+
+<div class="nav">
+  <button onclick="showScene(1)" id="btn1">1. Crisis</button>
+  <button onclick="showScene(2)" id="btn2">2. Problem</button>
+  <button onclick="showScene(3)" id="btn3">3. Product</button>
+  <button onclick="showScene(4)" id="btn4">4. Brain</button>
+  <button onclick="showScene(5)" id="btn5">5. Workers</button>
+  <button onclick="showScene(6)" id="btn6">6. Work</button>
+  <button onclick="showScene(7)" id="btn7">7. Sign-Off</button>
+  <button onclick="showScene(8)" id="btn8">8. Sentinel</button>
+  <button onclick="showScene(9)" id="btn9">9. Close</button>
+</div>
+
+<script>
+function showScene(n) {
+  document.querySelectorAll('.scene').forEach(s => s.classList.remove('active'));
+  document.getElementById('scene' + n).classList.add('active');
+  document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById('btn' + n).classList.add('active');
+}
+
+function approve() {
+  document.getElementById('signoff-result').innerHTML = '<span style="color: #7EC8A0;">✓ Approved. Invoice sent. Action logged in audit trail.</span>';
+}
+
+function reject() {
+  document.getElementById('signoff-result').innerHTML = '<span style="color: #FF6B6B;">✗ Rejected. Action cancelled. Agent notified.</span>';
+}
+
+showScene(1);
+</script>
+</body>
+</html>

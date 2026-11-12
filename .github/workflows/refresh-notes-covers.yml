@@ -1,0 +1,116 @@
+name: Publish Notes with photographic covers
+
+on:
+  push:
+    branches: [gh-pages]
+    paths:
+      - '_src/notes.json'
+      - '_src/notes_depth.json'
+      - '_src/notes_visuals.json'
+      - '_src/build_notes.py'
+      - '_src/notes_browser_check.py'
+      - '_src/site_reliability_check.py'
+      - '_src/pages/home.html'
+      - '_src/partials/scroll_cinema.html'
+      - '_src/partials/editorial_tools.html'
+      - '_src/js/70-motion.js'
+      - '_src/js/80-scroll.js'
+      - '_src/css/silver-motion.css'
+      - '_src/publish_notes_photography.py'
+      - '.github/workflows/refresh-notes-covers.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: notes-publication-gh-pages
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install photographic processing
+        run: python -m pip install 'Pillow>=10,<13'
+      - name: Produce article-specific photographic covers
+        run: python3 _src/publish_notes_photography.py
+      - name: Build the current editorial site from source
+        run: python3 _src/build.py
+      - name: Validate source content and published site assets
+        run: |
+          python3 _src/notes_quality_gate.py
+          python3 _src/site_published_check.py
+          python3 _src/site_security_check.py
+          node --check assets/tw.js
+          python3 - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          import json
+          root=Path('assets/notes-photo-2026')
+          notes=json.loads(Path('_src/notes.json').read_text())
+          sources=json.loads((root/'SOURCES.json').read_text())
+          assert len(notes)==len(sources)==13
+          index=Path('notes/index.html').read_text()
+          for note in notes:
+              slug=note['slug']
+              page=Path(f'notes/{slug}/index.html').read_text()
+              for width in (800,1600):
+                  for ext in ('jpg','webp'):
+                      asset=root/f'{slug}-{width}.{ext}'
+                      assert asset.is_file() and asset.stat().st_size>6000, asset
+                      with Image.open(asset) as im:
+                          assert im.size==(width,width*9//16), (asset, im.size)
+                  assert f'/assets/notes-photo-2026/{slug}-{width}.webp' in page
+                  assert f'/assets/notes-photo-2026/{slug}-{width}.webp' in index
+              og=root/f'og-{slug}.jpg'
+              with Image.open(og) as im: assert im.size==(1200,630)
+              assert f'/assets/notes-photo-2026/og-{slug}.jpg' in page
+              assert note['alt'] in page and note['alt'] in index
+          assert 'data-cinema-story-head' in Path('index.html').read_text()
+          assert 'storyHeads' in Path('assets/tw.js').read_text()
+          print('PASS: thirteen covers, article links, 2027 field note and scroll story')
+          PY
+      - name: Install Chromium for responsive editorial QA
+        run: |
+          python -m pip install playwright==1.55.0
+          python -m playwright install --with-deps chromium
+      - name: Browser-test navigation, mobile scroll and all 13 Notes
+        run: |
+          python3 _src/site_reliability_check.py
+          python3 _src/notes_browser_check.py
+      - name: Save responsive design screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: twinthos-premium-design-qa
+          path: _src/qa-mobile/
+          if-no-files-found: ignore
+          retention-days: 7
+      - name: Save editorial image previews
+        uses: actions/upload-artifact@v4
+        with:
+          name: twinthos-notes-photography
+          path: assets/notes-photo-2026/
+          retention-days: 14
+      - name: Commit site build to the published branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -u
+          git add assets/notes-photo-2026/ notes/
+          if ! git diff --cached --quiet; then
+            git commit -m "Publish AI agents in 2027 editorial and cinematic scroll narrative"
+            git pull --rebase origin gh-pages
+            git push origin HEAD:gh-pages
+          else
+            echo "Published files are already up to date"
+          fi

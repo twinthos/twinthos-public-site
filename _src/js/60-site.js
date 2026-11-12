@@ -1,0 +1,13 @@
+/* Shared, progressively enhanced tool explorer, permission example and Notes search. */
+(function(){'use strict';
+document.querySelectorAll('[data-explorer]').forEach(function(root){
+ var tabs=Array.from(root.querySelectorAll('[role=tab]'));
+ function select(tab,focus){tabs.forEach(function(t){var yes=t===tab;t.setAttribute('aria-selected',String(yes));t.tabIndex=yes?0:-1;document.getElementById(t.getAttribute('aria-controls')).hidden=!yes;});if(focus)tab.focus();}
+ tabs.forEach(function(t,i){t.addEventListener('click',function(){select(t,false);});t.addEventListener('keydown',function(e){var n;if(e.key==='ArrowRight'||e.key==='ArrowDown')n=(i+1)%tabs.length;if(e.key==='ArrowLeft'||e.key==='ArrowUp')n=(i+tabs.length-1)%tabs.length;if(e.key==='Home')n=0;if(e.key==='End')n=tabs.length-1;if(n!==undefined){e.preventDefault();select(tabs[n],true);}});});select(tabs[0],false);
+});
+var results={allow:['Within scope','Access matches the job.','The agent can read the approved policy source. The permission is limited to the information needed for this task.'],review:['Human review','Prepare it. Ask before sending.','The agent may draft a customer reply, but a named person must approve the message before it leaves the business.'],deny:['Outside scope','The request crosses a boundary.','A full customer export is not part of the agreed job. The application should deny this action and record the attempt for review.']};
+document.querySelectorAll('[data-boundary]').forEach(function(root){root.querySelectorAll('[data-outcome]').forEach(function(b){b.addEventListener('click',function(){var r=results[b.dataset.outcome];root.querySelectorAll('[data-outcome]').forEach(function(x){x.setAttribute('aria-pressed',String(x===b));});root.querySelector('[data-result]').textContent=r[0];root.querySelector('[data-result-title]').textContent=r[1];root.querySelector('[data-result-copy]').textContent=r[2];});});});
+var search=document.getElementById('notes-search');if(search){var category='all',cards=Array.from(document.querySelectorAll('[data-note]')),filters=Array.from(document.querySelectorAll('[data-category-filter]'));
+ function filter(){var q=search.value.trim().toLowerCase(),count=0;cards.forEach(function(card){var show=(category==='all'||card.dataset.category===category)&&card.textContent.toLowerCase().includes(q);card.hidden=!show;if(show)count++;});document.getElementById('notes-count').textContent=count+' field note'+(count===1?'':'s');document.getElementById('notes-empty').hidden=count!==0;}
+ filters.forEach(function(b){b.addEventListener('click',function(){category=b.dataset.categoryFilter;filters.forEach(function(x){x.setAttribute('aria-pressed',String(x===b));});filter();});});search.addEventListener('input',filter);filter();}
+})();

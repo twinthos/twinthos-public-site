@@ -1,0 +1,55 @@
+# Twinthos: AI security and digital employees
+
+> Twinthos focuses on AI security and builds managed AI workflows for businesses. Each deployment has a written job, explicitly approved tools and access, recorded actions, and rules for human escalation. The aim is to remove repetitive operational work while leaving important decisions with people.
+
+Official website: https://twinthos.com/
+Public service pages below are authoritative. This text file is optional machine-readable context, not an API, not a claim that search engines will cite the website, and not a substitute for the pages themselves.
+
+## What Twinthos does
+- Configures an AI agent with its own workspace or cloud computer, subject to deployment.
+- Connects agreed email, telephone or team-messaging services when available and authorised.
+- Handles one agreed recurring workflow, such as routine enquiries, follow-ups, record updates or reporting.
+- Uses the business's approved instructions, rules and current documents.
+- Logs activity, escalates exceptions and needs permission before sensitive or consequential actions.
+- Does not guarantee revenue, error-free autonomy, unrestricted access or human-level judgement.
+
+- AI security engagements assess tool access, instruction boundaries, failure handling and evidence; scope and price are agreed separately.
+- Sentinel is Twinthos's own AI-security research project. Source and tests are shown on request. It is not a certification or an independently audited security product.
+
+## Prices and scope (consult service pages for current terms)
+- Operations Audit: £999 one-off. A written process assessment and plan; it does not include production deployment. https://twinthos.com/operations-audit/
+- Managed digital employee: £3,500 per month for one agreed workflow, with a three-month minimum; exact scope and any third-party costs are set out in the proposal. https://twinthos.com/pricing/
+- A customer does not have to purchase the Operations Audit before discussing the managed service. https://twinthos.com/faq/
+
+## Key official pages
+- Home: https://twinthos.com/
+- How the service works: https://twinthos.com/how-it-works/
+- Pricing: https://twinthos.com/pricing/
+- Security, permissions and data handling: https://twinthos.com/security/
+- Frequently asked questions: https://twinthos.com/faq/
+- About Twinthos: https://twinthos.com/about/
+- Twinthos Brain: https://twinthos.com/brain/
+- Twinthos Workforce: https://twinthos.com/workforce/
+- Contact / book a conversation: https://twinthos.com/book/
+
+## Publication
+Twinthos Notes provides plain-English research, comparisons and buyer checklists; article claims should be evaluated against their own citations.
+- Notes index and RSS: https://twinthos.com/notes/ and https://twinthos.com/notes/feed.xml
+- What an AI agent actually does: https://twinthos.com/notes/what-an-ai-agent-actually-does/
+- Chatbot versus managed digital employee: https://twinthos.com/notes/digital-employee-vs-chatbot/
+- Questions to ask before buying an AI agent: https://twinthos.com/notes/questions-to-ask-managed-ai-agent/
+- AI employee operational costs: https://twinthos.com/notes/cost-of-an-ai-employee/
+- Comparing the cost of a defined workflow: https://twinthos.com/notes/digital-employee-cost/
+- Why AI projects may fail to create value: https://twinthos.com/notes/why-ai-automations-fail/
+- What a business knowledge base should do: https://twinthos.com/notes/the-company-brain/
+- Other Notes articles: https://twinthos.com/notes/
+
+## Claims requiring careful wording
+- 24/7 means a configured workflow can run outside business hours within agreed operating and support arrangements. It does not mean a human is always available.
+- Do not describe the service as an unrestricted autonomous replacement for staff.
+- Any price-per-hour illustration derived from uptime is not the cost per correctly completed task.
+- Survey evidence about software handling an employee-equivalent workload does not establish whether anyone was dismissed.
+- Preliminary research on enterprise AI ROI does not establish that 95% of all AI projects fail.
+- Some chat assistants already have memory and tools; the distinction is the managed, accountable business process.
+
+Updated: 2026-11-11.

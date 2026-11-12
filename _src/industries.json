@@ -1,0 +1,141 @@
+{
+ "groups": [
+  {"id":"agencies","label":"Agencies"},
+  {"id":"property","label":"Property"},
+  {"id":"recruitment","label":"Recruitment"},
+  {"id":"wholesale","label":"Wholesale"},
+  {"id":"manufacturing","label":"Manufacturing"},
+  {"id":"professional","label":"Professional services","sub":["consultancies","legal","insurance"]}
+ ],
+ "items": {
+  "agencies": {
+   "tab":"Agencies","stage":"Agency",
+   "head":"Keep delivery moving between client conversations.",
+   "pain":"The brief is incomplete. Feedback is scattered. Someone has to turn every conversation into the next task.",
+   "role":"Organise incoming requests, retrieve project context, ask for missing details and prepare tasks and status updates.",
+   "impl":"Less coordination around delivery. More attention on the work clients buy.",
+   "note":"Scope, price and approval decisions stay with your team.",
+   "caps":["A client message arrives.","The matching project brief opens.","One missing requirement is requested.","The approved information becomes an organised task.","A client update is prepared."],
+   "cards":[
+    {"app":"Client email","t":"Can we add a short social cut to the spring campaign? We need it before launch.","from":"Orchard Studio","st":["Received",""]},
+    {"app":"Project brief","t":"Spring campaign","rows":[["Deliverable","30s campaign film"],["Social cut","Requested"],["Formats","Missing","9:16 and 1:1"]],"st":["Incomplete","Complete"]},
+    {"app":"Request to client","t":"Which formats do you need for the social cut?","reply":"9:16 and 1:1, please.","st":["Sent","Answered"]},
+    {"app":"Task board","t":"Cut campaign film to 9:16 and 1:1","rows":[["Owner","Dan"],["Due","Friday"],["Client update","Drafted"]],"st":["Prepared","Ready for review"]}
+   ],
+   "outs":["Brief organised","Task prepared","Client update ready"],
+   "extra":"For suitable agencies we can also discuss a managed agent service they offer to their own clients. That is a separate conversation, scoped and priced on its own. It is not part of the standard service and carries no promise of extra revenue."
+  },
+  "property": {
+   "tab":"Property","stage":"Property and lettings",
+   "head":"Turn enquiries into an organised next step.",
+   "pain":"Viewing requests, availability and property details sit in different places. Staff have to keep the conversation moving.",
+   "role":"Collect enquiry details, retrieve approved property information, coordinate available viewing slots and update the record.",
+   "impl":"Fewer conversations left waiting. Less back-and-forth for the team.",
+   "note":"Applicant selection, referencing and tenancy decisions stay with your team.",
+   "caps":["A viewing enquiry arrives by message.","The property record supplies approved facts.","The calendar supplies available slots.","A slot is selected in the conversation.","The enquiry record and confirmation update."],
+   "cards":[
+    {"app":"Phone message","t":"Is the 2-bed on Mill Lane still available? Can I view it this week?","from":"Alex Reid","st":["Received",""]},
+    {"app":"Property record","t":"14 Mill Lane, 2 bedrooms","rows":[["Status","Available from 1 Nov"],["Rent","£1,250 pcm"],["Viewing","Not booked","Thu 16:30"]],"st":["Open","Viewing set"]},
+    {"app":"Viewing calendar","t":"Available slots","slots":["Wed 11:00","Thu 16:30","Fri 09:30"],"pick":1,"st":["Checking","Slot chosen"]},
+    {"app":"Enquiry record","t":"Alex Reid, viewing Thu 16:30","rows":[["Details","Collected"],["Confirmation","Prepared"]],"st":["Updating","Updated"]}
+   ],
+   "outs":["Details collected","Viewing coordinated","Record updated"]
+  },
+  "recruitment": {
+   "tab":"Recruitment","stage":"Recruitment",
+   "head":"Keep the process moving between interviews.",
+   "pain":"Availability, reminders and candidate updates require repeated coordination between several people.",
+   "role":"Collect availability, coordinate approved interview slots, prepare candidate updates and record scheduling activity.",
+   "impl":"Less diary coordination. More time for recruiter conversations.",
+   "note":"Shortlisting, ranking and hiring decisions stay with your people.",
+   "caps":["Candidate and interviewer availability arrive separately.","The calendars line up.","An interview appointment appears.","A confirmation is prepared within permissions.","The applicant record updates."],
+   "cards":[
+    {"app":"Candidate email","t":"I can do Tuesday 14:00 to 17:00, or Wednesday after 12:00.","from":"Priya N.","st":["Received",""]},
+    {"app":"Interviewer calendar","t":"Sam, hiring manager","rows":[["Free","Tue 15:00, Wed 13:30"],["Interview","Not set","Tue 15:00"]],"st":["Open","Matched"]},
+    {"app":"Appointment","t":"Interview, 45 minutes","rows":[["When","Tue 15:00"],["With","Sam"]],"st":["Planned","Arranged"]},
+    {"app":"Applicant record","t":"Priya N.","rows":[["Stage","Interview arranged"],["Confirmation","Sent"]],"st":["Updating","Updated"]}
+   ],
+   "outs":["Interview arranged","Confirmation sent","Scheduling record updated"]
+  },
+  "wholesale": {
+   "tab":"Wholesale","stage":"Wholesale and distribution",
+   "head":"Answer the order question without the internal chase.",
+   "pain":"A customer needs stock or delivery information. Sales has to find the answer across records and other teams.",
+   "role":"Retrieve authorised stock and order information, gather missing order details and prepare a response grounded in the current records.",
+   "impl":"Less internal searching before a customer can get an answer.",
+   "note":"Delivery dates are only given once they are confirmed in the order record.",
+   "caps":["“Can you supply this?” arrives by email.","The item record opens.","An authorised system supplies stock.","The order record supplies confirmed delivery.","The reply is prepared with the relevant details."],
+   "cards":[
+    {"app":"Customer email","t":"Can you supply 200 more of PX-40? And is order SO-2291 still arriving Wednesday?","from":"Hartley Trade","st":["Received",""]},
+    {"app":"Item record","t":"PX-40 pallet strap","rows":[["Unit","Pallet of 50"],["Stock","Not checked","220 available"]],"st":["Open","Stock known"]},
+    {"app":"Stock and orders","t":"Authorised records","rows":[["Available now","220"],["SO-2291 delivery","Confirmed Wed 20 Nov"]],"st":["Checking","Read"]},
+    {"app":"Reply prepared","t":"Stock and delivery kept separate","rows":[["Stock","220 available now"],["SO-2291","Delivery confirmed Wed 20 Nov"],["New order","Date confirmed when placed"]],"st":["Drafting","Ready for review"]}
+   ],
+   "outs":["Stock checked","Order details assembled","Response ready"]
+  },
+  "manufacturing": {
+   "tab":"Manufacturing","stage":"Manufacturing",
+   "head":"Keep order updates from becoming a daily chase.",
+   "pain":"Customer updates depend on production information, supplier responses and order records that do not arrive together.",
+   "role":"Collect approved status information, follow up on missing updates, maintain the order record and prepare an exception summary.",
+   "impl":"Clearer coordination around orders. Less time assembling the same update.",
+   "note":"It does not control machinery or change production schedules.",
+   "caps":["A customer asks for an update.","The order record shows a missing supplier confirmation.","The agreed follow-up goes to the supplier.","The supplier confirmation arrives.","The records change. One exception goes to the manager."],
+   "cards":[
+    {"app":"Customer email","t":"Where are we on order 4471? We need the housings by the 28th.","from":"Calder Engineering","st":["Received",""]},
+    {"app":"Order 4471","t":"Housings, batch of 60","rows":[["Machining","Complete"],["Coating","Unconfirmed","Done 22 Nov"],["Packaging","No date"]],"st":["Gaps","Updated"]},
+    {"app":"Supplier follow-up","t":"Please confirm the coating completion date for order 4471.","reply":"Coating complete 22 Nov.","st":["Sent","Confirmed"]},
+    {"app":"Update and exception","t":"Customer update prepared","rows":[["Status","Machined, coated"],["Exception","Packaging date unconfirmed"]],"flag":1,"st":["Assembling","For the manager"]}
+   ],
+   "outs":["Status assembled","Missing update chased","Exception flagged"]
+  },
+  "consultancies": {
+   "tab":"Consultancies","stage":"Consultancy",
+   "head":"Keep agreed actions moving after the meeting.",
+   "pain":"Decisions are recorded, but someone still has to organise the actions, find the documents and follow up.",
+   "role":"Use authorised meeting notes to prepare an action list, draft follow-up messages, organise relevant files and update the project record.",
+   "impl":"Less administration between the conversation and the work.",
+   "note":"Your consultants review every message before it goes to a client.",
+   "caps":["Meeting notes arrive.","Actions become structured tasks.","Relevant documents join the project.","A follow-up email is drafted.","The action record shows ownership and the next step."],
+   "cards":[
+    {"app":"Meeting notes","t":"Steering call. Revised scope agreed. Jo to send options. Sam to share the Q3 data.","from":"Authorised notes","st":["Received",""]},
+    {"app":"Action list","t":"Steering call actions","rows":[["Send scope options","Jo, Friday"],["Share Q3 data","Sam, Wednesday"],["Q3 data file","Missing","Attached"]],"st":["Structured","Complete"]},
+    {"app":"Project files","t":"Documents joined to the project","rows":[["Scope v3.pdf","Added"],["Q3 data.xlsx","Found in shared drive"]],"st":["Searching","Assembled"]},
+    {"app":"Follow-up draft","t":"Thanks both. Actions, owners and dates are below. Q3 data is attached.","rows":[["Owners","Set"],["Next step","Jo, Friday"]],"st":["Drafting","Drafted"]}
+   ],
+   "outs":["Actions organised","Documents assembled","Follow-up drafted"]
+  },
+  "legal": {
+   "tab":"Legal","stage":"Legal practice",
+   "head":"Move intake forward with the information in place.",
+   "pain":"Initial enquiries arrive without the details and documents needed for the next conversation.",
+   "role":"Collect agreed intake information, request missing documents, organise the matter file and prepare a summary for the legal team.",
+   "impl":"Less intake chasing before the team can assess the matter.",
+   "note":"It gives no legal advice and makes no conflict-check decision. Your team reviews every intake.",
+   "caps":["An enquiry arrives.","The intake checklist identifies missing documents.","A request is prepared.","Received files join the matter record.","An intake summary is ready for human review."],
+   "cards":[
+    {"app":"Client enquiry","t":"A supplier has not paid three invoices. Can someone call me this week?","from":"New enquiry","st":["Received",""]},
+    {"app":"Intake checklist","t":"New matter","rows":[["Contact details","Complete"],["Parties","Complete"],["Signed contract","Missing","Received"]],"st":["Incomplete","Complete"]},
+    {"app":"Document request","t":"Please send the signed contract and the three invoices.","reply":"Contract.pdf and Invoices.zip received.","st":["Prepared","Received"]},
+    {"app":"Matter record","t":"Intake summary","rows":[["Matter file","Organised"],["Summary","For human review"]],"st":["Assembling","Ready for review"]}
+   ],
+   "outs":["Intake organised","Documents collected","Summary ready"]
+  },
+  "insurance": {
+   "tab":"Insurance","stage":"Insurance broker",
+   "head":"Bring the renewal information together.",
+   "pain":"Renewal details and supporting documents need repeated collection before a broker can act.",
+   "role":"Request agreed renewal information, organise documents, update the customer record and flag missing items for the broker.",
+   "impl":"Less document chasing around the broker's work.",
+   "note":"No policy recommendations, underwriting or claims decisions.",
+   "caps":["A renewal task opens.","The checklist identifies missing information.","An email request is prepared.","The response populates the record.","A renewal pack is ready for broker review."],
+   "cards":[
+    {"app":"Renewal task","t":"Fairview Dental, policy renews 30 Nov","from":"Opened by schedule","st":["Opened",""]},
+    {"app":"Renewal checklist","t":"Information needed","rows":[["Premises","Complete"],["Claims declaration","Complete"],["Staff numbers","Missing","11"]],"st":["Incomplete","Complete"]},
+    {"app":"Email to customer","t":"Please confirm your current staff numbers for the renewal.","reply":"We now have 11 staff.","st":["Prepared","Answered"]},
+    {"app":"Renewal pack","t":"Fairview Dental","rows":[["Customer record","Updated"],["Documents","Organised"]],"st":["Assembling","Ready for review"]}
+   ],
+   "outs":["Information requested","Documents organised","Renewal pack prepared"]
+  }
+ }
+}

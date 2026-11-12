@@ -1,0 +1,457 @@
+[
+  {
+    "slug": "questions-to-ask-managed-ai-agent",
+    "tone": "red",
+    "title": "The access test",
+    "intro": "Four questions to ask before any business agent receives production access.",
+    "steps": [
+      [
+        "Inventory",
+        "Name every account, folder, tool and permission the role can reach."
+      ],
+      [
+        "Authority",
+        "Separate instructions from the owner from untrusted web and email content."
+      ],
+      [
+        "Approval",
+        "Identify writes, external messages and spending that require a person."
+      ],
+      [
+        "Evidence",
+        "Request a successful, rejected and failed example before expansion."
+      ]
+    ],
+    "practice": "Choose one real action, such as sending a reply. Ask the provider to show the allowed scope, a denied attempt and the audit record.",
+    "insight": {
+      "title": "An email is not permission.",
+      "left_label": "THE RISK",
+      "left": "An incoming message asks for a full customer export.",
+      "right_label": "THE CHECK",
+      "right": "Only agreed tasks can reach customer data. Export is denied.",
+      "lesson": "Content an agent reads must not rewrite its access rules.",
+      "term": "permissions",
+      "definition": "The accounts, files and actions software is allowed to use."
+    }
+  },
+  {
+    "slug": "ai-agents-2027-security",
+    "tone": "red",
+    "title": "The four boundaries of an accountable agent",
+    "intro": "Read the sequence as a security requirement for every meaningful tool action, not a claim that a particular agent is deployed.",
+    "steps": [
+      [
+        "Identity",
+        "Identify the agent, requesting person and accountable business owner."
+      ],
+      [
+        "Permission",
+        "Limit the tools, data, destination and lifetime to this specific job."
+      ],
+      [
+        "Enforcement",
+        "Make the execution layer independently reject prohibited actions."
+      ],
+      [
+        "Evidence",
+        "Verify the external result and retain a minimal, useful audit record."
+      ]
+    ],
+    "practice": "Choose a sensitive action. Ask the provider to demonstrate the approved path, a forbidden path and a partial failure using only synthetic data.",
+    "insight": {
+      "title": "The model can propose. The system must decide.",
+      "left_label": "A PROMPT-ONLY PROMISE",
+      "left": "The assistant says it will never send unapproved information.",
+      "right_label": "AN ENFORCED BOUNDARY",
+      "right": "The execution service blocks an unauthorised send regardless of the model's text.",
+      "lesson": "Security is the difference between a polite answer and an action the system cannot perform.",
+      "term": "least privilege",
+      "definition": "Giving software only the minimum rights required to complete an agreed task."
+    }
+  },
+  {
+    "slug": "the-company-brain",
+    "tone": "blue",
+    "title": "The memory lifecycle",
+    "intro": "Context becomes useful when facts have ownership, review and expiry.",
+    "steps": [
+      [
+        "Collect",
+        "Use a named, approved business source rather than an unsupported recollection."
+      ],
+      [
+        "Attribute",
+        "Record who owns the information and when it was last checked."
+      ],
+      [
+        "Retrieve",
+        "Return only knowledge the role is permitted to access."
+      ],
+      [
+        "Correct",
+        "Amend, archive or delete stale knowledge with a documented process."
+      ]
+    ],
+    "practice": "Select one important company rule. Trace its source, owner, access permissions and correction path before putting it into an agent.",
+    "insight": {
+      "title": "Same question. Different answers.",
+      "left_label": "WITHOUT AN OWNER",
+      "left": "An old PDF contains an outdated refund rule.",
+      "right_label": "WITH AN OWNER",
+      "right": "A dated, approved policy names who can update it.",
+      "lesson": "When sources disagree, check the owner and current policy.",
+      "term": "company knowledge",
+      "definition": "Information a business has approved for specific people or software to use."
+    }
+  },
+  {
+    "slug": "what-an-ai-agent-actually-does",
+    "tone": "blue",
+    "title": "The agent's working loop",
+    "intro": "The value is not a clever reply. It is a verifiable result from permitted action.",
+    "steps": [
+      [
+        "Request",
+        "Receive a defined job with the necessary context."
+      ],
+      [
+        "Choose",
+        "Select a permitted tool and a next step."
+      ],
+      [
+        "Act",
+        "Use the scoped browser, file or connector access."
+      ],
+      [
+        "Verify",
+        "Inspect the real output and escalate an uncertain result."
+      ]
+    ],
+    "practice": "Describe one job in three lines: what starts it, what tools it may use and what evidence proves completion.",
+    "insight": {
+      "title": "A reply is not a finished task.",
+      "left_label": "WHAT A CHAT CAN DO",
+      "left": "Draft a helpful customer response.",
+      "right_label": "WHAT MUST BE CHECKED",
+      "right": "Confirm the intended record or draft is saved in the right place.",
+      "lesson": "Judge completion from the actual business system, not a chat message.",
+      "term": "tool",
+      "definition": "An application or function software can use to perform an action."
+    }
+  },
+  {
+    "slug": "why-ai-automations-fail",
+    "tone": "red",
+    "title": "When the clean path breaks",
+    "intro": "A recovery diagram. A failed tool call must not be treated as proof that no action occurred.",
+    "steps": [
+      [
+        "Interrupt",
+        "A login fails, a source disappears or a tool call times out."
+      ],
+      [
+        "Inspect",
+        "Read the last known external state, not just the agent transcript."
+      ],
+      [
+        "Decide",
+        "Retry safely only if duplicate changes can be ruled out."
+      ],
+      [
+        "Recover",
+        "Escalate, record the gap and resume from a verified checkpoint."
+      ]
+    ],
+    "practice": "Rehearse a timeout just after a simulated write. Check that the workflow does not send or update twice.",
+    "insight": {
+      "title": "A timeout is not a cancellation.",
+      "left_label": "WHAT THE AGENT SEES",
+      "left": "The connection stops before a confirmation arrives.",
+      "right_label": "WHAT MAY HAVE HAPPENED",
+      "right": "The customer record could already have changed.",
+      "lesson": "Inspect the external record before another attempt.",
+      "term": "timeout",
+      "definition": "When software stops waiting for a response; the requested action may still have happened."
+    }
+  },
+  {
+    "slug": "digital-employee-vs-chatbot",
+    "tone": "blue",
+    "title": "Answering versus operating",
+    "intro": "A service role is defined by the tools, accountability and boundary around it.",
+    "steps": [
+      [
+        "Conversation",
+        "The system can explain or draft information."
+      ],
+      [
+        "Assigned role",
+        "A recurring task receives an owner and acceptance criteria."
+      ],
+      [
+        "Tool access",
+        "Specific accounts and permitted actions are configured."
+      ],
+      [
+        "Service review",
+        "Output, failures and human support are measured separately."
+      ]
+    ],
+    "practice": "Ask a vendor to name one agreed recurring job, its success criteria, its exceptions and the support person responsible for it.",
+    "insight": {
+      "title": "Advice and responsibility are different.",
+      "left_label": "THE CONVERSATION",
+      "left": "A helpful answer is given to a person.",
+      "right_label": "THE MANAGED JOB",
+      "right": "A defined task produces a checked result with a named owner.",
+      "lesson": "The difference is the agreed work and oversight, not a magical model.",
+      "term": "oversight",
+      "definition": "A person reviews the work and remains responsible for important decisions."
+    }
+  },
+  {
+    "slug": "intro-to-ai",
+    "tone": "blue",
+    "title": "Four layers of practical AI",
+    "intro": "A vocabulary that moves from prediction to a bounded business system.",
+    "steps": [
+      [
+        "Model",
+        "Produces or transforms content from provided context."
+      ],
+      [
+        "Workflow",
+        "Organises steps, triggers and checking around that model."
+      ],
+      [
+        "Agent",
+        "Can choose tool calls within the work process."
+      ],
+      [
+        "Governance",
+        "Restricts access, confirms outputs and names a responsible person."
+      ]
+    ],
+    "practice": "Take a familiar task. Identify which parts genuinely require a model and which would be more reliable as ordinary rules.",
+    "insight": {
+      "title": "Not every step needs AI.",
+      "left_label": "A LANGUAGE MODEL",
+      "left": "Can read information and draft a reply.",
+      "right_label": "A BUSINESS PROCESS",
+      "right": "Checks the information, follows rules and asks for approval.",
+      "lesson": "Use ordinary rules where they are more predictable than AI.",
+      "term": "workflow",
+      "definition": "A repeatable sequence of steps that turns an input into an expected result."
+    }
+  },
+  {
+    "slug": "digital-employee-cost",
+    "tone": "gold",
+    "title": "What a fair comparison includes",
+    "intro": "A decision map for comparing service cost against the work actually performed.",
+    "steps": [
+      [
+        "Baseline",
+        "Count today's task frequency, effort and error correction."
+      ],
+      [
+        "Scope",
+        "Specify one workflow, permissions, volume and exclusions."
+      ],
+      [
+        "Full cost",
+        "Add human approval, support, tools and exception handling."
+      ],
+      [
+        "Measure",
+        "Review accepted outputs before claiming time or cash savings."
+      ]
+    ],
+    "practice": "Use your own last month of work to record volume and review time. Compare it against the written scope, not an advertised percentage.",
+    "insight": {
+      "title": "A price is not the full cost.",
+      "left_label": "HEADLINE PRICE",
+      "left": "The monthly amount on the proposal.",
+      "right_label": "LIKE-FOR-LIKE TOTAL",
+      "right": "The same work, plus tools, review, support and failures.",
+      "lesson": "Compare accepted work with the full cost of delivering it.",
+      "term": "accepted output",
+      "definition": "Work checked against the standard agreed before it started."
+    }
+  },
+  {
+    "slug": "cost-of-an-ai-employee",
+    "tone": "gold",
+    "title": "The real cost stack",
+    "intro": "Model usage is just one operating component; responsibilities matter more than headline rates.",
+    "steps": [
+      [
+        "Design",
+        "Map the task and prepare suitable company data."
+      ],
+      [
+        "Connect",
+        "Configure business tools and authorised accounts."
+      ],
+      [
+        "Operate",
+        "Budget for usage, hosting, review and monitoring."
+      ],
+      [
+        "Maintain",
+        "Allow for changes, incidents and recovery work."
+      ]
+    ],
+    "practice": "Request a quote that separates setup, tools, usage, maintenance and support. Ask who pays each line when activity doubles.",
+    "insight": {
+      "title": "Cheap model calls can be expensive jobs.",
+      "left_label": "MODEL USAGE",
+      "left": "The charge for generating or analysing content.",
+      "right_label": "OPERATING COST",
+      "right": "Setup, tools, hosting, checking, maintenance and recovery.",
+      "lesson": "Ask who pays for the work around the model.",
+      "term": "model",
+      "definition": "Software trained to process information and generate or classify content."
+    }
+  },
+  {
+    "slug": "small-businesses-already-hired-ai",
+    "tone": "gold",
+    "title": "A practical first-job filter",
+    "intro": "Good starting tasks are frequent, bounded and easy for a named owner to inspect.",
+    "steps": [
+      [
+        "Find",
+        "Pick a recurring task with a recognizable input."
+      ],
+      [
+        "Limit",
+        "Exclude sensitive decisions and out-of-scope access."
+      ],
+      [
+        "Trial",
+        "Check representative outputs and inconvenient edge cases."
+      ],
+      [
+        "Review",
+        "Keep, revise or stop based on evidence and effort."
+      ]
+    ],
+    "practice": "Choose just one inbox, report or follow-up job. Set a review date and one measurable acceptance test.",
+    "insight": {
+      "title": "Start smaller than the sales pitch.",
+      "left_label": "TOO MUCH AT ONCE",
+      "left": "Automate all customer decisions immediately.",
+      "right_label": "A BETTER FIRST JOB",
+      "right": "Prepare one repeat reply for a person to check.",
+      "lesson": "A small, reviewable job makes problems easier to find and fix.",
+      "term": "bounded task",
+      "definition": "A job with a clear beginning, end and limits."
+    }
+  },
+  {
+    "slug": "the-2-dollar-ai-that-answers-the-phone",
+    "tone": "gold",
+    "title": "The complete call journey",
+    "intro": "Assess the journey end to end, rather than a per-minute headline.",
+    "steps": [
+      [
+        "Answer",
+        "Identify what the caller needs and disclose the system appropriately."
+      ],
+      [
+        "Understand",
+        "Confirm names, consent and unclear requests."
+      ],
+      [
+        "Handoff",
+        "Route complex, urgent or sensitive calls to a person."
+      ],
+      [
+        "Verify",
+        "Check the actual booking or CRM entry after the call."
+      ]
+    ],
+    "practice": "Try a noisy call, an interrupted caller and a request beyond the script. Verify the hand-off and the written record.",
+    "insight": {
+      "title": "Answering is not resolving.",
+      "left_label": "THE HEADLINE",
+      "left": "An automated voice picks up the call.",
+      "right_label": "THE FULL JOURNEY",
+      "right": "Identify the request, confirm details, hand off and check the booking.",
+      "lesson": "Price the completed call journey, not only voice processing.",
+      "term": "handoff",
+      "definition": "When software sends the work to a person with enough context to continue."
+    }
+  },
+  {
+    "slug": "atm-and-bank-tellers",
+    "tone": "gold",
+    "title": "Automation changes a task bundle",
+    "intro": "A historical analogy is not a forecast of employment or customer demand.",
+    "steps": [
+      [
+        "List",
+        "Separate administration from judgement and relationships."
+      ],
+      [
+        "Automate",
+        "Select bounded tasks with clear acceptance criteria."
+      ],
+      [
+        "Reallocate",
+        "Decide what people will do with the released time."
+      ],
+      [
+        "Observe",
+        "Measure service quality and unexpected consequences."
+      ]
+    ],
+    "practice": "Ask the people who perform the task what exceptions a process document misses, then include those cases in the trial.",
+    "insight": {
+      "title": "One task is not a whole job.",
+      "left_label": "WHAT CHANGED",
+      "left": "A machine handles many cash withdrawals.",
+      "right_label": "WHAT STILL NEEDS PEOPLE",
+      "right": "Service, advice, exceptions and customer relationships.",
+      "lesson": "Do not turn an analogy into a prediction about staffing.",
+      "term": "automation",
+      "definition": "Using technology to carry out specified tasks with less manual effort."
+    }
+  },
+  {
+    "slug": "super-intelligence-si",
+    "tone": "red",
+    "title": "Capability is not permission",
+    "intro": "Future model intelligence does not replace real-world security engineering.",
+    "steps": [
+      [
+        "Identify",
+        "Name the deployed model, tools, data and environment."
+      ],
+      [
+        "Constrain",
+        "Apply least privilege and approval limits."
+      ],
+      [
+        "Challenge",
+        "Test bad instructions, missing context and forbidden actions."
+      ],
+      [
+        "Revalidate",
+        "Repeat the evaluation after model or tool changes."
+      ]
+    ],
+    "practice": "Write a prohibited-action test and confirm the real application refuses the action, rather than merely saying that it would refuse.",
+    "insight": {
+      "title": "More capable does not mean unrestricted.",
+      "left_label": "MODEL CAPABILITY",
+      "left": "A system handles a difficult reasoning question.",
+      "right_label": "REAL-WORLD CONTROL",
+      "right": "The connected application refuses an unapproved data export.",
+      "lesson": "Test the actual boundary where work happens.",
+      "term": "security boundary",
+      "definition": "A rule enforced by the software or service that limits what another system can do."
+    }
+  }
+]

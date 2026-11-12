@@ -1,0 +1,7 @@
+{
+  "resource": "https://twinthos.com",
+  "authorization_servers": [],
+  "scopes_supported": [],
+  "bearer_methods": ["header"],
+  "resource_registration": "https://twinthos.com/.well-known/oauth-protected-resource"
+}

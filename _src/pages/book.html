@@ -1,0 +1,52 @@
+<!--{"title":"Book a call · Twinthos","desc":"Tell us which recurring task keeps coming back. Choose a discovery call, the £999 operations audit or the £3,500 per month managed digital employee.","path":"book/","nav":""}-->
+<section class="phead">
+  <div class="wrap">
+    <p class="eyebrow">Start here</p>
+    <h1 class="d2">What would you hand over?</h1>
+    <p class="lede">Tell us the recurring task. We’ll reply within two working days.</p>
+  </div>
+</section>
+<section class="book">
+  <div class="wrap book-in">
+    <div class="book-main">
+      <form data-form data-done="bookDone" action="https://formsubmit.co/ajax/twinthos@agentmail.to" method="POST" novalidate>
+        <input type="hidden" name="_subject" value="Twinthos enquiry">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="true">
+        <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <fieldset class="interest">
+          <legend>What would you like to discuss?</legend>
+          <label class="opt"><input type="radio" name="interest" value="fit" checked><span class="opt-in"><b>A short conversation</b><span>Let's find out whether Twinthos is useful for your business.</span></span></label>
+          <label class="opt"><input type="radio" name="interest" value="audit"><span class="opt-in"><b>Operations audit</b><span>£999 once. We review the work and give you a plan.</span></span></label>
+          <label class="opt"><input type="radio" name="interest" value="managed"><span class="opt-in"><b>Managed digital employee</b><span>£3,500 a month. We set up and look after one job.</span></span></label>
+          <label class="opt"><input type="radio" name="interest" value="security"><span class="opt-in"><b>AI security review</b><span>Discuss your agent, tools and security boundaries. Scope and price agreed separately.</span></span></label>
+<label class="opt"><input type="radio" name="interest" value="unsure"><span class="opt-in"><b>Not sure yet</b><span>Tell us the problem. We will suggest a start.</span></span></label>
+        </fieldset>
+        <div class="fld"><label for="f-name">Name</label><input id="f-name" name="name" maxlength="150" autocomplete="name" required aria-describedby="e-name"><p class="emsg" id="e-name">Please add your name.</p></div>
+        <div class="fld"><label for="f-email">Work email</label><input id="f-email" name="email" maxlength="254" type="email" autocomplete="email" required aria-describedby="e-email"><p class="emsg" id="e-email">Please add an email address we can reply to, like name@company.com.</p></div>
+        <div class="fld"><label for="f-co">Company <span class="opt-l">and website, optional</span></label><input id="f-co" name="company" maxlength="200" autocomplete="organization"></div>
+        <div class="fld"><label for="f-msg">What would you like to improve or secure?</label><textarea id="f-msg" name="message" maxlength="3000" rows="5" required aria-describedby="h-msg e-msg"></textarea><p class="hint" id="h-msg">A few sentences is enough. Please leave out private customer details.</p><p class="emsg" id="e-msg">Please tell us about the task in a sentence or two.</p></div>
+        <p class="hint">Your message is delivered through FormSubmit; its spam check may ask you to verify. Do not send passwords, private client records or medical data. <a href="/privacy/">How we handle your information</a>.</p>
+        <p class="form-sum" role="alert" hidden>Some details are missing. Please check the fields marked below.</p>
+        <div class="form-actions">
+          <button class="btn btn-ink" type="submit">Send my request <span class="ar">→</span></button>
+          <span class="muted">Or email <a href="mailto:twinthos@agentmail.to">twinthos@agentmail.to</a></span>
+        </div>
+        <p class="form-fail" role="alert" tabindex="-1" hidden>Your request did not send. Please email <a href="mailto:twinthos@agentmail.to">twinthos@agentmail.to</a> and we will pick it up from there.</p>
+      </form>
+      <div class="form-done" id="bookDone" role="status" hidden>
+        <p class="eyebrow">Request received</p>
+        <h2 class="d3">Thank you. We will reply within two working days.</h2>
+        <p class="lede">We will read what you sent and suggest a time. If it is clearly not a fit, we will tell you that instead.</p>
+        <p><a class="tlink" href="/">Back to the homepage</a></p>
+      </div>
+    </div>
+    <aside class="book-side" aria-label="What happens next">
+      <div data-for="fit"><h2 class="side-h">On the first call</h2><ol class="side-steps"><li>You describe one task that repeats.</li><li>We ask where it gets stuck and who decides.</li><li>We tell you straight: worth a closer look, or not.</li></ol></div>
+      <div data-for="audit" hidden><h2 class="side-h">The operations audit</h2><ol class="side-steps"><li>We agree what is included and when before you pay.</li><li>We map the work, where it waits and who decides.</li><li>You get a written plan. You keep it either way.</li></ol><p class="side-note">£999 one-off, excluding VAT where applicable. <a href="/operations-audit/">What the audit includes</a></p></div>
+      <div data-for="managed" hidden><h2 class="side-h">The managed digital employee</h2><ol class="side-steps"><li>We write a proposal: the work, the tools, the rules.</li><li>We build and test it. Billing starts when it is live.</li><li>We watch it, fix it and report on it.</li></ol><p class="side-note">£3,500 per month, three-month minimum, excluding VAT where applicable. <a href="/pricing/">See the terms</a></p></div>
+      <div data-for="security" hidden><h2 class="side-h">Your AI security review</h2><ol class="side-steps"><li>Describe the agent and the systems it can reach.</li><li>We agree a test scope and access requirements.</li><li>You receive a written proposal before any work begins.</li></ol><p class="side-note">Separately scoped and priced. Do not submit credentials or confidential logs here.</p></div><div data-for="unsure" hidden><h2 class="side-h">Not sure yet</h2><ol class="side-steps"><li>Tell us the problem in plain words.</li><li>We suggest a call, an audit, or nothing at all.</li><li>Nothing starts until you agree in writing what is included.</li></ol></div>
+      <p class="side-foot">No preparation needed. This is a conversation, not a pitch.</p>
+    </aside>
+  </div>
+</section>

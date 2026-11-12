@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Twinthos Live Demo</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0B0B0F; color: #E8E6E1; font-family: 'Inter', Arial, sans-serif; overflow-x: hidden; }
+  
+  .scene { display: none; min-height: 100vh; padding: 40px; }
+  .scene.active { display: flex; flex-direction: column; justify-content: center; align-items: center; }
+  
+  .title { font-size: 48px; font-weight: 800; margin-bottom: 20px; text-align: center; }
+  .subtitle { font-size: 20px; color: #9A9A9F; margin-bottom: 40px; text-align: center; max-width: 800px; }
+  
+  .nav { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; z-index: 100; }
+  .nav button { background: #15151A; color: #E8E6E1; border: 1px solid #333; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-size: 14px; }
+  .nav button:hover { background: #4F8CFF; border-color: #4F8CFF; }
+  .nav button.active { background: #4F8CFF; border-color: #4F8CFF; }
+  
+  .card { background: #15151A; border: 1px solid #222; border-radius: 12px; padding: 24px; margin: 10px; }
+  .card-title { font-size: 18px; font-weight: 700; margin-bottom: 12px; }
+  .card-body { font-size: 14px; color: #9A9A9F; }
+  
+  .inbox { width: 100%; max-width: 600px; }
+  .inbox-item { background: #15151A; border: 1px solid #222; border-radius: 8px; padding: 12px 16px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
+  .inbox-item.unread { border-left: 3px solid #FF6B6B; }
+  .inbox-item.read { border-left: 3px solid #7EC8A0; opacity: 0.7; }
+  .inbox-label { font-size: 14px; }
+  .inbox-status { font-size: 12px; color: #9A9A9F; }
+  
+  .brain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 900px; }
+  .brain-item { background: #15151A; border: 1px solid #222; border-radius: 8px; padding: 16px; text-align: center; }
+  .brain-item .icon { font-size: 32px; margin-bottom: 8px; }
+  .brain-item .label { font-size: 14px; font-weight: 600; }
+  .brain-item .desc { font-size: 12px; color: #9A9A9F; margin-top: 4px; }
+  
+  .agent-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; max-width: 800px; }
+  .agent-card { background: #15151A; border: 1px solid #222; border-radius: 8px; padding: 20px; }
+  .agent-card .name { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+  .agent-card .dept { font-size: 12px; color: #4F8CFF; margin-bottom: 8px; }
+  .agent-card .status { font-size: 12px; color: #7EC8A0; }
+  .agent-card .output { font-size: 12px; color: #9A9A9F; margin-top: 8px; font-family: monospace; }
+  
+  .sentinel-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; max-width: 800px; }
+  .sentinel-item { background: #15151A; border: 1px solid #222; border-radius: 8px; padding: 12px; text-align: center; }
+  .sentinel-item .label { font-size: 11px; color: #9A9A9F; }
+  .sentinel-item .value { font-size: 20px; font-weight: 700; color: #7EC8A0; margin-top: 4px; }
+  
+  .signoff { background: #15151A; border: 2px solid #C9A063; border-radius: 12px; padding: 24px; max-width: 500px; text-align: center; }
+  .signoff .action { font-size: 16px; margin-bottom: 16px; }
+  .signoff .buttons { display: flex; gap: 12px; justify-content: center; }
+  .signoff .btn-approve { background: #7EC8A0; color: #0B0B0F; padding: 10px 24px; border-radius: 8px; border: none; cursor: pointer; font-weight: 700; }
+  .signoff .btn-reject { background: #FF6B6B; color: #0B0B0F; padding: 10px 24px; border-radius: 8px; border: none; cursor: pointer; font-weight: 700; }
+  
+  .work-product { background: #15151A; border: 1px solid #4F8CFF; border-radius: 8px; padding: 16px; max-width: 600px; font-family: monospace; font-size: 13px; }
+  .work-product .line { margin-bottom: 4px; }
+  .work-product .label { color: #4F8CFF; }
+  .work-product .value { color: #E8E6E1; }
+  
+  .progress-bar { width: 100%; max-width: 600px; height: 4px; background: #222; border-radius: 2px; margin-top: 20px; }
+  .progress-fill { height: 100%; background: #4F8CFF; border-radius: 2px; transition: width 0.5s; }
+  
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+  .pulse { animation: pulse 2s infinite; }
+  
+  @keyframes slideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .slide-in { animation: slideIn 0.5s ease-out; }
+</style>
+</head>
+<body>
+
+<!-- Scene 1: The Problem -->
+<div class="scene active" id="scene1">
+  <div class="title">Operational Drag</div>
+  <div class="subtitle">Your team spends 40% of their time on work that produces zero value.</div>
+  <div class="inbox">
+    <div class="inbox-item unread"><span class="inbox-label">📧 Unread: 23 messages</span><span class="inbox-status">Needs triage</span></div>
+    <div class="inbox-item unread"><span class="inbox-label">📊 Stock data: unreconciled</span><span class="inbox-status">147 rows pending</span></div>
+    <div class="inbox-item unread"><span class="inbox-label">📋 CRM: missing follow-ups</span><span class="inbox-status">8 overdue</span></div>
+    <div class="inbox-item unread"><span class="inbox-label">🔒 Security: 3 CVEs unpatched</span><span class="inbox-status">Unknown exposure</span></div>
+    <div class="inbox-item unread"><span class="inbox-label">📄 Documents: 12 unfiled</span><span class="inbox-status">Manual filing required</span></div>
+  </div>
+</div>
+
+<!-- Scene 2: The Brain -->
+<div class="scene" id="scene2">
+  <div class="title">The Company Brain</div>
+  <div class="subtitle">Persistent knowledge per company. Never invents memories. Never shares data across clients.</div>
+  <div class="brain-grid">
+    <div class="brain-item"><div class="icon">🧠</div><div class="label">Identity</div><div class="desc">Who you are</div></div>
+    <div class="brain-item"><div class="icon">📋</div><div class="label">Rules</div><div class="desc">How you work</div></div>
+    <div class="brain-item"><div class="icon">📚</div><div class="label">Knowledge</div><div class="desc">What you know</div></div>
+    <div class="brain-item"><div class="icon">💾</div><div class="label">Memory</div><div class="desc">What happened</div></div>
+    <div class="brain-item"><div class="icon">📁</div><div class="label">Projects</div><div class="desc">What you're doing</div></div>
+    <div class="brain-item"><div class="icon">👥</div><div class="label">Employees</div><div class="desc">Who does what</div></div>
+    <div class="brain-item"><div class="icon">📜</div><div class="label">History</div><div class="desc">What was decided</div></div>
+    <div class="brain-item"><div class="icon">🔐</div><div class="label">Permissions</div><div class="desc">Who can do what</div></div>
+    <div class="brain-item"><div class="icon">✅</div><div class="label">Approved</div><div class="desc">Verified facts only</div></div>
+  </div>
+</div>
+
+<!-- Scene 3: The Workers -->
+<div class="scene" id="scene3">
+  <div class="title">Digital Employees Working</div>
+  <div class="subtitle">Four agents. Running simultaneously. No sick days. No quitting. No onboarding.</div>
+  <div class="agent-grid">
+    <div class="agent-card">
+      <div class="name">Inbox Manager</div>
+      <div class="dept">Delivery</div>
+      <div class="status pulse">● Active</div>
+      <div class="output">Triaged 23 messages → 8 urgent, 10 follow-up, 5 archive</div>
+    </div>
+    <div class="agent-card">
+      <div class="name">Prospector</div>
+      <div class="dept">Sales</div>
+      <div class="status pulse">● Active</div>
+      <div class="output">Found 10 target companies with verified decision-makers</div>
+    </div>
+    <div class="agent-card">
+      <div class="name">Security Auditor</div>
+      <div class="dept">Engineering</div>
+      <div class="status pulse">● Active</div>
+      <div class="output">Scanned codebase: 0 critical, 2 medium, 5 low findings</div>
+    </div>
+    <div class="agent-card">
+      <div class="name">Data Scraper</div>
+      <div class="dept">Sales/Engineering</div>
+      <div class="status pulse">● Active</div>
+      <div class="output">Verified 5 company dossiers with source URLs</div>
+    </div>
+  </div>
+</div>
+
+<!-- Scene 4: Work Product -->
+<div class="scene" id="scene4">
+  <div class="title">Work Product</div>
+  <div class="subtitle">Not text. Work. Triggered by work arriving, not by someone typing a prompt.</div>
+  <div class="work-product">
+    <div class="line"><span class="label">Filed:</span> <span class="value">Stock reconciliation report (147 rows reconciled)</span></div>
+    <div class="line"><span class="label">Booked:</span> <span class="value">Demo call with Martin Attwood (Robinsons Brewery)</span></div>
+    <div class="line"><span class="label">Chased:</span> <span class="value">3 overdue invoices (£4,200 total)</span></div>
+    <div class="line"><span class="label">Triaged:</span> <span class="value">23 inbox messages → 8 urgent, 10 follow-up, 5 archive</span></div>
+    <div class="line"><span class="label">Scanned:</span> <span class="value">Codebase: 0 critical, 2 medium, 5 low findings</span></div>
+    <div class="line"><span class="label">Verified:</span> <span class="value">5 company dossiers with source URLs</span></div>
+  </div>
+</div>
+
+<!-- Scene 5: Sign-Off -->
+<div class="scene" id="scene5">
+  <div class="title">Human Sign-Off</div>
+  <div class="subtitle">Every consequential action has one named human who signs off.</div>
+  <div class="signoff">
+    <div class="action">Agent proposes: Send invoice to Martin Attwood (£5,000)</div>
+    <div class="buttons">
+      <button class="btn-approve" onclick="approve()">Approve</button>
+      <button class="btn-reject" onclick="reject()">Reject</button>
+    </div>
+    <div id="signoff-result" style="margin-top: 16px; font-size: 14px;"></div>
+  </div>
+</div>
+
+<!-- Scene 6: Sentinel -->
+<div class="scene" id="scene6">
+  <div class="title">Twinthos Sentinel</div>
+  <div class="subtitle">Continuous threat intelligence. Matched to your stack. Alerts via any channel.</div>
+  <div class="sentinel-grid">
+    <div class="sentinel-item"><div class="label">CVE Feeds</div><div class="value">100</div></div>
+    <div class="sentinel-item"><div class="label">CISA KEV</div><div class="value">0</div></div>
+    <div class="sentinel-item"><div class="label">EPSS High</div><div class="value">0</div></div>
+    <div class="sentinel-item"><div class="label">Suppliers</div><div class="value">6</div></div>
+    <div class="sentinel-item"><div class="label">Tests Pass</div><div class="value">169</div></div>
+    <div class="sentinel-item"><div class="label">Scan Interval</div><div class="value">30m</div></div>
+    <div class="sentinel-item"><div class="label">Audit Cost</div><div class="value">£10K</div></div>
+    <div class="sentinel-item"><div class="label">Breach Cost</div><div class="value">£500K+</div></div>
+  </div>
+</div>
+
+<div class="nav">
+  <button onclick="showScene(1)" id="btn1">1. Problem</button>
+  <button onclick="showScene(2)" id="btn2">2. Brain</button>
+  <button onclick="showScene(3)" id="btn3">3. Workers</button>
+  <button onclick="showScene(4)" id="btn4">4. Work</button>
+  <button onclick="showScene(5)" id="btn5">5. Sign-Off</button>
+  <button onclick="showScene(6)" id="btn6">6. Sentinel</button>
+</div>
+
+<script>
+function showScene(n) {
+  document.querySelectorAll('.scene').forEach(s => s.classList.remove('active'));
+  document.getElementById('scene' + n).classList.add('active');
+  document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById('btn' + n).classList.add('active');
+}
+
+function approve() {
+  document.getElementById('signoff-result').innerHTML = '<span style="color: #7EC8A0;">✓ Approved. Invoice sent. Action logged in audit trail.</span>';
+}
+
+function reject() {
+  document.getElementById('signoff-result').innerHTML = '<span style="color: #FF6B6B;">✗ Rejected. Action cancelled. Agent notified.</span>';
+}
+
+showScene(1);
+</script>
+</body>
+</html>
