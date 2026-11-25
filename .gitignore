@@ -1,0 +1,6 @@
+node_modules/
+_src/
+*.sh
+*.pyc
+__pycache__/
+.env

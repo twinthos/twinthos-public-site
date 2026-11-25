@@ -1,0 +1,43 @@
+{
+  "name": "Twinthos",
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "url": "https://twinthos.com/",
+  "description": "Twinthos focuses on AI security and managed digital employees, combining company knowledge, approved tools and defined responsibilities.",
+  "updated": "2026-11-08",
+  "audience": "Businesses evaluating managed agents, company knowledge and AI security",
+  "services": [
+    {
+      "name": "Operations Audit",
+      "price": 999,
+      "currency": "GBP",
+      "billing": "one-off",
+      "scope": "Written assessment and plan, not a production AI deployment",
+      "url": "https://twinthos.com/operations-audit/"
+    },
+    {
+      "name": "Managed digital employee",
+      "price": 3500,
+      "currency": "GBP",
+      "billing": "monthly",
+      "minimumTermMonths": 3,
+      "scope": "One agreed workflow, configured and managed, subject to proposal and approved integrations",
+      "url": "https://twinthos.com/pricing/"
+    },
+    {
+      "name": "AI security review",
+      "scope": "Separately scoped assessment of agent tools, permissions, failure handling and evidence; price agreed in writing",
+      "url": "https://twinthos.com/security/"
+    }
+  ],
+  "limitations": [
+    "Approved systems only",
+    "Human review of consequential actions",
+    "Integration availability varies",
+    "Actual performance depends on workflow and deployment"
+  ],
+  "officialAnswers": "https://twinthos.com/faq/",
+  "securityDetails": "https://twinthos.com/security/",
+  "book": "https://twinthos.com/book/",
+  "notice": "This is a public informational catalog. It does not publish callable tools, booking APIs or live availability endpoints."
+}
