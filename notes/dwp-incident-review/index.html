@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en-GB" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DWP cyber incident: 0 bytes, 8.4 million claimants, one missing list · Twinthos Notes</title>
+<meta name="description" content="At 19:20 on Thursday a thousand people tried to log into Universal Credit and couldn't. Twenty-one hours later nobody had published a cause. Twelve frames from the public record, and four tests run from a terminal.">
+<link rel="canonical" href="https://twinthos.com/notes/dwp-incident-review/">
+<meta name="theme-color" content="#05070B">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Twinthos">
+<meta property="og:url" content="https://twinthos.com/notes/dwp-incident-review/">
+<meta property="og:title" content="DWP cyber incident: 0 bytes, 8.4 million claimants, one missing list · Twinthos Notes">
+<meta property="og:description" content="At 19:20 on Thursday a thousand people tried to log into Universal Credit and couldn't. Twenty-one hours later nobody had published a cause. Twelve frames from the public record, and four tests run from a terminal.">
+<meta property="og:image" content="https://twinthos.com/assets/notes-photo-2026/dwp-review/01.webp">
+<meta property="article:published_time" content="2026-11-27T18:40:00+00:00">
+<meta property="article:section" content="AI security">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Who decides to switch off Universal Credit? Five roles, one missing list">
+<meta name="twitter:description" content="Five people owned five questions after the DWP cyber incident. None could answer the smallest one: which software with credentials was already running inside the department.">
+<meta name="twitter:image" content="https://twinthos.com/assets/notes-photo-2026/who-decides-dwp-shutdown-1600.webp">
+<link rel="preload" href="/assets/fonts/InterTight-normal-400-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/tw.css?v=88838283">
+<script>if(location.protocol==='http:'&&location.hostname==='twinthos.com')location.replace('https://twinthos.com'+location.pathname+location.search+location.hash);document.documentElement.classList.replace('no-js','js')</script>
+<script src="/assets/tw.js?v=88838283" defer></script>
+
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Who decides to switch off Universal Credit? Five roles, one missing list", "description": "Five people owned five questions after the DWP cyber incident. None could answer the smallest one: which software with credentials was already running inside the department.", "datePublished": "2026-11-27", "dateModified": "2026-11-27", "author": {"@type": "Person", "name": "Tyson Mandela", "url": "https://twinthos.com/about/"}, "image": "https://twinthos.com/assets/notes-photo-2026/who-decides-dwp-shutdown-1600.webp", "mainEntityOfPage": "https://twinthos.com/notes/who-decides-dwp-shutdown/", "@id": "https://twinthos.com/notes/who-decides-dwp-shutdown/#article", "inLanguage": "en-GB", "articleSection": "AI security", "publisher": {"@id": "https://twinthos.com/#org"}, "isAccessibleForFree": true, "about": [{"@type": "Thing", "name": "DWP cyber incident"}, {"@type": "Thing", "name": "Universal Credit"}, {"@type": "Thing", "name": "AI agent governance"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "@id": "https://twinthos.com/notes/who-decides-dwp-shutdown/#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Twinthos", "item": "https://twinthos.com/"}, {"@type": "ListItem", "position": 2, "name": "Field notes", "item": "https://twinthos.com/notes/"}, {"@type": "ListItem", "position": 3, "name": "Who decides to switch off Universal Credit? Five roles, one missing list", "item": "https://twinthos.com/notes/who-decides-dwp-shutdown/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is Universal Credit working again?", "acceptedAnswer": {"@type": "Answer", "text": "No restoration timetable had been published as of 27 November 2026. DWP says benefit and pension payments are unaffected."}}, {"@type": "Question", "name": "Was data stolen from DWP?", "acceptedAnswer": {"@type": "Answer", "text": "No official statement confirms it. Number 10 said there's currently no evidence of customer data loss. Absence of evidence isn't a finding."}}, {"@type": "Question", "name": "Was the DWP incident ransomware?", "acceptedAnswer": {"@type": "Answer", "text": "No official statement has said so. I won't assert it, and neither should anyone selling you a control."}}, {"@type": "Question", "name": "What should a board ask first?", "acceptedAnswer": {"@type": "Answer", "text": "The questions above, starting with the list of agents that hold credentials. It costs an hour and no budget."}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://twinthos.com/#org", "name": "Twinthos", "url": "https://twinthos.com/"}, {"@type": "NewsArticle", "@id": "https://twinthos.com/notes/dwp-incident-review/#article", "headline": "DWP cyber incident: 0 bytes, 8.4 million claimants, one missing list", "description": "At 19:20 on Thursday a thousand people tried to log into Universal Credit and couldn't. Twenty-one hours later nobody had published a cause. Twelve frames from the public record, and four tests run from a terminal.", "image": ["https://twinthos.com/assets/notes-photo-2026/dwp-review/01.webp", "https://twinthos.com/assets/notes-photo-2026/dwp-review/02.webp", "https://twinthos.com/assets/notes-photo-2026/dwp-review/03.webp", "https://twinthos.com/assets/notes-photo-2026/dwp-review/04.webp", "https://twinthos.com/assets/notes-photo-2026/dwp-review/05.webp", "https://twinthos.com/assets/notes-photo-2026/dwp-review/06.webp", "https://twinthos.com/assets/notes-photo-2026/dwp-review/07.webp", "https://twinthos.com/assets/notes-photo-2026/dwp-review/08.webp", "https://twinthos.com/assets/notes-photo-2026/dwp-review/09.webp", "https://twinthos.com/assets/notes-photo-2026/dwp-review/10.webp", "https://twinthos.com/assets/notes-photo-2026/dwp-review/11.webp", "https://twinthos.com/assets/notes-photo-2026/dwp-review/12.webp"], "datePublished": "2026-11-27T18:40:00+00:00", "dateModified": "2026-11-27T18:40:00+00:00", "author": {"@type": "Person", "name": "Tyson Mandela"}, "publisher": {"@id": "https://twinthos.com/#org"}, "mainEntityOfPage": {"@id": "https://twinthos.com/notes/dwp-incident-review/#webpage"}, "articleSection": "AI security"}]}</script>
+</head>
+<body class="pg-article">
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="/" aria-label="Twinthos home"><span class="brand-wordmark">TWINTHOS</span></a>
+    <a class="nav-price" href="/pricing/">Pricing</a>
+    <nav class="nav-links" id="navLinks" aria-label="Main"><a href="/workforce/">The agent</a><a href="/brain/">Company Brain</a><a href="/security/">AI security</a><a href="/pricing/">Pricing</a><a href="/notes/" aria-current="page">Notes</a><a class="nav-book" href="/book/?interest=fit">Book a call</a></nav>
+    <a class="btn btn-ink btn-sm nav-cta" href="/book/?interest=fit">Book a call</a>
+    <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks"><span></span></button>
+  </div>
+</header>
+<main id="main">
+<style>
+.pg-article .review-shot{margin:44px 0 60px;}
+.pg-article .review-shot img{display:block;width:100%;height:auto;border:1px solid var(--line,#212623);background:#05060A;}
+.pg-article .review-shot figcaption{margin-top:14px;font-size:15px;line-height:1.55;color:var(--ink-2,#A4A9A2);max-width:760px;}
+.pg-article .review-shot figcaption span{font-variant-numeric:tabular-nums;color:#4D86FF;margin-right:10px;font-size:13px;letter-spacing:.08em;}
+.pg-article .review-note{max-width:760px;}
+.pg-article .review-dl{display:inline-block;margin:8px 0 0;padding:16px 22px;border:1px solid #212623;color:#EEF0F5;text-decoration:none;font-size:16px;}
+.pg-article .review-dl:hover{border-color:#4D86FF;color:#4D86FF;}
+</style>
+<div class="article-stage" data-tone="AI security"><header class="article-head wrap"><a class="eyebrow" href="/notes/">← FIELD NOTES / AI security</a><h1>DWP cyber incident: 0 bytes, 8.4 million claimants, one missing list</h1><p class="lede">At 19:20 on Thursday a thousand people tried to log into Universal Credit and couldn't. By Friday afternoon nobody had published a cause. These twelve frames are what I could see from outside: the public record, plus four tests run from a terminal at 16:10.</p><p class="article-meta">Tyson Mandela · Published <time datetime="2026-11-27">27 November 2026</time> · 4 min read</p></header></div>
+<div class="wrap"><article class="article-body review-note">
+<p class="lede-para">You're on a bus. You open the app to check whether this month's payment has cleared. The page hangs, then hangs again. You assume your signal, then your password, then you start to worry about the money.</p>
+<p>About a thousand people did the same thing over the next ninety minutes. The department took some services offline at 21:00 and called it a precaution. That word describes what you do. It never describes what happened.</p>
+</article></div>
+<div class="wrap"><figure class="review-shot">
+  <img src="/assets/notes-photo-2026/dwp-review/01.webp" width="1080" height="1350" loading="lazy" decoding="async" alt="Slide 1 of 12, cover: 1,300 outage reports between 19:20 and 21:00, against a normal rate of one every fifteen minutes. About 195 times the usual traffic, on a Thursday evening.">
+  <figcaption><span>01 / 12</span> 1,300 outage reports between 19:20 and 21:00, against a normal rate of one every fifteen minutes. About 195 times the usual traffic, on a Thursday evening.</figcaption>
+</figure>
+<figure class="review-shot">
+  <img src="/assets/notes-photo-2026/dwp-review/02.webp" width="1080" height="1350" loading="lazy" decoding="async" alt="Slide 2 of 12, record vs noise: Two columns. What DWP put on the record, and the three things it has never said.">
+  <figcaption><span>02 / 12</span> Two columns. What DWP put on the record, and the three things it has never said.</figcaption>
+</figure>
+<figure class="review-shot">
+  <img src="/assets/notes-photo-2026/dwp-review/03.webp" width="1080" height="1350" loading="lazy" decoding="async" alt="Slide 3 of 12, language shift: 08:11 precaution. 12:16 live incident. 13:48 serious cyber incident. Five and a half hours, one direction of travel.">
+  <figcaption><span>03 / 12</span> 08:11 precaution. 12:16 live incident. 13:48 serious cyber incident. Five and a half hours, one direction of travel.</figcaption>
+</figure>
+<figure class="review-shot">
+  <img src="/assets/notes-photo-2026/dwp-review/04.webp" width="1080" height="1350" loading="lazy" decoding="async" alt="Slide 4 of 12, scale: 8.4 million Universal Credit claimants in August 2026, behind a form that would not open.">
+  <figcaption><span>04 / 12</span> 8.4 million Universal Credit claimants in August 2026, behind a form that would not open.</figcaption>
+</figure>
+<figure class="review-shot">
+  <img src="/assets/notes-photo-2026/dwp-review/05.webp" width="1080" height="1350" loading="lazy" decoding="async" alt="Slide 5 of 12, demand signal: Of 15,000+ problem reports by 15:41, two thirds were logins. A broken front page does not produce that shape.">
+  <figcaption><span>05 / 12</span> Of 15,000+ problem reports by 15:41, two thirds were logins. A broken front page does not produce that shape.</figcaption>
+</figure>
+<figure class="review-shot">
+  <img src="/assets/notes-photo-2026/dwp-review/06.webp" width="1080" height="1350" loading="lazy" decoding="async" alt="Slide 6 of 12, field test: Four hosts, four lookups, four handshakes, at 16:10 GMT on Friday. One returned zero bytes. Two had no DNS record at all.">
+  <figcaption><span>06 / 12</span> Four hosts, four lookups, four handshakes, at 16:10 GMT on Friday. One returned zero bytes. Two had no DNS record at all.</figcaption>
+</figure>
+<figure class="review-shot">
+  <img src="/assets/notes-photo-2026/dwp-review/07.webp" width="1080" height="1350" loading="lazy" decoding="async" alt="Slide 7 of 12, technical read: The certificate is valid and the handshake completes, so routing is intact. Nothing comes back from the application. That is a decision, not a fault.">
+  <figcaption><span>07 / 12</span> The certificate is valid and the handshake completes, so routing is intact. Nothing comes back from the application. That is a decision, not a fault.</figcaption>
+</figure>
+<figure class="review-shot">
+  <img src="/assets/notes-photo-2026/dwp-review/08.webp" width="1080" height="1350" loading="lazy" decoding="async" alt="Slide 8 of 12, the distinction: Benefit and pension payments were unaffected. Access was. An availability failure is still a board incident.">
+  <figcaption><span>08 / 12</span> Benefit and pension payments were unaffected. Access was. An availability failure is still a board incident.</figcaption>
+</figure>
+<figure class="review-shot">
+  <img src="/assets/notes-photo-2026/dwp-review/09.webp" width="1080" height="1350" loading="lazy" decoding="async" alt="Slide 9 of 12, comparators: Capita's £14m fine against Co-op's £206m revenue hit and M&S's near £300m profit impact. The penalty is rarely the largest number.">
+  <figcaption><span>09 / 12</span> Capita's £14m fine against Co-op's £206m revenue hit and M&S's near £300m profit impact. The penalty is rarely the largest number.</figcaption>
+</figure>
+<figure class="review-shot">
+  <img src="/assets/notes-photo-2026/dwp-review/10.webp" width="1080" height="1350" loading="lazy" decoding="async" alt="Slide 10 of 12, the clock: A personal data breach likely to affect rights must reach the ICO within 72 hours of awareness. All three statements landed in the first day.">
+  <figcaption><span>10 / 12</span> A personal data breach likely to affect rights must reach the ICO within 72 hours of awareness. All three statements landed in the first day.</figcaption>
+</figure>
+<figure class="review-shot">
+  <img src="/assets/notes-photo-2026/dwp-review/11.webp" width="1080" height="1350" loading="lazy" decoding="async" alt="Slide 11 of 12, board tests: Four questions, each with a file that answers it. Ask for the file, not the assurance.">
+  <figcaption><span>11 / 12</span> Four questions, each with a file that answers it. Ask for the file, not the assurance.</figcaption>
+</figure>
+<figure class="review-shot">
+  <img src="/assets/notes-photo-2026/dwp-review/12.webp" width="1080" height="1350" loading="lazy" decoding="async" alt="Slide 12 of 12, my read: Control worked. Communication didn't. Cause unattributed, and no evidence of data loss is a position, not a finding.">
+  <figcaption><span>12 / 12</span> Control worked. Communication didn't. Cause unattributed, and no evidence of data loss is a position, not a finding.</figcaption>
+</figure></div>
+<div class="wrap"><article class="article-body review-note">
+<p>The question worth carrying into next week isn't "was there a breach". The honest answer is that nobody outside knows, and "no evidence" is a statement about evidence.</p>
+<p>Ask who holds the list. Every department now runs software that acts on its behalf: agents that read mailboxes, query case systems, move files, call APIs. Each one carries credentials. When a system has to come down in an evening, the first thing you need is a list of everything holding a key to it, who approved it, and when it expires.</p>
+<p>Nobody has published one for this incident. I'd be surprised if one exists.</p>
+<p>I build managed AI agents with a company brain, a work log and one named approver. When a client's systems stop, the agents stop, and the log says what ran and who said yes.</p>
+<p><a class="review-dl" href="/assets/notes-photo-2026/dwp-review/dwp-incident-review.pdf">Download the 12-page review (PDF, 4:5)</a></p>
+</article></div>
+</main>
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="brand" href="/" aria-label="Twinthos home"><span class="brand-wordmark">TWINTHOS</span></a>
+        <p class="foot-line">Intelligence at work.<br>Security at its core.</p>
+      </div>
+      <div><h2 class="foot-h">Service</h2><ul><li><a href="/workforce/">The agent & tools</a></li><li><a href="/brain/">Company Brain</a></li><li><a href="/how-it-works/">How it works</a></li><li><a href="/pricing/">Pricing</a></li><li><a href="/operations-audit/">Operations audit</a></li></ul></div>
+      <div><h2 class="foot-h">Company</h2><ul><li><a href="/about/">About</a></li><li><a href="/notes/">Notes</a></li><li><a href="/security/">Security and data</a></li><li><a href="/faq/">Questions</a></li></ul></div>
+      <div><h2 class="foot-h">Start</h2><ul><li><a href="/book/?interest=fit">Book a discovery call</a></li><li><a href="mailto:twinthos@agentmail.to">twinthos@agentmail.to</a></li></ul></div>
+    </div>
+    <div class="foot-base"><span>© 2026 Twinthos · a trading name of Tyson Mandela, Bath, England</span><span><a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a></span></div>
+  </div>
+</footer>
+</body>
+</html>

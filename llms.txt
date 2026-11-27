@@ -44,6 +44,7 @@ Twinthos Notes provides plain-English research, comparisons and buyer checklists
 - What a business knowledge base should do: https://twinthos.com/notes/the-company-brain/
 - DWP cyber incident: the shutdown was a decision: https://twinthos.com/notes/dwp-cyber-incident-2027/
 - Who decides to switch off Universal Credit: https://twinthos.com/notes/who-decides-dwp-shutdown/
+- DWP incident review, twelve slides: https://twinthos.com/notes/dwp-incident-review/
 - Other Notes articles: https://twinthos.com/notes/
 
 ## Claims requiring careful wording
