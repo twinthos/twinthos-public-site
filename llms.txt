@@ -42,6 +42,8 @@ Twinthos Notes provides plain-English research, comparisons and buyer checklists
 - Comparing the cost of a defined workflow: https://twinthos.com/notes/digital-employee-cost/
 - Why AI projects may fail to create value: https://twinthos.com/notes/why-ai-automations-fail/
 - What a business knowledge base should do: https://twinthos.com/notes/the-company-brain/
+- DWP cyber incident: the shutdown was a decision: https://twinthos.com/notes/dwp-cyber-incident-2027/
+- Who decides to switch off Universal Credit: https://twinthos.com/notes/who-decides-dwp-shutdown/
 - Other Notes articles: https://twinthos.com/notes/
 
 ## Claims requiring careful wording
