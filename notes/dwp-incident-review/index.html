@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The night the DWP page went quiet: 12 frames on 0 bytes and 8.4 million people · Twinthos Notes</title>
-<meta name="description" content="A story in twelve frames: what the record shows, what it never said, and the list nobody has published.">
+<title>DWP cyber incident: 8.4 million claimants, one sign-in page returning nothing · Twinthos Notes</title>
+<meta name="description" content="DWP called it a precaution at 08:11 and a serious cyber incident hours later. Twelve slides: the record, the 12 hours 55 minutes before the first statement, four requests I reran, and what they cannot prove.">
 <link rel="canonical" href="https://twinthos.com/notes/dwp-incident-review/">
 <meta name="theme-color" content="#05070B">
 <meta name="color-scheme" content="dark">
@@ -12,24 +12,24 @@
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Twinthos">
 <meta property="og:url" content="https://twinthos.com/notes/dwp-incident-review/">
-<meta property="og:title" content="The night the DWP page went quiet">
-<meta property="og:description" content="A story in twelve frames: what the record shows, what it never said, and the list nobody has published.">
-<meta property="og:image" content="https://twinthos.com/assets/notes-photo-2026/dwp-review/card.webp">
-<meta property="article:published_time" content="2026-11-27T18:40:00+00:00">
+<meta property="og:title" content="DWP cyber incident: 8.4 million claimants, one sign-in page returning nothing">
+<meta property="og:description" content="DWP called it a precaution at 08:11 and a serious cyber incident hours later. Twelve slides: the record, the 12 hours 55 minutes before the first statement, four requests I reran, and what they cannot prove.">
+<meta property="og:image" content="https://twinthos.com/assets/notes-photo-2026/dwp-review/og.jpg">
+<meta property="article:modified_time" content="2026-11-27T17:55:00+00:00">
+<meta property="article:published_time" content="2026-11-27T17:55:00+00:00">
 <meta property="article:section" content="AI security">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Who decides to switch off Universal Credit? Five roles, one missing list">
-<meta name="twitter:description" content="A story in twelve frames: what the record shows, what it never said, and the list nobody has published.">
-<meta name="twitter:image" content="https://twinthos.com/assets/notes-photo-2026/who-decides-dwp-shutdown-1600.webp">
+<meta name="twitter:title" content="DWP cyber incident: 8.4 million claimants, one sign-in page returning nothing">
+<meta name="twitter:description" content="DWP called it a precaution at 08:11 and a serious cyber incident hours later. Twelve slides: the record, the 12 hours 55 minutes before the first statement, four requests I reran, and what they cannot prove.">
+<meta name="twitter:image" content="https://twinthos.com/assets/notes-photo-2026/dwp-review/og.jpg">
 <link rel="preload" href="/assets/fonts/InterTight-normal-400-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/tw.css?v=88838283">
 <script>if(location.protocol==='http:'&&location.hostname==='twinthos.com')location.replace('https://twinthos.com'+location.pathname+location.search+location.hash);document.documentElement.classList.replace('no-js','js')</script>
 <script src="/assets/tw.js?v=88838283" defer></script>
 
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Who decides to switch off Universal Credit? Five roles, one missing list", "description": "Five people owned five questions after the DWP cyber incident. None could answer the smallest one: which software with credentials was already running inside the department.", "datePublished": "2026-11-27", "dateModified": "2026-11-27", "author": {"@type": "Person", "name": "Tyson Mandela", "url": "https://twinthos.com/about/"}, "image": "https://twinthos.com/assets/notes-photo-2026/who-decides-dwp-shutdown-1600.webp", "mainEntityOfPage": "https://twinthos.com/notes/who-decides-dwp-shutdown/", "@id": "https://twinthos.com/notes/who-decides-dwp-shutdown/#article", "inLanguage": "en-GB", "articleSection": "AI security", "publisher": {"@id": "https://twinthos.com/#org"}, "isAccessibleForFree": true, "about": [{"@type": "Thing", "name": "DWP cyber incident"}, {"@type": "Thing", "name": "Universal Credit"}, {"@type": "Thing", "name": "AI agent governance"}]}</script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "@id": "https://twinthos.com/notes/who-decides-dwp-shutdown/#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Twinthos", "item": "https://twinthos.com/"}, {"@type": "ListItem", "position": 2, "name": "Field notes", "item": "https://twinthos.com/notes/"}, {"@type": "ListItem", "position": 3, "name": "Who decides to switch off Universal Credit? Five roles, one missing list", "item": "https://twinthos.com/notes/who-decides-dwp-shutdown/"}]}</script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is Universal Credit working again?", "acceptedAnswer": {"@type": "Answer", "text": "No restoration timetable had been published as of 27 November 2026. DWP says benefit and pension payments are unaffected."}}, {"@type": "Question", "name": "Was data stolen from DWP?", "acceptedAnswer": {"@type": "Answer", "text": "No official statement confirms it. Number 10 said there's currently no evidence of customer data loss. Absence of evidence isn't a finding."}}, {"@type": "Question", "name": "Was the DWP incident ransomware?", "acceptedAnswer": {"@type": "Answer", "text": "No official statement has said so. I won't assert it, and neither should anyone selling you a control."}}, {"@type": "Question", "name": "What should a board ask first?", "acceptedAnswer": {"@type": "Answer", "text": "The questions above, starting with the list of agents that hold credentials. It costs an hour and no budget."}}]}</script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Organization", "@id": "https://twinthos.com/#org", "name": "Twinthos", "url": "https://twinthos.com/"}, {"@type": "NewsArticle", "@id": "https://twinthos.com/notes/dwp-incident-review/#article", "headline": "DWP cyber incident: 0 bytes, 8.4 million claimants, one missing list", "description": "At 19:20 on Thursday a thousand people tried to log into Universal Credit and couldn't. Twenty-one hours later nobody had published a cause. Twelve frames from the public record, and four tests run from a terminal.", "image": ["https://twinthos.com/assets/notes-photo-2026/dwp-review/card.webp", "https://twinthos.com/assets/notes-photo-2026/dwp-review/02.webp", "https://twinthos.com/assets/notes-photo-2026/dwp-review/03.webp", "https://twinthos.com/assets/notes-photo-2026/dwp-review/04.webp", "https://twinthos.com/assets/notes-photo-2026/dwp-review/05.webp", "https://twinthos.com/assets/notes-photo-2026/dwp-review/06.webp", "https://twinthos.com/assets/notes-photo-2026/dwp-review/07.webp", "https://twinthos.com/assets/notes-photo-2026/dwp-review/08.webp", "https://twinthos.com/assets/notes-photo-2026/dwp-review/09.webp", "https://twinthos.com/assets/notes-photo-2026/dwp-review/10.webp", "https://twinthos.com/assets/notes-photo-2026/dwp-review/11.webp", "https://twinthos.com/assets/notes-photo-2026/dwp-review/12.webp"], "datePublished": "2026-11-27T18:40:00+00:00", "dateModified": "2026-11-27T18:40:00+00:00", "author": {"@type": "Person", "name": "Tyson Mandela"}, "publisher": {"@id": "https://twinthos.com/#org"}, "mainEntityOfPage": {"@id": "https://twinthos.com/notes/dwp-incident-review/#webpage"}, "articleSection": "AI security"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "@id": "https://twinthos.com/notes/dwp-incident-review/#article", "headline": "DWP cyber incident: 8.4 million claimants, one sign-in page returning nothing", "description": "DWP called it a precaution at 08:11 and a serious cyber incident hours later. Twelve slides: the record, the 12 hours 55 minutes before the first statement, four requests I reran, and what they cannot prove.", "datePublished": "2026-11-27T17:55:00+00:00", "dateModified": "2026-11-27T17:55:00+00:00", "author": {"@type": "Person", "name": "Tyson Mandela", "url": "https://twinthos.com/about/"}, "image": ["https://twinthos.com/assets/notes-photo-2026/dwp-review/og.jpg"], "mainEntityOfPage": "https://twinthos.com/notes/dwp-incident-review/", "inLanguage": "en-GB", "articleSection": "AI security", "publisher": {"@id": "https://twinthos.com/#org"}, "isAccessibleForFree": true, "about": [{"@type": "Thing", "name": "DWP cyber incident"}, {"@type": "Thing", "name": "Universal Credit"}, {"@type": "Thing", "name": "cyber incident response"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "@id": "https://twinthos.com/notes/dwp-incident-review/#breadcrumb", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Twinthos", "item": "https://twinthos.com/"}, {"@type": "ListItem", "position": 2, "name": "Field notes", "item": "https://twinthos.com/notes/"}, {"@type": "ListItem", "position": 3, "name": "DWP cyber incident: 8.4 million claimants, one sign-in page returning nothing", "item": "https://twinthos.com/notes/dwp-incident-review/"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is Universal Credit working again?", "acceptedAnswer": {"@type": "Answer", "text": "At 17:40 on 27 November 2026 the Universal Credit sign-in page still returned no data from this machine, and no restoration date had been published. DWP says benefit and pension payments are unaffected."}}, {"@type": "Question", "name": "Was data stolen from DWP?", "acceptedAnswer": {"@type": "Answer", "text": "No published statement says so. Downing Street said there was no evidence of customer data loss. Absence of evidence is not a finding either way."}}, {"@type": "Question", "name": "Was this a ransomware attack?", "acceptedAnswer": {"@type": "Answer", "text": "Nobody official has said so. DWP describes a cyber incident affecting its systems and says the investigation into the cause is ongoing."}}, {"@type": "Question", "name": "What should a board ask first?", "acceptedAnswer": {"@type": "Answer", "text": "The list of software that holds credentials, who owns each one, and what still worked at nine on a Monday. It costs an hour and no budget."}}]}</script>
 </head>
 <body class="pg-article">
 <a class="skip" href="#main">Skip to content</a>
@@ -44,74 +44,112 @@
 </header>
 <main id="main">
 <style>
-.pg-article .review-shot{margin:44px 0 60px;}
-.pg-article .review-shot img{display:block;width:100%;height:auto;border:1px solid var(--line,#212623);background:#05060A;}
-.pg-article .review-shot figcaption{margin-top:14px;font-size:15px;line-height:1.55;color:var(--ink-2,#A4A9A2);max-width:760px;}
-.pg-article .review-shot figcaption span{font-variant-numeric:tabular-nums;color:#4D86FF;margin-right:10px;font-size:13px;letter-spacing:.08em;}
+.pg-article .review-shot{margin:44px 0 56px;}
+.pg-article .review-shot img{display:block;width:100%;height:auto;border:1px solid var(--line,#303538);background:#F5F2EC;}
+.pg-article .review-shot figcaption{margin-top:14px;font-size:15px;line-height:1.55;color:var(--muted,#a5aaac);max-width:760px;}
+.pg-article .review-shot figcaption span{font-variant-numeric:tabular-nums;color:#d4c2a5;margin-right:10px;font-size:13px;letter-spacing:.08em;}
+.pg-article .review-wrap{max-width:820px;}
 .pg-article .review-note{max-width:760px;}
-.pg-article .review-dl{display:inline-block;margin:8px 0 0;padding:16px 22px;border:1px solid #212623;color:#EEF0F5;text-decoration:none;font-size:16px;}
-.pg-article .review-dl:hover{border-color:#4D86FF;color:#4D86FF;}
+.pg-article .review-dl{display:inline-block;margin:8px 0 0;padding:16px 22px;border:1px solid var(--line,#303538);color:var(--ink,#f4f3ef);text-decoration:none;font-size:16px;}
+.pg-article .review-dl:hover{border-color:#d4c2a5;color:#d4c2a5;}
+.pg-article .review-src li{margin:0 0 12px;line-height:1.5;font-size:15px;word-break:break-word;}
 </style>
-<div class="article-stage" data-tone="AI security"><header class="article-head wrap"><a class="eyebrow" href="/notes/">← FIELD NOTES / AI security</a><h1>The night the DWP page went quiet: 12 frames on 0 bytes and 8.4 million people</h1><p class="lede">On Thursday evening people trying to check their benefits found a page that wouldn't open. Twelve frames on what the record shows, and the one question nobody has answered.</p><p class="article-meta">Tyson Mandela · Published <time datetime="2026-11-27">27 November 2026</time> · 3 min read</p></header></div>
+<div class="article-stage" data-tone="AI security"><header class="article-head wrap"><a class="eyebrow" href="/notes/">← FIELD NOTES / AI security</a><h1>DWP cyber incident: 8.4 million claimants, one sign-in page returning nothing</h1><p class="lede">DWP took services offline at 08:11 and called it a precaution. At 17:40, from this machine, the Universal Credit sign-in still answered a connection with silence. Twelve slides on the record, the 12 hours 55 minutes before it, and the one number nobody has published.</p><p class="article-meta">Tyson Mandela · Published <time datetime="2026-11-27">27 November 2026</time> · 12 slides, about 4 minutes</p></header></div>
+
 <div class="wrap"><article class="article-body review-note">
-<p class="lede-para">You're on a bus. You open the app to see whether this month's money has cleared. The page hangs, then hangs again. You assume your signal, then your password.</p>
-<p>About a thousand people did the same in the next ninety minutes. At nine the department took services offline and called it a precaution. That word describes what you do, not what happened.</p>
+<p class="lede-para">At 08:11 the department published three sentences: some online services taken offline as a precaution after a cyber incident, the National Cyber Security Centre and the Government Cyber Coordination Centre investigating, benefits and pensions still being paid.</p>
+<p>By the noon Downing Street briefing, a malicious actor had not been ruled out. Later the work and pensions secretary called it a serious cyber incident. As at 17:40 there was no named cause, no statement on whether any data left, and no restoration date.</p>
+<p>I ran four requests against four addresses twice, an hour and a half apart. The result did not change. The slides below are that record, set out in order, with what I could verify and what I could not.</p>
 </article></div>
-<div class="wrap"><figure class="review-shot">
-  <img src="/assets/notes-photo-2026/dwp-review/01.webp" width="1080" height="1350" loading="lazy" decoding="async" alt="Slide 1 of 12: More than 1,300 reports about gov.uk before nine. The department called it a precaution.">
-  <figcaption><span>01 / 12</span> More than 1,300 reports about gov.uk before nine. The department called it a precaution.</figcaption>
+
+<div class="wrap review-wrap">
+<figure class="review-shot">
+  <img src="/assets/notes-photo-2026/dwp-review/01.webp" width="1080" height="1350" loading="lazy" decoding="async" alt="Slide 1 of 12: The cover, checked twice from one machine: 16:10 and 17:40 on 27 November 2026.">
+  <figcaption><span>01 / 12</span> The cover, checked twice from one machine: 16:10 and 17:40 on 27 November 2026.</figcaption>
 </figure>
 <figure class="review-shot">
-  <img src="/assets/notes-photo-2026/dwp-review/02.webp" width="1080" height="1350" loading="lazy" decoding="async" alt="Slide 2 of 12: 19:20. You assume your signal, then your password, then you ring.">
-  <figcaption><span>02 / 12</span> 19:20. You assume your signal, then your password, then you ring.</figcaption>
+  <img src="/assets/notes-photo-2026/dwp-review/02.webp" width="1080" height="1350" loading="lazy" decoding="async" alt="Slide 2 of 12: The wording moved in a morning: a precaution at 08:11, a malicious actor not ruled out by the noon briefing, a serious cyber incident later.">
+  <figcaption><span>02 / 12</span> The wording moved in a morning: a precaution at 08:11, a malicious actor not ruled out by the noon briefing, a serious cyber incident later.</figcaption>
 </figure>
 <figure class="review-shot">
-  <img src="/assets/notes-photo-2026/dwp-review/03.webp" width="1080" height="1350" loading="lazy" decoding="async" alt="Slide 3 of 12: Downdetector normal rate: one report every fifteen minutes. That evening: more than 1,300.">
-  <figcaption><span>03 / 12</span> Downdetector normal rate: one report every fifteen minutes. That evening: more than 1,300.</figcaption>
+  <img src="/assets/notes-photo-2026/dwp-review/03.webp" width="1080" height="1350" loading="lazy" decoding="async" alt="Slide 3 of 12: Three statements. Confirmed: services offline, payments running, ministers calling it serious. Not said: what caused it, whether data left, when it returns.">
+  <figcaption><span>03 / 12</span> Three statements. Confirmed: services offline, payments running, ministers calling it serious. Not said: what caused it, whether data left, when it returns.</figcaption>
 </figure>
 <figure class="review-shot">
-  <img src="/assets/notes-photo-2026/dwp-review/04.webp" width="1080" height="1350" loading="lazy" decoding="async" alt="Slide 4 of 12: 08:11 precaution. 12:16 live incident. 13:48 serious cyber incident.">
-  <figcaption><span>04 / 12</span> 08:11 precaution. 12:16 live incident. 13:48 serious cyber incident.</figcaption>
+  <img src="/assets/notes-photo-2026/dwp-review/04.webp" width="1080" height="1350" loading="lazy" decoding="async" alt="Slide 4 of 12: First reports at 19:16 the night before. The department&#x27;s first statement was published at 08:11, 12 hours 55 minutes later.">
+  <figcaption><span>04 / 12</span> First reports at 19:16 the night before. The department's first statement was published at 08:11, 12 hours 55 minutes later.</figcaption>
 </figure>
 <figure class="review-shot">
-  <img src="/assets/notes-photo-2026/dwp-review/05.webp" width="1080" height="1350" loading="lazy" decoding="async" alt="Slide 5 of 12: 8.4 million Universal Credit claimants. 96,925 staff. About 87 people each.">
-  <figcaption><span>05 / 12</span> 8.4 million Universal Credit claimants. 96,925 staff. About 87 people each.</figcaption>
+  <img src="/assets/notes-photo-2026/dwp-review/05.webp" width="1080" height="1350" loading="lazy" decoding="async" alt="Slide 5 of 12: 620 reports at 08:12, 170 by 09:42, and 69% of them about logging in. Reports had been arriving since the evening before.">
+  <figcaption><span>05 / 12</span> 620 reports at 08:12, 170 by 09:42, and 69% of them about logging in. Reports had been arriving since the evening before.</figcaption>
 </figure>
 <figure class="review-shot">
-  <img src="/assets/notes-photo-2026/dwp-review/06.webp" width="1080" height="1350" loading="lazy" decoding="async" alt="Slide 6 of 12: The sign-in address resolved. Twenty-five seconds, no response, zero bytes.">
-  <figcaption><span>06 / 12</span> The sign-in address resolved. Twenty-five seconds, no response, zero bytes.</figcaption>
+  <img src="/assets/notes-photo-2026/dwp-review/06.webp" width="1080" height="1350" loading="lazy" decoding="async" alt="Slide 6 of 12: Four addresses from one machine. Sign-in completed its connection and sent nothing. Two names did not resolve at all. dwp.gov.uk served.">
+  <figcaption><span>06 / 12</span> Four addresses from one machine. Sign-in completed its connection and sent nothing. Two names did not resolve at all. dwp.gov.uk served.</figcaption>
 </figure>
 <figure class="review-shot">
-  <img src="/assets/notes-photo-2026/dwp-review/07.webp" width="1080" height="1350" loading="lazy" decoding="async" alt="Slide 7 of 12: The front door stayed open. The system behind it stopped.">
-  <figcaption><span>07 / 12</span> The front door stayed open. The system behind it stopped.</figcaption>
+  <img src="/assets/notes-photo-2026/dwp-review/07.webp" width="1080" height="1350" loading="lazy" decoding="async" alt="Slide 7 of 12: A crash returns an error. Two of these names were missing from the public directory altogether, and no cause has been named.">
+  <figcaption><span>07 / 12</span> A crash returns an error. Two of these names were missing from the public directory altogether, and no cause has been named.</figcaption>
 </figure>
 <figure class="review-shot">
-  <img src="/assets/notes-photo-2026/dwp-review/08.webp" width="1080" height="1350" loading="lazy" decoding="async" alt="Slide 8 of 12: Not proof that data left, or who did it. The cause is still unpublished.">
-  <figcaption><span>08 / 12</span> Not proof that data left, or who did it. The cause is still unpublished.</figcaption>
+  <img src="/assets/notes-photo-2026/dwp-review/08.webp" width="1080" height="1350" loading="lazy" decoding="async" alt="Slide 8 of 12: Payments ran. The service for reporting a change of circumstances did not.">
+  <figcaption><span>08 / 12</span> Payments ran. The service for reporting a change of circumstances did not.</figcaption>
 </figure>
 <figure class="review-shot">
-  <img src="/assets/notes-photo-2026/dwp-review/09.webp" width="1080" height="1350" loading="lazy" decoding="async" alt="Slide 9 of 12: The money kept moving. The site did not. That is not a contradiction.">
-  <figcaption><span>09 / 12</span> The money kept moving. The site did not. That is not a contradiction.</figcaption>
+  <img src="/assets/notes-photo-2026/dwp-review/09.webp" width="1080" height="1350" loading="lazy" decoding="async" alt="Slide 9 of 12: Five incidents, five measures: a fine, a recovery cost, lost output, lost sales and lost profit. They do not add up.">
+  <figcaption><span>09 / 12</span> Five incidents, five measures: a fine, a recovery cost, lost output, lost sales and lost profit. They do not add up.</figcaption>
 </figure>
 <figure class="review-shot">
-  <img src="/assets/notes-photo-2026/dwp-review/10.webp" width="1080" height="1350" loading="lazy" decoding="async" alt="Slide 10 of 12: Capita: £14m fine. Co-op: £206m lost sales. WannaCry: £92m to the NHS. M&S: about £300m profit.">
-  <figcaption><span>10 / 12</span> Capita: £14m fine. Co-op: £206m lost sales. WannaCry: £92m to the NHS. M&S: about £300m profit.</figcaption>
+  <img src="/assets/notes-photo-2026/dwp-review/10.webp" width="1080" height="1350" loading="lazy" decoding="async" alt="Slide 10 of 12: 72 hours from the moment you know, if a breach could affect people&#x27;s rights.">
+  <figcaption><span>10 / 12</span> 72 hours from the moment you know, if a breach could affect people's rights.</figcaption>
 </figure>
 <figure class="review-shot">
-  <img src="/assets/notes-photo-2026/dwp-review/11.webp" width="1080" height="1350" loading="lazy" decoding="async" alt="Slide 11 of 12: No list means no named approver, no record of what it touched, no expiry date.">
-  <figcaption><span>11 / 12</span> No list means no named approver, no record of what it touched, no expiry date.</figcaption>
+  <img src="/assets/notes-photo-2026/dwp-review/11.webp" width="1080" height="1350" loading="lazy" decoding="async" alt="Slide 11 of 12: Four registers: a timeline with names, the egress record, a signature per statement, and what still works at nine on a Monday.">
+  <figcaption><span>11 / 12</span> Four registers: a timeline with names, the egress record, a signature per statement, and what still works at nine on a Monday.</figcaption>
 </figure>
 <figure class="review-shot">
-  <img src="/assets/notes-photo-2026/dwp-review/12.webp" width="1080" height="1350" loading="lazy" decoding="async" alt="Slide 12 of 12: One named approver per agent. A work log. A key with an end date.">
-  <figcaption><span>12 / 12</span> One named approver per agent. A work log. A key with an end date.</figcaption>
-</figure></div>
+  <img src="/assets/notes-photo-2026/dwp-review/12.webp" width="1080" height="1350" loading="lazy" decoding="async" alt="Slide 12 of 12: Four requests anyone can rerun. Half a day, starting with a domain list.">
+  <figcaption><span>12 / 12</span> Four requests anyone can rerun. Half a day, starting with a domain list.</figcaption>
+</figure>
+</div>
+
 <div class="wrap"><article class="article-body review-note">
-<p>The one technical detail worth keeping: the secure connection still worked, and the system sent nothing back. Two other addresses had been deleted from the internet's directory. Somebody turned things off, one at a time.</p>
-<p>So the question isn't whether there was a breach. It's who holds the list.</p>
-<p>Every department now runs software that acts for it. Agents that read mail, look up cases, move files. Each one carries a key. When a system has to come down in an evening, you need a list of everything holding a key, who approved it, and when it expires.</p>
-<p>Nobody has published one. I'd be surprised if one exists.</p>
-<p>I build managed AI agents with a work log and one named approver. When a client's systems stop, the agents stop, and the log says what ran.</p>
-<p><a class="review-dl" href="/assets/notes-photo-2026/dwp-review/dwp-incident-review.pdf">Download the 12 slides (PDF)</a></p>
+<h2 id="probe">What I ran, and what it returned</h2>
+<p>From one Linux host: the Universal Credit sign-in, the new claims service, Tell Us Once, and dwp.gov.uk. The first completed a TLS handshake and then sent zero bytes until the request timed out. The second and third did not resolve at 16:10, which means the public name had no address, not that the server refused. dwp.gov.uk answered normally.</p>
+<p>That is four observations, repeated. It is not a diagnosis, and I have not offered one.</p>
+
+<h2 id="limit">What none of this proves</h2>
+<p>It does not prove an intrusion, and it does not prove there was none. It does not prove data left or stayed. The pattern, a service that accepts a connection and returns nothing while sibling names vanish from DNS, is consistent with a deliberate shutdown, which is also what DWP described. Consistency is not evidence of a cause.</p>
+<p>The one thing a reader can check is the timing: first public reports of the failure at 19:16 the night before, the department's first statement published at 08:11. Twelve hours and fifty-five minutes in which the page was failing and nothing was said publicly.</p>
+
+<h2 id="clock">The clock that starts at knowledge</h2>
+<p>If a breach could affect people's rights, UK GDPR gives 72 hours from the moment the organisation knows. That clock starts at knowledge, not at the end of the investigation, which is earlier than any public statement. "No evidence of loss" is a position, and a position needs a record behind it.</p>
+
+<h2 id="where-twinthos-comes-in">Where Twinthos comes in</h2>
+<p>Digital employees are changing what a company can carry, and the routine work is the part worth handing over: the checks, the filings, the reporting that nobody enjoys. What stays with people is the judgement, the relationships and the decisions that carry a name.</p>
+<p>The lesson of 27 November is the unglamorous one. An organisation needs to know what it owns before the day it has to say something publicly: which services answer, which names resolve, which software holds credentials, and who signs the words. Tyson Mandela builds and audits AI agents for a living, and the open-source Sentinel at <a href="https://github.com/twinthos/ai-sec-sentinel">github.com/twinthos/ai-sec-sentinel</a> is the working proof. The four requests in this deck are the same four that start an <a href="/operations-audit/">Operations Audit</a>.</p>
+<p><a class="review-dl" href="/operations-audit/">See the Operations Audit →</a> <a class="review-dl" href="mailto:twinthos@agentmail.to">twinthos@agentmail.to</a></p>
+<p style="font-size:14px;color:var(--muted,#a5aaac)">A managed service, not software you have to run yourself.</p>
+
+<h2 id="sources">Sources</h2>
+<ol class="review-src">
+<li>DWP, “Temporary disruption to some DWP online services”, GOV.UK, published 08:11 and updated 14:45 on 27 November 2026. <a href="https://www.gov.uk/government/news/temporary-disruption-to-some-dwp-online-services" rel="nofollow noopener">https://www.gov.uk/government/news/temporary-disruption-to-some-dwp-online-services</a></li>
+<li>BBC News, “Department for Work and Pensions takes some services offline after cyber incident”, 27 November 2026. <a href="https://www.bbc.co.uk/news/articles/c8wy5p6pv2e2o" rel="nofollow noopener">https://www.bbc.co.uk/news/articles/c8wy5p6pv2e2o</a></li>
+<li>The Guardian, “DWP cyber incident knocks almost all pensions and benefits systems offline”, 27 November 2026. <a href="https://www.theguardian.com/politics/2026/nov/27/dwp-cyber-incident-pensions-benefits-systems-offline" rel="nofollow noopener">https://www.theguardian.com/politics/2026/nov/27/dwp-cyber-incident-pensions-benefits-systems-offline</a></li>
+<li>ChronicleLive live coverage, Downdetector counts for gov.uk at 08:12 and 09:42 on 27 November 2026. <a href="https://www.chroniclelive.co.uk/news/uk-news/dwp-cyber-incident-live-updates-34973543" rel="nofollow noopener">https://www.chroniclelive.co.uk/news/uk-news/dwp-cyber-incident-live-updates-34973543</a></li>
+<li>Information Commissioner's Office, enforcement action against Capita plc, £14m, October 2025. <a href="https://ico.org.uk/action-weve-taken/enforcement/2025/10/capita-plc/" rel="nofollow noopener">https://ico.org.uk/action-weve-taken/enforcement/2025/10/capita-plc/</a></li>
+<li>National Audit Office, “Investigation: WannaCry cyber attack and the NHS”, 2017. <a href="https://www.nao.org.uk/reports/investigation-wannacry-cyber-attack-and-the-nhs/" rel="nofollow noopener">https://www.nao.org.uk/reports/investigation-wannacry-cyber-attack-and-the-nhs/</a></li>
+<li>BBC News, “Co-op says cyber-attack cost it £206m in lost sales”, 25 September 2025. <a href="https://www.bbc.com/news/articles/ckgq9dke4e5o" rel="nofollow noopener">https://www.bbc.com/news/articles/ckgq9dke4e5o</a></li>
+<li>The Guardian, “M&S expects cyber-attack to cost £300m in lost profits”, 21 May 2025. <a href="https://www.theguardian.com/business/2025/may/21/cyber-attack-cost-marks-and-spencer-300m-lost-profits" rel="nofollow noopener">https://www.theguardian.com/business/2025/may/21/cyber-attack-cost-marks-and-spencer-300m-lost-profits</a></li>
+<li>Information Commissioner's Office, personal data breach reporting, the 72-hour rule. <a href="https://ico.org.uk/for-organisations/report-a-breach/" rel="nofollow noopener">https://ico.org.uk/for-organisations/report-a-breach/</a></li>
+</ol>
+
+<div class="nx-log" style="margin-top:36px;padding-top:18px;border-top:1px solid var(--line,#303538);font-size:14px;color:var(--muted,#a5aaac)">
+<p><b>Corrections log.</b></p>
+<p>27 November 2026. Deck rebuilt and republished. Removed a report multiplier and a claimants-per-staff ratio that could not be traced to a primary source. Replaced with the Downdetector counts (620 at 08:12, 69% login-related), the 12 hours 55 minutes between first reports and the first statement, and a probe rerun at 17:40 on the day.</p>
+</div>
+
+<p style="margin-top:28px"><a href="/assets/notes-photo-2026/dwp-review/dwp-cyber-incident-27-nov.pdf">Download the twelve slides as a PDF</a></p>
 </article></div>
 </main>
 <footer class="foot">
