@@ -1,2 +1,155 @@
-<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>Twinthos field notes</title><link>https://twinthos.com/notes/</link><description>AI security, agents and practical automation.</description><lastBuildDate>Fri, 27 Nov 2026 17:55:00 GMT</lastBuildDate><item><title>DWP cyber incident: 8.4 million claimants, one sign-in page returning nothing</title><link>https://twinthos.com/notes/dwp-incident-review/</link><guid>https://twinthos.com/notes/dwp-incident-review/</guid><pubDate>Fri, 27 Nov 2026 17:55:00 GMT</pubDate><description>DWP called it a precaution at 08:11 and a serious cyber incident hours later. Twelve slides on the record, four requests anyone can rerun, and what they cannot prove.</description></item>
-<item><title>The questions to ask before an AI agent touches your data</title><link>https://twinthos.com/notes/questions-to-ask-managed-ai-agent/</link><guid isPermaLink="true">https://twinthos.com/notes/questions-to-ask-managed-ai-agent/</guid><description>Questions that turn an impressive demonstration into a reviewable deployment.</description><pubDate>Wed, 21 Oct 2026 12:00:00 GMT</pubDate></item><item><title>AI agents in 2027: the security problem is ownership</title><link>https://twinthos.com/notes/ai-agents-2027-security/</link><guid isPermaLink="true">https://twinthos.com/notes/ai-agents-2027-security/</guid><description>The next wave of AI will act inside businesses. Its identity, permissions and evidence will matter as much as its intelligence.</description><pubDate>Sun, 08 Nov 2026 12:00:00 GMT</pubDate></item><item><title>Your AI agent's memory needs an owner</title><link>https://twinthos.com/notes/the-company-brain/</link><guid isPermaLink="true">https://twinthos.com/notes/the-company-brain/</guid><description>A Company Brain is useful when its knowledge is current, attributable and available to the right people.</description><pubDate>Wed, 21 Oct 2026 12:00:00 GMT</pubDate></item><item><title>What an AI agent actually does all day</title><link>https://twinthos.com/notes/what-an-ai-agent-actually-does/</link><guid isPermaLink="true">https://twinthos.com/notes/what-an-ai-agent-actually-does/</guid><description>The useful difference is the ability to move from a request to a tool action and a checked result.</description><pubDate>Wed, 21 Oct 2026 12:00:00 GMT</pubDate></item><item><title>Why AI agents fail the week after a perfect demo</title><link>https://twinthos.com/notes/why-ai-automations-fail/</link><guid isPermaLink="true">https://twinthos.com/notes/why-ai-automations-fail/</guid><description>A demonstration follows a clean path. Real work includes missing data, expired access and contradictory instructions.</description><pubDate>Wed, 21 Oct 2026 12:00:00 GMT</pubDate></item><item><title>AI employee vs chatbot: one takes responsibility</title><link>https://twinthos.com/notes/digital-employee-vs-chatbot/</link><guid isPermaLink="true">https://twinthos.com/notes/digital-employee-vs-chatbot/</guid><description>A digital employee is a service role for software. The name matters less than the job, tools and accountability.</description><pubDate>Wed, 21 Oct 2026 12:00:00 GMT</pubDate></item><item><title>AI without the fog: what it is, what it costs, who owns it</title><link>https://twinthos.com/notes/intro-to-ai/</link><guid isPermaLink="true">https://twinthos.com/notes/intro-to-ai/</guid><description>A practical vocabulary for deciding what belongs in your business.</description><pubDate>Wed, 21 Oct 2026 12:00:00 GMT</pubDate></item><item><title>What an AI employee should cost, priced by the work</title><link>https://twinthos.com/notes/digital-employee-cost/</link><guid isPermaLink="true">https://twinthos.com/notes/digital-employee-cost/</guid><description>A way to compare a managed AI service without inventing savings.</description><pubDate>Wed, 21 Oct 2026 12:00:00 GMT</pubDate></item><item><title>The AI employee costs nobody quotes</title><link>https://twinthos.com/notes/cost-of-an-ai-employee/</link><guid isPermaLink="true">https://twinthos.com/notes/cost-of-an-ai-employee/</guid><description>Model usage is one line in a wider operating budget.</description><pubDate>Wed, 21 Oct 2026 12:00:00 GMT</pubDate></item><item><title>The first job a small business should hand to an AI agent</title><link>https://twinthos.com/notes/small-businesses-already-hired-ai/</link><guid isPermaLink="true">https://twinthos.com/notes/small-businesses-already-hired-ai/</guid><description>Small businesses can start with a manageable workflow instead of a company-wide transformation.</description><pubDate>Wed, 21 Oct 2026 12:00:00 GMT</pubDate></item><item><title>The £2 AI that answers your phone, and what it really costs</title><link>https://twinthos.com/notes/the-2-dollar-ai-that-answers-the-phone/</link><guid isPermaLink="true">https://twinthos.com/notes/the-2-dollar-ai-that-answers-the-phone/</guid><description>A cheap headline rate does not describe a complete telephone workflow.</description><pubDate>Wed, 21 Oct 2026 12:00:00 GMT</pubDate></item><item><title>What ATMs did to bank tellers, and what AI agents do next</title><link>https://twinthos.com/notes/atm-and-bank-tellers/</link><guid isPermaLink="true">https://twinthos.com/notes/atm-and-bank-tellers/</guid><description>Historical analogies can start a discussion. They cannot forecast your staffing needs.</description><pubDate>Wed, 21 Oct 2026 12:00:00 GMT</pubDate></item><item><title>Superintelligence isn't a deployment plan. Your AI agent is.</title><link>https://twinthos.com/notes/super-intelligence-si/</link><guid isPermaLink="true">https://twinthos.com/notes/super-intelligence-si/</guid><description>Future capability is a different question from what your system can safely do today.</description><pubDate>Wed, 21 Oct 2026 12:00:00 GMT</pubDate></item></channel></rss>
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Twinthos Field Notes</title>
+    <link>https://twinthos.com/notes/</link>
+    <description>Notes on AI security, AI agents and the operational decisions behind them.</description>
+    <language>en-GB</language>
+    <lastBuildDate>Fri, 27 Nov 2026 18:34:56 +0000</lastBuildDate>
+    <atom:link href="https://twinthos.com/notes/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>Two million prompts, three breached providers, nobody knew</title>
+      <link>https://twinthos.com/notes/two-million-prompts/</link>
+      <guid isPermaLink="true">https://twinthos.com/notes/two-million-prompts/</guid>
+      <pubDate>Fri, 27 Nov 2026 09:00:00 +0000</pubDate>
+      <category>AI security</category>
+      <description>Canary credentials sent through AI inference services came back used. Zero Data Retention did not survive the first hop.</description>
+    </item>
+    <item>
+      <title>72% of UK firms use AI. Half do not monitor what it does.</title>
+      <link>https://twinthos.com/notes/half-of-uk-firms-do-not-monitor-ai/</link>
+      <guid isPermaLink="true">https://twinthos.com/notes/half-of-uk-firms-do-not-monitor-ai/</guid>
+      <pubDate>Fri, 27 Nov 2026 09:00:00 +0000</pubDate>
+      <category>Business decisions</category>
+      <description>Two November surveys and one breach report put a number on the gap between using AI and being able to see it.</description>
+    </item>
+    <item>
+      <title>80,000 requests in 90 minutes: what the agent found that pentests missed</title>
+      <link>https://twinthos.com/notes/80000-requests-in-90-minutes/</link>
+      <guid isPermaLink="true">https://twinthos.com/notes/80000-requests-in-90-minutes/</guid>
+      <pubDate>Fri, 27 Nov 2026 09:00:00 +0000</pubDate>
+      <category>AI security</category>
+      <description>A free account became a foothold in under two hours. The flaw was one missing authorisation check, not a model.</description>
+    </item>
+    <item>
+      <title>19 times in 122 runs, the agent did what it was not asked to do</title>
+      <link>https://twinthos.com/notes/19-unsanctioned-actions/</link>
+      <guid isPermaLink="true">https://twinthos.com/notes/19-unsanctioned-actions/</guid>
+      <pubDate>Fri, 27 Nov 2026 09:00:00 +0000</pubDate>
+      <category>AI security</category>
+      <description>The UK&#x27;s own AI test recorded agents acting on the live internet: invented identities, a real open-source maintainer, and a one-hour containment.</description>
+    </item>
+    <item>
+      <title>AI agents in 2027: the security problem is ownership</title>
+      <link>https://twinthos.com/notes/ai-agents-2027-security/</link>
+      <guid isPermaLink="true">https://twinthos.com/notes/ai-agents-2027-security/</guid>
+      <pubDate>Sun, 08 Nov 2026 09:00:00 +0000</pubDate>
+      <category>AI security</category>
+      <description>The next wave of AI will act inside businesses. Its identity, permissions and evidence will matter as much as its intelligence.</description>
+    </item>
+    <item>
+      <title>Why AI agents fail the week after a perfect demo</title>
+      <link>https://twinthos.com/notes/why-ai-automations-fail/</link>
+      <guid isPermaLink="true">https://twinthos.com/notes/why-ai-automations-fail/</guid>
+      <pubDate>Wed, 21 Oct 2026 09:00:00 +0000</pubDate>
+      <category>AI security</category>
+      <description>A demonstration follows a clean path. Real work includes missing data, expired access and contradictory instructions.</description>
+    </item>
+    <item>
+      <title>What an AI agent actually does all day</title>
+      <link>https://twinthos.com/notes/what-an-ai-agent-actually-does/</link>
+      <guid isPermaLink="true">https://twinthos.com/notes/what-an-ai-agent-actually-does/</guid>
+      <pubDate>Wed, 21 Oct 2026 09:00:00 +0000</pubDate>
+      <category>Agents &amp;amp; tools</category>
+      <description>The useful difference is the ability to move from a request to a tool action and a checked result.</description>
+    </item>
+    <item>
+      <title>Your AI agent&#x27;s memory needs an owner</title>
+      <link>https://twinthos.com/notes/the-company-brain/</link>
+      <guid isPermaLink="true">https://twinthos.com/notes/the-company-brain/</guid>
+      <pubDate>Wed, 21 Oct 2026 09:00:00 +0000</pubDate>
+      <category>Agents &amp;amp; tools</category>
+      <description>A Company Brain is useful when its knowledge is current, attributable and available to the right people.</description>
+    </item>
+    <item>
+      <title>The £2 AI that answers your phone, and what it really costs</title>
+      <link>https://twinthos.com/notes/the-2-dollar-ai-that-answers-the-phone/</link>
+      <guid isPermaLink="true">https://twinthos.com/notes/the-2-dollar-ai-that-answers-the-phone/</guid>
+      <pubDate>Wed, 21 Oct 2026 09:00:00 +0000</pubDate>
+      <category>Business decisions</category>
+      <description>A cheap headline rate does not describe a complete telephone workflow.</description>
+    </item>
+    <item>
+      <title>Super&lt;wbr&gt;intelligence is not a deployment plan.</title>
+      <link>https://twinthos.com/notes/super-intelligence-si/</link>
+      <guid isPermaLink="true">https://twinthos.com/notes/super-intelligence-si/</guid>
+      <pubDate>Wed, 21 Oct 2026 09:00:00 +0000</pubDate>
+      <category>AI security</category>
+      <description>Future capability is a different question from what your system can safely do today.</description>
+    </item>
+    <item>
+      <title>The first job a small business should hand to an AI agent</title>
+      <link>https://twinthos.com/notes/small-businesses-already-hired-ai/</link>
+      <guid isPermaLink="true">https://twinthos.com/notes/small-businesses-already-hired-ai/</guid>
+      <pubDate>Wed, 21 Oct 2026 09:00:00 +0000</pubDate>
+      <category>Business decisions</category>
+      <description>Small businesses can start with a manageable workflow instead of a company-wide transformation.</description>
+    </item>
+    <item>
+      <title>The questions to ask before an AI agent touches your data</title>
+      <link>https://twinthos.com/notes/questions-to-ask-managed-ai-agent/</link>
+      <guid isPermaLink="true">https://twinthos.com/notes/questions-to-ask-managed-ai-agent/</guid>
+      <pubDate>Wed, 21 Oct 2026 09:00:00 +0000</pubDate>
+      <category>AI security</category>
+      <description>Questions that turn an impressive demonstration into a reviewable deployment.</description>
+    </item>
+    <item>
+      <title>AI without the fog: what it is, what it costs, who owns it</title>
+      <link>https://twinthos.com/notes/intro-to-ai/</link>
+      <guid isPermaLink="true">https://twinthos.com/notes/intro-to-ai/</guid>
+      <pubDate>Wed, 21 Oct 2026 09:00:00 +0000</pubDate>
+      <category>Agents &amp;amp; tools</category>
+      <description>A practical vocabulary for deciding what belongs in your business.</description>
+    </item>
+    <item>
+      <title>DWP cyber incident: 8.4 million claimants, one sign-in page returning nothing</title>
+      <link>https://twinthos.com/notes/dwp-incident-review/</link>
+      <guid isPermaLink="true">https://twinthos.com/notes/dwp-incident-review/</guid>
+      <pubDate>Wed, 21 Oct 2026 09:00:00 +0000</pubDate>
+      <category>Field notes</category>
+      <description>DWP took services offline at 08:11 and called it a precaution. At 17:40, from this machine, the Universal Credit sign-in still answered a connection with silence. Twelve slides on the record, the 12 hours 55 minutes before it, and the one number nobody has published.</description>
+    </item>
+    <item>
+      <title>AI employee vs chatbot: one takes responsibility</title>
+      <link>https://twinthos.com/notes/digital-employee-vs-chatbot/</link>
+      <guid isPermaLink="true">https://twinthos.com/notes/digital-employee-vs-chatbot/</guid>
+      <pubDate>Wed, 21 Oct 2026 09:00:00 +0000</pubDate>
+      <category>Agents &amp;amp; tools</category>
+      <description>A digital employee is a service role for software. The name matters less than the job, tools and accountability.</description>
+    </item>
+    <item>
+      <title>What an AI employee should cost, priced by the work</title>
+      <link>https://twinthos.com/notes/digital-employee-cost/</link>
+      <guid isPermaLink="true">https://twinthos.com/notes/digital-employee-cost/</guid>
+      <pubDate>Wed, 21 Oct 2026 09:00:00 +0000</pubDate>
+      <category>Business decisions</category>
+      <description>A way to compare a managed AI service without inventing savings.</description>
+    </item>
+    <item>
+      <title>The AI employee costs nobody quotes</title>
+      <link>https://twinthos.com/notes/cost-of-an-ai-employee/</link>
+      <guid isPermaLink="true">https://twinthos.com/notes/cost-of-an-ai-employee/</guid>
+      <pubDate>Wed, 21 Oct 2026 09:00:00 +0000</pubDate>
+      <category>Business decisions</category>
+      <description>Model usage is one line in a wider operating budget.</description>
+    </item>
+    <item>
+      <title>What ATMs did to bank tellers, and what AI agents do next</title>
+      <link>https://twinthos.com/notes/atm-and-bank-tellers/</link>
+      <guid isPermaLink="true">https://twinthos.com/notes/atm-and-bank-tellers/</guid>
+      <pubDate>Wed, 21 Oct 2026 09:00:00 +0000</pubDate>
+      <category>Business decisions</category>
+      <description>Historical analogies can start a discussion. They cannot forecast your staffing needs.</description>
+    </item>
+  </channel>
+</rss>

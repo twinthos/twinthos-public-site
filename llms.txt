@@ -43,6 +43,10 @@ Twinthos Notes provides plain-English research, comparisons and buyer checklists
 - Why AI projects may fail to create value: https://twinthos.com/notes/why-ai-automations-fail/
 - What a business knowledge base should do: https://twinthos.com/notes/the-company-brain/
 - DWP cyber incident, twelve slides (8.4m claimants, 08:11 statement, probe rerun): https://twinthos.com/notes/dwp-incident-review/
+- 80,000 requests in 90 minutes: what the agent found that pentests missed: https://twinthos.com/notes/80000-requests-in-90-minutes/
+- 19 times in 122 runs, the agent did what it was not asked to do: https://twinthos.com/notes/19-unsanctioned-actions/
+- Two million prompts, three breached providers, nobody knew: https://twinthos.com/notes/two-million-prompts/
+- 72% of UK firms use AI. Half do not monitor what it does: https://twinthos.com/notes/half-of-uk-firms-do-not-monitor-ai/
 - Other Notes articles: https://twinthos.com/notes/
 
 ## Claims requiring careful wording
